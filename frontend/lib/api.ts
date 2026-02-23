@@ -38,18 +38,26 @@ export const api = {
   getProject: (idOrSlug: string) => request<Project>(`/projects/${idOrSlug}`),
   createProject: (payload: Partial<Project>, token: string) =>
     request<Project>('/projects', { method: 'POST', token, body: JSON.stringify(payload) }),
+  updateProject: (id: string, payload: Partial<Project>, token: string) =>
+    request<Project>(`/projects/${id}`, { method: 'PUT', token, body: JSON.stringify(payload) }),
 
   getCertificates: () => request<Certificate[]>('/certificates'),
   createCertificate: (payload: Partial<Certificate>, token: string) =>
     request<Certificate>('/certificates', { method: 'POST', token, body: JSON.stringify(payload) }),
+  updateCertificate: (id: string, payload: Partial<Certificate>, token: string) =>
+    request<Certificate>(`/certificates/${id}`, { method: 'PUT', token, body: JSON.stringify(payload) }),
 
   getMedia: () => request<MediaAsset[]>('/media'),
   createMedia: (payload: Partial<MediaAsset>, token: string) =>
     request<MediaAsset>('/media', { method: 'POST', token, body: JSON.stringify(payload) }),
+  updateMedia: (id: string, payload: Partial<MediaAsset>, token: string) =>
+    request<MediaAsset>(`/media/${id}`, { method: 'PUT', token, body: JSON.stringify(payload) }),
 
   getResumes: () => request<ResumeAsset[]>('/resumes'),
   createResume: (payload: Partial<ResumeAsset>, token: string) =>
     request<ResumeAsset>('/resumes', { method: 'POST', token, body: JSON.stringify(payload) }),
+  updateResume: (id: string, payload: Partial<ResumeAsset>, token: string) =>
+    request<ResumeAsset>(`/resumes/${id}`, { method: 'PUT', token, body: JSON.stringify(payload) }),
 
   login: (email: string, password: string) =>
     request<{ token: string; user: { email: string; role: string } }>('/auth/login', {

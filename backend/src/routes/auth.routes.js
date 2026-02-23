@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const authRouter = Router();
@@ -18,9 +17,7 @@ authRouter.post('/login', async (req, res) => {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 
-  const matches = await bcrypt.compare(password, await bcrypt.hash(adminPassword, 10));
-
-  if (!matches) {
+  if (password !== adminPassword) {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 
