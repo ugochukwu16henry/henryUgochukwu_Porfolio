@@ -1,0 +1,32 @@
+import { Router } from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+export const authRouter = Router();
+
+authRouter.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+
+  if (email !== adminEmail) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+
+  const matches = await bcrypt.compare(password, await bcrypt.hash(adminPassword, 10));
+
+  if (!matches) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+
+  const token = jwt.sign({ role: 'admin', email }, process.env.JWT_SECRET, {
+    expiresIn: '8h'
+  });
+
+  return res.json({ token, user: { email, role: 'admin' } });
+});

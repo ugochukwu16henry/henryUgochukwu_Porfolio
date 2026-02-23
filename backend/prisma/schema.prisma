@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id              String   @id @default(cuid())
+  fullName        String
+  title           String
+  headline        String
+  bio             String
+  email           String
+  linkedInUrl     String?
+  githubUrl       String?
+  location        String?
+  heroImageUrl    String?
+  currentRole     String?
+  firstDegree     String
+  firstDegreeDate String
+  secondDegree    String
+  secondDegreeEta String
+  updatedAt       DateTime @updatedAt
+}
+
+model Project {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  summary          String
+  problem          String
+  actionTaken      String
+  result           String
+  techStack        String[]
+  hostingFrontend  String?
+  hostingBackend   String?
+  databaseStorage  String?
+  imageUrl         String
+  liveUrl          String
+  repoUrl          String?
+  featured         Boolean  @default(false)
+  displayOrder     Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Certificate {
+  id            String   @id @default(cuid())
+  title         String
+  issuer        String
+  issuedDate    String?
+  credentialUrl String?
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model MediaAsset {
+  id          String   @id @default(cuid())
+  title       String
+  imageUrl    String
+  category    String   @default("personal")
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ResumeAsset {
+  id        String   @id @default(cuid())
+  title     String
+  type      String
+  fileUrl   String?
+  fileName  String?
+  linkUrl   String?
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
