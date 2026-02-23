@@ -63,6 +63,11 @@ export const api = {
     request<{ token: string; user: { email: string; role: string } }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password })
+    }),
+  verifyToken: (token: string) =>
+    request<{ valid: boolean; user: { role: string; email: string } }>('/auth/verify', {
+      method: 'GET',
+      token
     })
 };
 

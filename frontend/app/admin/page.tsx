@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api, uploadFile } from '@/lib/api';
 
 export default function AdminPage() {
   const [token, setToken] = useState('');
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -68,21 +70,56 @@ export default function AdminPage() {
   });
 
   const requireToken = () => {
-    if (!token) {
+    if (!token || !isAuthenticated) {
       setMessage('Please login as admin first.');
       return false;
     }
     return true;
   };
 
+  useEffect(() => {
+    const restoreSession = async () => {
+      const savedToken = localStorage.getItem('admin_token');
+
+      if (!savedToken) {
+        setIsCheckingAuth(false);
+        return;
+      }
+
+      try {
+        await api.verifyToken(savedToken);
+        setToken(savedToken);
+        setIsAuthenticated(true);
+      } catch {
+        localStorage.removeItem('admin_token');
+        setToken('');
+        setIsAuthenticated(false);
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+
+    restoreSession();
+  }, []);
+
   const login = async () => {
     try {
       const data = await api.login(email, password);
       setToken(data.token);
+      localStorage.setItem('admin_token', data.token);
+      setIsAuthenticated(true);
       setMessage('Admin login successful.');
     } catch (error) {
+      setIsAuthenticated(false);
       setMessage((error as Error).message);
     }
+  };
+
+  const logout = () => {
+    localStorage.removeItem('admin_token');
+    setToken('');
+    setIsAuthenticated(false);
+    setMessage('You have been logged out.');
   };
 
   const saveProject = async () => {
@@ -190,9 +227,23 @@ export default function AdminPage() {
         <div className="grid gap-3 md:grid-cols-3">
           <input className="rounded-lg bg-muted p-3" placeholder="Admin email" value={email} onChange={(event) => setEmail(event.target.value)} />
           <input className="rounded-lg bg-muted p-3" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
-          <button className="primary-btn" onClick={login}>Login</button>
+          <button className="primary-btn" onClick={login}>Sign In</button>
         </div>
+        {isAuthenticated ? (
+          <button className="ghost-btn" onClick={logout}>Logout</button>
+        ) : null}
       </section>
+
+      {isCheckingAuth ? <p className="text-subtle">Checking admin session...</p> : null}
+
+      {!isCheckingAuth && !isAuthenticated ? (
+        <section className="glass-card p-6">
+          <p className="text-subtle">Sign in to access admin controls.</p>
+        </section>
+      ) : null}
+
+      {!isAuthenticated ? null : (
+        <>
 
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Update Profile</h2>
@@ -290,6 +341,8 @@ export default function AdminPage() {
         </div>
         <button className="primary-btn" onClick={saveResume}>{resumePayload.id ? 'Update Resume/CV' : 'Add Resume/CV'}</button>
       </section>
+      </>
+      )}
     </main>
   );
 }

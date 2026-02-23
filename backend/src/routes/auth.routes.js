@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
+import { requireAuth } from '../middleware/auth.js';
 
 export const authRouter = Router();
 
@@ -26,4 +27,8 @@ authRouter.post('/login', async (req, res) => {
   });
 
   return res.json({ token, user: { email, role: 'admin' } });
+});
+
+authRouter.get('/verify', requireAuth, (req, res) => {
+  return res.json({ valid: true, user: req.user });
 });
