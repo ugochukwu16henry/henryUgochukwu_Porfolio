@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { api, uploadFile } from '@/lib/api';
 
 export default function AdminPage() {
   const [token, setToken] = useState('');
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -77,6 +78,27 @@ export default function AdminPage() {
     return true;
   };
 
+  const resetSession = (notice?: string) => {
+    localStorage.removeItem('admin_token');
+    setToken('');
+    setIsAuthenticated(false);
+    if (notice) {
+      setMessage(notice);
+    }
+  };
+
+  const handleRequestError = (error: unknown) => {
+    const text = (error as Error).message || 'Request failed';
+    const isAuthError = /unauthorized|invalid or expired token|invalid credentials/i.test(text);
+
+    if (isAuthError) {
+      resetSession('Session expired or invalid. Please sign in again.');
+      return;
+    }
+
+    setMessage(text);
+  };
+
   useEffect(() => {
     const restoreSession = async () => {
       const savedToken = localStorage.getItem('admin_token');
@@ -91,10 +113,7 @@ export default function AdminPage() {
         setToken(savedToken);
         setIsAuthenticated(true);
       } catch {
-        localStorage.removeItem('admin_token');
-        setToken('');
-        setIsAuthenticated(false);
-        setMessage('Session expired or invalid. Please sign in again.');
+        resetSession('Session expired or invalid. Please sign in again.');
       } finally {
         setIsCheckingAuth(false);
       }
@@ -102,6 +121,12 @@ export default function AdminPage() {
 
     restoreSession();
   }, []);
+
+  useEffect(() => {
+    if (!isCheckingAuth && !isAuthenticated) {
+      emailInputRef.current?.focus();
+    }
+  }, [isAuthenticated, isCheckingAuth]);
 
   const login = async () => {
     try {
@@ -112,15 +137,12 @@ export default function AdminPage() {
       setMessage('Admin login successful.');
     } catch (error) {
       setIsAuthenticated(false);
-      setMessage((error as Error).message);
+      handleRequestError(error);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem('admin_token');
-    setToken('');
-    setIsAuthenticated(false);
-    setMessage('You have been logged out.');
+    resetSession('You have been logged out.');
   };
 
   const saveProject = async () => {
@@ -139,7 +161,7 @@ export default function AdminPage() {
         setMessage('Project added successfully.');
       }
     } catch (error) {
-      setMessage((error as Error).message);
+      handleRequestError(error);
     }
   };
 
@@ -154,7 +176,7 @@ export default function AdminPage() {
         setMessage('Certificate added successfully.');
       }
     } catch (error) {
-      setMessage((error as Error).message);
+      handleRequestError(error);
     }
   };
 
@@ -169,7 +191,7 @@ export default function AdminPage() {
         setMessage('Photo added successfully.');
       }
     } catch (error) {
-      setMessage((error as Error).message);
+      handleRequestError(error);
     }
   };
 
@@ -184,7 +206,7 @@ export default function AdminPage() {
         setMessage('Resume/CV added successfully.');
       }
     } catch (error) {
-      setMessage((error as Error).message);
+      handleRequestError(error);
     }
   };
 
@@ -194,7 +216,7 @@ export default function AdminPage() {
       await api.updateProfile(profilePayload, token);
       setMessage('Profile updated successfully.');
     } catch (error) {
-      setMessage((error as Error).message);
+      handleRequestError(error);
     }
   };
 
@@ -211,7 +233,7 @@ export default function AdminPage() {
       onUploaded(data.fileUrl);
       setMessage('File uploaded successfully.');
     } catch (error) {
-      setMessage((error as Error).message);
+      handleRequestError(error);
     } finally {
       setUploading(false);
     }
@@ -226,7 +248,7 @@ export default function AdminPage() {
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Admin Login</h2>
         <div className="grid gap-3 md:grid-cols-3">
-          <input className="rounded-lg bg-muted p-3" placeholder="Admin email" value={email} onChange={(event) => setEmail(event.target.value)} />
+          <input ref={emailInputRef} className="rounded-lg bg-muted p-3" placeholder="Admin email" value={email} onChange={(event) => setEmail(event.target.value)} />
           <input className="rounded-lg bg-muted p-3" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
           <button className="primary-btn" onClick={login}>Sign In</button>
         </div>
