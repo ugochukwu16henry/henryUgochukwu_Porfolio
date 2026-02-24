@@ -71,7 +71,7 @@ export default function AdminPage() {
 
   const requireToken = () => {
     if (!token || !isAuthenticated) {
-      setMessage('Please login as admin first.');
+      setMessage('Your admin session is not active. Please sign in again.');
       return false;
     }
     return true;
@@ -94,6 +94,7 @@ export default function AdminPage() {
         localStorage.removeItem('admin_token');
         setToken('');
         setIsAuthenticated(false);
+        setMessage('Session expired or invalid. Please sign in again.');
       } finally {
         setIsCheckingAuth(false);
       }
