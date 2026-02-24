@@ -11,6 +11,29 @@ projectRouter.get('/', async (_, res) => {
   });
   res.json(projects);
 });
+  projectRouter.get('/', async (req, res) => {
+    const { page = 1, pageSize = 10, search = '' } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(pageSize);
+    const take = parseInt(pageSize);
+    const where = search
+      ? {
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { summary: { contains: search, mode: 'insensitive' } }
+        ]
+      }
+      : {};
+    const [projects, total] = await Promise.all([
+      prisma.project.findMany({
+        where,
+        orderBy: [{ featured: 'desc' }, { displayOrder: 'asc' }, { createdAt: 'desc' }],
+        skip,
+        take
+      }),
+      prisma.project.count({ where })
+    ]);
+    res.json({ items: projects, total });
+  });
 
 projectRouter.get('/:idOrSlug', async (req, res) => {
   const { idOrSlug } = req.params;

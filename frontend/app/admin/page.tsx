@@ -75,10 +75,30 @@ export default function AdminPage() {
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
   const [isLoadingDashboard, setIsLoadingDashboard] = useState(false);
 
+  // Pagination and search state
   const [projects, setProjects] = useState<Project[]>([]);
+  const [projectsTotal, setProjectsTotal] = useState(0);
+  const [projectsPage, setProjectsPage] = useState(1);
+  const [projectsPageSize, setProjectsPageSize] = useState(10);
+  const [projectsSearch, setProjectsSearch] = useState('');
+
   const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [certificatesTotal, setCertificatesTotal] = useState(0);
+  const [certificatesPage, setCertificatesPage] = useState(1);
+  const [certificatesPageSize, setCertificatesPageSize] = useState(10);
+  const [certificatesSearch, setCertificatesSearch] = useState('');
+
   const [mediaAssets, setMediaAssets] = useState<MediaAsset[]>([]);
+  const [mediaTotal, setMediaTotal] = useState(0);
+  const [mediaPage, setMediaPage] = useState(1);
+  const [mediaPageSize, setMediaPageSize] = useState(10);
+  const [mediaSearch, setMediaSearch] = useState('');
+
   const [resumes, setResumes] = useState<ResumeAsset[]>([]);
+  const [resumesTotal, setResumesTotal] = useState(0);
+  const [resumesPage, setResumesPage] = useState(1);
+  const [resumesPageSize, setResumesPageSize] = useState(10);
+  const [resumesSearch, setResumesSearch] = useState('');
 
   const [projectPayload, setProjectPayload] = useState(emptyProjectPayload);
   const [certificatePayload, setCertificatePayload] = useState(emptyCertificatePayload);
@@ -89,12 +109,12 @@ export default function AdminPage() {
   const refreshDashboardData = async (activeToken: string) => {
     setIsLoadingDashboard(true);
     try {
-      const [profile, projectsData, certificateData, mediaData, resumeData] = await Promise.all([
+      const [profile, projectsResp, certificatesResp, mediaResp, resumesResp] = await Promise.all([
         api.getProfile(),
-        api.getProjects(),
-        api.getCertificates(),
-        api.getMedia(),
-        api.getResumes()
+        api.getProjects({ page: projectsPage, pageSize: projectsPageSize, search: projectsSearch }),
+        api.getCertificates({ page: certificatesPage, pageSize: certificatesPageSize, search: certificatesSearch }),
+        api.getMedia({ page: mediaPage, pageSize: mediaPageSize, search: mediaSearch }),
+        api.getResumes({ page: resumesPage, pageSize: resumesPageSize, search: resumesSearch })
       ]);
 
       if (profile) {
@@ -104,10 +124,14 @@ export default function AdminPage() {
         });
       }
 
-      setProjects(projectsData);
-      setCertificates(certificateData);
-      setMediaAssets(mediaData);
-      setResumes(resumeData);
+      setProjects(projectsResp.items);
+      setProjectsTotal(projectsResp.total);
+      setCertificates(certificatesResp.items);
+      setCertificatesTotal(certificatesResp.total);
+      setMediaAssets(mediaResp.items);
+      setMediaTotal(mediaResp.total);
+      setResumes(resumesResp.items);
+      setResumesTotal(resumesResp.total);
     } catch (error) {
       handleRequestError(error);
     } finally {
@@ -186,6 +210,8 @@ export default function AdminPage() {
     };
 
     restoreSession();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectsPage, projectsPageSize, projectsSearch, certificatesPage, certificatesPageSize, certificatesSearch, mediaPage, mediaPageSize, mediaSearch, resumesPage, resumesPageSize, resumesSearch]);
   }, []);
 
   useEffect(() => {
@@ -527,7 +553,13 @@ export default function AdminPage() {
       </section>
 
       <section className="glass-card space-y-4 p-6">
-        <h2 className="text-xl font-semibold text-white">Your Projects ({projects.length})</h2>
+        <h2 className="text-xl font-semibold text-white">Your Projects ({projectsTotal})</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <input className="rounded-lg bg-muted p-2 text-sm" placeholder="Search projects" value={projectsSearch} onChange={e => { setProjectsSearch(e.target.value); setProjectsPage(1); }} />
+          <select className="rounded-lg bg-muted p-2 text-sm" value={projectsPageSize} onChange={e => { setProjectsPageSize(Number(e.target.value)); setProjectsPage(1); }}>
+            {[5,10,20,50].map(size => <option key={size} value={size}>{size} per page</option>)}
+          </select>
+        </div>
         {!projects.length ? <p className="text-subtle">No projects yet.</p> : null}
         <div className="space-y-3">
           {projects.map((item) => (
@@ -546,6 +578,11 @@ export default function AdminPage() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="flex items-center gap-2 mt-3">
+          <button className="ghost-btn" disabled={projectsPage === 1} onClick={() => setProjectsPage(projectsPage - 1)}>Prev</button>
+          <span className="text-sm">Page {projectsPage} of {Math.ceil(projectsTotal / projectsPageSize) || 1}</span>
+          <button className="ghost-btn" disabled={projectsPage * projectsPageSize >= projectsTotal} onClick={() => setProjectsPage(projectsPage + 1)}>Next</button>
         </div>
       </section>
 
@@ -571,7 +608,13 @@ export default function AdminPage() {
       </section>
 
       <section className="glass-card space-y-4 p-6">
-        <h2 className="text-xl font-semibold text-white">Your Certificates ({certificates.length})</h2>
+        <h2 className="text-xl font-semibold text-white">Your Certificates ({certificatesTotal})</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <input className="rounded-lg bg-muted p-2 text-sm" placeholder="Search certificates" value={certificatesSearch} onChange={e => { setCertificatesSearch(e.target.value); setCertificatesPage(1); }} />
+          <select className="rounded-lg bg-muted p-2 text-sm" value={certificatesPageSize} onChange={e => { setCertificatesPageSize(Number(e.target.value)); setCertificatesPage(1); }}>
+            {[5,10,20,50].map(size => <option key={size} value={size}>{size} per page</option>)}
+          </select>
+        </div>
         {!certificates.length ? <p className="text-subtle">No certificates yet.</p> : null}
         <div className="space-y-3">
           {certificates.map((item) => (
@@ -618,6 +661,11 @@ export default function AdminPage() {
             </article>
           ))}
         </div>
+        <div className="flex items-center gap-2 mt-3">
+          <button className="ghost-btn" disabled={certificatesPage === 1} onClick={() => setCertificatesPage(certificatesPage - 1)}>Prev</button>
+          <span className="text-sm">Page {certificatesPage} of {Math.ceil(certificatesTotal / certificatesPageSize) || 1}</span>
+          <button className="ghost-btn" disabled={certificatesPage * certificatesPageSize >= certificatesTotal} onClick={() => setCertificatesPage(certificatesPage + 1)}>Next</button>
+        </div>
       </section>
 
       <section className="glass-card space-y-4 p-6">
@@ -645,7 +693,13 @@ export default function AdminPage() {
       </section>
 
       <section className="glass-card space-y-4 p-6">
-        <h2 className="text-xl font-semibold text-white">Your Photos ({mediaAssets.length})</h2>
+        <h2 className="text-xl font-semibold text-white">Your Photos ({mediaTotal})</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <input className="rounded-lg bg-muted p-2 text-sm" placeholder="Search photos" value={mediaSearch} onChange={e => { setMediaSearch(e.target.value); setMediaPage(1); }} />
+          <select className="rounded-lg bg-muted p-2 text-sm" value={mediaPageSize} onChange={e => { setMediaPageSize(Number(e.target.value)); setMediaPage(1); }}>
+            {[5,10,20,50].map(size => <option key={size} value={size}>{size} per page</option>)}
+          </select>
+        </div>
         {!mediaAssets.length ? <p className="text-subtle">No photos yet.</p> : null}
         <div className="space-y-3">
           {mediaAssets.map((item) => (
@@ -664,6 +718,11 @@ export default function AdminPage() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="flex items-center gap-2 mt-3">
+          <button className="ghost-btn" disabled={mediaPage === 1} onClick={() => setMediaPage(mediaPage - 1)}>Prev</button>
+          <span className="text-sm">Page {mediaPage} of {Math.ceil(mediaTotal / mediaPageSize) || 1}</span>
+          <button className="ghost-btn" disabled={mediaPage * mediaPageSize >= mediaTotal} onClick={() => setMediaPage(mediaPage + 1)}>Next</button>
         </div>
       </section>
 
@@ -703,7 +762,13 @@ export default function AdminPage() {
       </section>
 
       <section className="glass-card space-y-4 p-6">
-        <h2 className="text-xl font-semibold text-white">Your Resume/CV Files ({resumes.length})</h2>
+        <h2 className="text-xl font-semibold text-white">Your Resume/CV Files ({resumesTotal})</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <input className="rounded-lg bg-muted p-2 text-sm" placeholder="Search resumes" value={resumesSearch} onChange={e => { setResumesSearch(e.target.value); setResumesPage(1); }} />
+          <select className="rounded-lg bg-muted p-2 text-sm" value={resumesPageSize} onChange={e => { setResumesPageSize(Number(e.target.value)); setResumesPage(1); }}>
+            {[5,10,20,50].map(size => <option key={size} value={size}>{size} per page</option>)}
+          </select>
+        </div>
         {!resumes.length ? <p className="text-subtle">No resume/CV records yet.</p> : null}
         <div className="space-y-3">
           {resumes.map((item) => (
@@ -722,6 +787,11 @@ export default function AdminPage() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="flex items-center gap-2 mt-3">
+          <button className="ghost-btn" disabled={resumesPage === 1} onClick={() => setResumesPage(resumesPage - 1)}>Prev</button>
+          <span className="text-sm">Page {resumesPage} of {Math.ceil(resumesTotal / resumesPageSize) || 1}</span>
+          <button className="ghost-btn" disabled={resumesPage * resumesPageSize >= resumesTotal} onClick={() => setResumesPage(resumesPage + 1)}>Next</button>
         </div>
       </section>
       </>

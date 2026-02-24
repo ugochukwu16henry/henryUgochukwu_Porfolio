@@ -42,7 +42,15 @@ export const api = {
   updateProfile: (payload: Partial<Profile>, token: string) =>
     request<Profile>('/profile', { method: 'PUT', token, body: JSON.stringify(payload) }),
 
-  getProjects: () => request<Project[]>('/projects'),
+  getProjects: (params?: { page?: number; pageSize?: number; search?: string }) => {
+    const query = params
+      ? `?${Object.entries(params)
+          .filter(([_, v]) => v !== undefined && v !== '')
+          .map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`)
+          .join('&')}`
+      : '';
+    return request<{ items: Project[]; total: number }>(`/projects${query}`);
+  },
   getProject: (idOrSlug: string) => request<Project>(`/projects/${idOrSlug}`),
   createProject: (payload: Partial<Project>, token: string) =>
     request<Project>('/projects', { method: 'POST', token, body: JSON.stringify(payload) }),
@@ -51,7 +59,15 @@ export const api = {
   deleteProject: (id: string, token: string) =>
     request<void>(`/projects/${id}`, { method: 'DELETE', token }),
 
-  getCertificates: () => request<Certificate[]>('/certificates'),
+  getCertificates: (params?: { page?: number; pageSize?: number; search?: string }) => {
+    const query = params
+      ? `?${Object.entries(params)
+          .filter(([_, v]) => v !== undefined && v !== '')
+          .map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`)
+          .join('&')}`
+      : '';
+    return request<{ items: Certificate[]; total: number }>(`/certificates${query}`);
+  },
   createCertificate: (payload: Partial<Certificate>, token: string) =>
     request<Certificate>('/certificates', { method: 'POST', token, body: JSON.stringify(payload) }),
   updateCertificate: (id: string, payload: Partial<Certificate>, token: string) =>
@@ -59,7 +75,15 @@ export const api = {
   deleteCertificate: (id: string, token: string) =>
     request<void>(`/certificates/${id}`, { method: 'DELETE', token }),
 
-  getMedia: () => request<MediaAsset[]>('/media'),
+  getMedia: (params?: { page?: number; pageSize?: number; search?: string }) => {
+    const query = params
+      ? `?${Object.entries(params)
+          .filter(([_, v]) => v !== undefined && v !== '')
+          .map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`)
+          .join('&')}`
+      : '';
+    return request<{ items: MediaAsset[]; total: number }>(`/media${query}`);
+  },
   createMedia: (payload: Partial<MediaAsset>, token: string) =>
     request<MediaAsset>('/media', { method: 'POST', token, body: JSON.stringify(payload) }),
   updateMedia: (id: string, payload: Partial<MediaAsset>, token: string) =>
@@ -67,7 +91,15 @@ export const api = {
   deleteMedia: (id: string, token: string) =>
     request<void>(`/media/${id}`, { method: 'DELETE', token }),
 
-  getResumes: () => request<ResumeAsset[]>('/resumes'),
+  getResumes: (params?: { page?: number; pageSize?: number; search?: string }) => {
+    const query = params
+      ? `?${Object.entries(params)
+          .filter(([_, v]) => v !== undefined && v !== '')
+          .map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`)
+          .join('&')}`
+      : '';
+    return request<{ items: ResumeAsset[]; total: number }>(`/resumes${query}`);
+  },
   createResume: (payload: Partial<ResumeAsset>, token: string) =>
     request<ResumeAsset>('/resumes', { method: 'POST', token, body: JSON.stringify(payload) }),
   updateResume: (id: string, payload: Partial<ResumeAsset>, token: string) =>

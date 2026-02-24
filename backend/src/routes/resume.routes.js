@@ -10,6 +10,28 @@ resumeRouter.get('/', async (_, res) => {
   });
   res.json(items);
 });
+  resumeRouter.get('/', async (req, res) => {
+    const { page = 1, pageSize = 10, search = '' } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(pageSize);
+    const take = parseInt(pageSize);
+    const where = search
+      ? {
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } }
+        ]
+      }
+      : {};
+    const [items, total] = await Promise.all([
+      prisma.resumeAsset.findMany({
+        where,
+        orderBy: [{ isPrimary: 'desc' }, { createdAt: 'desc' }],
+        skip,
+        take
+      }),
+      prisma.resumeAsset.count({ where })
+    ]);
+    res.json({ items, total });
+  });
 
 resumeRouter.post('/', requireAuth, async (req, res) => {
   const { id, createdAt, updatedAt, ...payload } = req.body;
