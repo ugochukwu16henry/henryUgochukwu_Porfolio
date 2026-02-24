@@ -1,0 +1,1 @@
+This is a placeholder marker file indicating that you should add a real Open Graph image here named "og-image.png" (1200x630) showing your hero section: your face, full name "Henry M. Ugochukwu", and "Full Stack Developer".
