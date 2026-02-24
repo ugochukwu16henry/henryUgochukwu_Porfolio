@@ -7,15 +7,21 @@ type RequestOptions = RequestInit & { token?: string };
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { token, headers, ...rest } = options;
 
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...rest,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...headers
-    },
-    cache: 'no-store'
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      ...rest,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...headers
+      },
+      cache: 'no-store'
+    });
+  } catch {
+    throw new Error('Network error: unable to reach backend. Check Railway service, NEXT_PUBLIC_API_URL, and CORS_ORIGIN.');
+  }
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Request failed' }));
@@ -75,11 +81,17 @@ export const uploadFile = async (file: File, token: string) => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await fetch(`${API_BASE_URL}/upload`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
-    body: formData
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(`${API_BASE_URL}/upload`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData
+    });
+  } catch {
+    throw new Error('Upload failed: network/CORS issue while reaching backend upload endpoint.');
+  }
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Upload failed' }));
