@@ -21,6 +21,7 @@ export default async function HomePage() {
   const resumes = resumesPage.items;
 
   const primaryResume = resumes.find((item) => item.isPrimary) || resumes[0];
+  const primaryResumeUrl = primaryResume?.fileUrl || primaryResume?.linkUrl || '';
 
   return (
     <main className="space-y-20 pb-16">
@@ -40,8 +41,8 @@ export default async function HomePage() {
               <Link href="/admin" className="primary-btn">
                 Admin Dashboard
               </Link>
-              {primaryResume?.linkUrl || primaryResume?.fileUrl ? (
-                <a href={primaryResume.linkUrl || primaryResume.fileUrl} target="_blank" rel="noreferrer" className="ghost-btn">
+              {primaryResumeUrl ? (
+                <a href={primaryResumeUrl} target="_blank" rel="noreferrer" className="ghost-btn">
                   View Resume / CV
                 </a>
               ) : null}
