@@ -8,6 +8,21 @@ import { SectionTitle } from '@/components/section-title';
 
 const siteUrl = 'https://henry-ugochukwu-porfolio.vercel.app';
 
+const normalizeImageUrl = (url?: string | null) => {
+  if (!url) return '';
+  const railwayHost = 'henryugochukwuporfolio-production.up.railway.app';
+  try {
+    const parsed = new URL(url, siteUrl);
+    if (parsed.hostname === railwayHost && parsed.protocol === 'http:') {
+      parsed.protocol = 'https:';
+      return parsed.toString();
+    }
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+};
+
 export default async function HomePage() {
   const [profile, projectsPage, certificatesPage, mediaPage, resumesPage] = await Promise.all([
     api.getProfile().catch(() => null),
@@ -90,7 +105,9 @@ export default async function HomePage() {
 
           <div className="relative mx-auto h-64 w-64 overflow-hidden rounded-3xl border border-white/15 md:h-80 md:w-80">
             <Image
-              src={profile?.heroImageUrl || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200'}
+              src={normalizeImageUrl(
+                profile?.heroImageUrl || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200'
+              )}
               alt="Henry M. Ugochukwu"
               fill
               className="object-cover"

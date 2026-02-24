@@ -8,6 +8,21 @@ const ensureAbsoluteUrl = (url: string) => {
   return `https://${url}`;
 };
 
+const normalizeImageUrl = (url: string) => {
+  if (!url) return '';
+  const railwayHost = 'henryugochukwuporfolio-production.up.railway.app';
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === railwayHost && parsed.protocol === 'http:') {
+      parsed.protocol = 'https:';
+      return parsed.toString();
+    }
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+};
+
 type Props = {
   project: Project;
 };
@@ -16,7 +31,7 @@ export const ProjectCard = ({ project }: Props) => {
   return (
     <article className="glass-card overflow-hidden">
       <div className="relative h-52 w-full">
-        <Image src={project.imageUrl} alt={project.title} fill className="object-cover" />
+        <Image src={normalizeImageUrl(project.imageUrl)} alt={project.title} fill className="object-cover" />
       </div>
       <div className="space-y-4 p-5">
         <div>
