@@ -2,6 +2,66 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { api, uploadFile } from '@/lib/api';
+import { Certificate, MediaAsset, Project, ResumeAsset } from '@/lib/types';
+
+const emptyProjectPayload = {
+  id: '',
+  title: '',
+  summary: '',
+  problem: '',
+  actionTaken: '',
+  result: '',
+  imageUrl: '',
+  liveUrl: '',
+  repoUrl: '',
+  techStack: '',
+  hostingFrontend: 'Vercel',
+  hostingBackend: 'Railway',
+  databaseStorage: 'PostgreSQL',
+  featured: false,
+  displayOrder: 0
+};
+
+const emptyCertificatePayload = {
+  id: '',
+  title: '',
+  issuer: '',
+  issuedDate: '',
+  credentialUrl: '',
+  imageUrl: ''
+};
+
+const emptyMediaPayload = {
+  id: '',
+  title: '',
+  imageUrl: '',
+  category: 'personal',
+  description: ''
+};
+
+const emptyResumePayload = {
+  id: '',
+  title: '',
+  type: 'resume',
+  linkUrl: '',
+  fileUrl: '',
+  isPrimary: true
+};
+
+const defaultProfilePayload = {
+  fullName: 'Henry M. Ugochukwu',
+  title: 'Full Stack Developer',
+  headline: '',
+  bio: '',
+  email: '',
+  linkedInUrl: '',
+  githubUrl: '',
+  heroImageUrl: '',
+  firstDegree: 'B.Sc. Marriage and Family Studies (BYU-Idaho)',
+  firstDegreeDate: 'August 2025',
+  secondDegree: 'Software Development Engineering',
+  secondDegreeEta: 'April 2026'
+};
 
 export default function AdminPage() {
   const [token, setToken] = useState('');
@@ -12,66 +72,48 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
-  const [loadingAction, setLoadingAction] = useState<
-    'login' | 'profile' | 'project' | 'certificate' | 'media' | 'resume' | null
-  >(null);
+  const [loadingAction, setLoadingAction] = useState<string | null>(null);
+  const [isLoadingDashboard, setIsLoadingDashboard] = useState(false);
 
-  const [projectPayload, setProjectPayload] = useState({
-    id: '',
-    title: '',
-    summary: '',
-    problem: '',
-    actionTaken: '',
-    result: '',
-    imageUrl: '',
-    liveUrl: '',
-    repoUrl: '',
-    techStack: '',
-    hostingFrontend: 'Vercel',
-    hostingBackend: 'Railway',
-    databaseStorage: 'PostgreSQL'
-  });
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [mediaAssets, setMediaAssets] = useState<MediaAsset[]>([]);
+  const [resumes, setResumes] = useState<ResumeAsset[]>([]);
 
-  const [certificatePayload, setCertificatePayload] = useState({
-    id: '',
-    title: '',
-    issuer: '',
-    issuedDate: '',
-    credentialUrl: '',
-    imageUrl: ''
-  });
+  const [projectPayload, setProjectPayload] = useState(emptyProjectPayload);
+  const [certificatePayload, setCertificatePayload] = useState(emptyCertificatePayload);
+  const [mediaPayload, setMediaPayload] = useState(emptyMediaPayload);
+  const [resumePayload, setResumePayload] = useState(emptyResumePayload);
+  const [profilePayload, setProfilePayload] = useState(defaultProfilePayload);
 
-  const [mediaPayload, setMediaPayload] = useState({
-    id: '',
-    title: '',
-    imageUrl: '',
-    category: 'personal',
-    description: ''
-  });
+  const refreshDashboardData = async (activeToken: string) => {
+    setIsLoadingDashboard(true);
+    try {
+      const [profile, projectsData, certificateData, mediaData, resumeData] = await Promise.all([
+        api.getProfile(),
+        api.getProjects(),
+        api.getCertificates(),
+        api.getMedia(),
+        api.getResumes()
+      ]);
 
-  const [resumePayload, setResumePayload] = useState({
-    id: '',
-    title: '',
-    type: 'resume',
-    linkUrl: '',
-    fileUrl: '',
-    isPrimary: true
-  });
+      if (profile) {
+        setProfilePayload({
+          ...defaultProfilePayload,
+          ...profile
+        });
+      }
 
-  const [profilePayload, setProfilePayload] = useState({
-    fullName: 'Henry M. Ugochukwu',
-    title: 'Full Stack Developer',
-    headline: '',
-    bio: '',
-    email: '',
-    linkedInUrl: '',
-    githubUrl: '',
-    heroImageUrl: '',
-    firstDegree: 'B.Sc. Marriage and Family Studies (BYU-Idaho)',
-    firstDegreeDate: 'August 2025',
-    secondDegree: 'Software Development Engineering',
-    secondDegreeEta: 'April 2026'
-  });
+      setProjects(projectsData);
+      setCertificates(certificateData);
+      setMediaAssets(mediaData);
+      setResumes(resumeData);
+    } catch (error) {
+      handleRequestError(error);
+    } finally {
+      setIsLoadingDashboard(false);
+    }
+  };
 
   const requireToken = () => {
     if (!token || !isAuthenticated) {
@@ -135,6 +177,7 @@ export default function AdminPage() {
         await api.verifyToken(savedToken);
         setToken(savedToken);
         setIsAuthenticated(true);
+        await refreshDashboardData(savedToken);
       } catch {
         resetSession('Session expired or invalid. Please sign in again.');
       } finally {
@@ -158,6 +201,7 @@ export default function AdminPage() {
       setToken(data.token);
       localStorage.setItem('admin_token', data.token);
       setIsAuthenticated(true);
+      await refreshDashboardData(data.token);
       setMessage('Admin login successful.');
     } catch (error) {
       setIsAuthenticated(false);
@@ -177,7 +221,10 @@ export default function AdminPage() {
     try {
       const payload = {
         ...projectPayload,
-        techStack: projectPayload.techStack.split(',').map((item) => item.trim())
+        techStack: projectPayload.techStack
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean)
       };
 
       if (projectPayload.id) {
@@ -187,6 +234,8 @@ export default function AdminPage() {
         await api.createProject(payload, token);
         setMessage('Project added successfully.');
       }
+      setProjectPayload(emptyProjectPayload);
+      await refreshDashboardData(token);
     } catch (error) {
       handleRequestError(error);
     } finally {
@@ -205,6 +254,8 @@ export default function AdminPage() {
         await api.createCertificate(certificatePayload, token);
         setMessage('Certificate added successfully.');
       }
+      setCertificatePayload(emptyCertificatePayload);
+      await refreshDashboardData(token);
     } catch (error) {
       handleRequestError(error);
     } finally {
@@ -223,6 +274,8 @@ export default function AdminPage() {
         await api.createMedia(mediaPayload, token);
         setMessage('Photo added successfully.');
       }
+      setMediaPayload(emptyMediaPayload);
+      await refreshDashboardData(token);
     } catch (error) {
       handleRequestError(error);
     } finally {
@@ -243,6 +296,8 @@ export default function AdminPage() {
           setMessage('Resume/CV added successfully.');
         }
       });
+      setResumePayload(emptyResumePayload);
+      await refreshDashboardData(token);
     } catch (error) {
       handleRequestError(error);
     } finally {
@@ -256,6 +311,99 @@ export default function AdminPage() {
     try {
       await api.updateProfile(profilePayload, token);
       setMessage('Profile updated successfully.');
+      await refreshDashboardData(token);
+    } catch (error) {
+      handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const editProject = (item: Project) => {
+    setProjectPayload({
+      id: item.id,
+      title: item.title,
+      summary: item.summary,
+      problem: item.problem,
+      actionTaken: item.actionTaken,
+      result: item.result,
+      imageUrl: item.imageUrl,
+      liveUrl: item.liveUrl,
+      repoUrl: item.repoUrl || '',
+      techStack: item.techStack.join(', '),
+      hostingFrontend: item.hostingFrontend || 'Vercel',
+      hostingBackend: item.hostingBackend || 'Railway',
+      databaseStorage: item.databaseStorage || 'PostgreSQL',
+      featured: item.featured,
+      displayOrder: 0
+    });
+    setMessage(`Editing project: ${item.title}`);
+  };
+
+  const deleteProject = async (id: string) => {
+    if (!requireToken()) return;
+    if (!window.confirm('Delete this project?')) return;
+
+    setLoadingAction(`project-delete-${id}`);
+    try {
+      await api.deleteProject(id, token);
+      setMessage('Project deleted successfully.');
+      await refreshDashboardData(token);
+    } catch (error) {
+      handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const editMedia = (item: MediaAsset) => {
+    setMediaPayload({
+      id: item.id,
+      title: item.title,
+      imageUrl: item.imageUrl,
+      category: item.category,
+      description: item.description || ''
+    });
+    setMessage(`Editing photo: ${item.title}`);
+  };
+
+  const deleteMedia = async (id: string) => {
+    if (!requireToken()) return;
+    if (!window.confirm('Delete this photo?')) return;
+
+    setLoadingAction(`media-delete-${id}`);
+    try {
+      await api.deleteMedia(id, token);
+      setMessage('Photo deleted successfully.');
+      await refreshDashboardData(token);
+    } catch (error) {
+      handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const editResume = (item: ResumeAsset) => {
+    setResumePayload({
+      id: item.id,
+      title: item.title,
+      type: item.type,
+      linkUrl: item.linkUrl || '',
+      fileUrl: item.fileUrl || '',
+      isPrimary: item.isPrimary
+    });
+    setMessage(`Editing resume/CV: ${item.title}`);
+  };
+
+  const deleteResume = async (id: string) => {
+    if (!requireToken()) return;
+    if (!window.confirm('Delete this resume/CV?')) return;
+
+    setLoadingAction(`resume-delete-${id}`);
+    try {
+      await api.deleteResume(id, token);
+      setMessage('Resume/CV deleted successfully.');
+      await refreshDashboardData(token);
     } catch (error) {
       handleRequestError(error);
     } finally {
@@ -313,6 +461,12 @@ export default function AdminPage() {
       {!isAuthenticated ? null : (
         <>
 
+      {isLoadingDashboard ? (
+        <section className="glass-card p-6">
+          <p className="text-subtle">Loading your dashboard data...</p>
+        </section>
+      ) : null}
+
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Update Profile</h2>
         <div className="grid gap-3 md:grid-cols-2">
@@ -335,7 +489,6 @@ export default function AdminPage() {
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Add Project</h2>
         <div className="grid gap-3 md:grid-cols-2">
-          <input className="rounded-lg bg-muted p-3" placeholder="Project ID (for update only)" value={projectPayload.id} onChange={(event) => setProjectPayload({ ...projectPayload, id: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Project title" value={projectPayload.title} onChange={(event) => setProjectPayload({ ...projectPayload, title: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Project image URL" value={projectPayload.imageUrl} onChange={(event) => setProjectPayload({ ...projectPayload, imageUrl: event.target.value })} />
           <label className="rounded-lg bg-muted p-3 text-sm text-subtle">
@@ -348,6 +501,14 @@ export default function AdminPage() {
           <input className="rounded-lg bg-muted p-3" placeholder="Frontend hosting" value={projectPayload.hostingFrontend} onChange={(event) => setProjectPayload({ ...projectPayload, hostingFrontend: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Backend hosting" value={projectPayload.hostingBackend} onChange={(event) => setProjectPayload({ ...projectPayload, hostingBackend: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Database" value={projectPayload.databaseStorage} onChange={(event) => setProjectPayload({ ...projectPayload, databaseStorage: event.target.value })} />
+          <label className="flex items-center gap-2 rounded-lg bg-muted p-3 text-sm text-subtle">
+            <input
+              type="checkbox"
+              checked={projectPayload.featured}
+              onChange={(event) => setProjectPayload({ ...projectPayload, featured: event.target.checked })}
+            />
+            Featured project
+          </label>
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Summary" value={projectPayload.summary} onChange={(event) => setProjectPayload({ ...projectPayload, summary: event.target.value })} />
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Problem" value={projectPayload.problem} onChange={(event) => setProjectPayload({ ...projectPayload, problem: event.target.value })} />
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Action Taken" value={projectPayload.actionTaken} onChange={(event) => setProjectPayload({ ...projectPayload, actionTaken: event.target.value })} />
@@ -362,12 +523,35 @@ export default function AdminPage() {
               ? 'Update Project'
               : 'Add Project'}
         </button>
+        <button className="ghost-btn" onClick={() => setProjectPayload(emptyProjectPayload)}>Clear Project Form</button>
+      </section>
+
+      <section className="glass-card space-y-4 p-6">
+        <h2 className="text-xl font-semibold text-white">Your Projects ({projects.length})</h2>
+        {!projects.length ? <p className="text-subtle">No projects yet.</p> : null}
+        <div className="space-y-3">
+          {projects.map((item) => (
+            <article key={item.id} className="rounded-xl border border-white/10 bg-muted/30 p-4">
+              <h3 className="font-semibold text-white">{item.title}</h3>
+              <p className="mt-1 text-sm text-subtle">{item.summary}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button className="ghost-btn" onClick={() => editProject(item)}>Edit</button>
+                <button
+                  className="ghost-btn border-red-400/40 text-red-300 hover:bg-red-500/10"
+                  onClick={() => deleteProject(item.id)}
+                  disabled={loadingAction === `project-delete-${item.id}`}
+                >
+                  {loadingAction === `project-delete-${item.id}` ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Add Certificate</h2>
         <div className="grid gap-3 md:grid-cols-2">
-          <input className="rounded-lg bg-muted p-3" placeholder="Certificate ID (for update only)" value={certificatePayload.id} onChange={(event) => setCertificatePayload({ ...certificatePayload, id: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Certificate title" value={certificatePayload.title} onChange={(event) => setCertificatePayload({ ...certificatePayload, title: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Issuer" value={certificatePayload.issuer} onChange={(event) => setCertificatePayload({ ...certificatePayload, issuer: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Issued date" value={certificatePayload.issuedDate} onChange={(event) => setCertificatePayload({ ...certificatePayload, issuedDate: event.target.value })} />
@@ -383,12 +567,62 @@ export default function AdminPage() {
               ? 'Update Certificate'
               : 'Add Certificate'}
         </button>
+        <button className="ghost-btn" onClick={() => setCertificatePayload(emptyCertificatePayload)}>Clear Certificate Form</button>
+      </section>
+
+      <section className="glass-card space-y-4 p-6">
+        <h2 className="text-xl font-semibold text-white">Your Certificates ({certificates.length})</h2>
+        {!certificates.length ? <p className="text-subtle">No certificates yet.</p> : null}
+        <div className="space-y-3">
+          {certificates.map((item) => (
+            <article key={item.id} className="rounded-xl border border-white/10 bg-muted/30 p-4">
+              <h3 className="font-semibold text-white">{item.title}</h3>
+              <p className="mt-1 text-sm text-subtle">{item.issuer}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  className="ghost-btn"
+                  onClick={() =>
+                    setCertificatePayload({
+                      id: item.id,
+                      title: item.title,
+                      issuer: item.issuer,
+                      issuedDate: item.issuedDate || '',
+                      credentialUrl: item.credentialUrl || '',
+                      imageUrl: item.imageUrl || ''
+                    })
+                  }
+                >
+                  Edit
+                </button>
+                <button
+                  className="ghost-btn border-red-400/40 text-red-300 hover:bg-red-500/10"
+                  onClick={async () => {
+                    if (!requireToken()) return;
+                    if (!window.confirm('Delete this certificate?')) return;
+                    setLoadingAction(`certificate-delete-${item.id}`);
+                    try {
+                      await api.deleteCertificate(item.id, token);
+                      setMessage('Certificate deleted successfully.');
+                      await refreshDashboardData(token);
+                    } catch (error) {
+                      handleRequestError(error);
+                    } finally {
+                      setLoadingAction(null);
+                    }
+                  }}
+                  disabled={loadingAction === `certificate-delete-${item.id}`}
+                >
+                  {loadingAction === `certificate-delete-${item.id}` ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Add Personal/Graduation Photo</h2>
         <div className="grid gap-3 md:grid-cols-2">
-          <input className="rounded-lg bg-muted p-3" placeholder="Photo ID (for update only)" value={mediaPayload.id} onChange={(event) => setMediaPayload({ ...mediaPayload, id: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Title" value={mediaPayload.title} onChange={(event) => setMediaPayload({ ...mediaPayload, title: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Category (profile/graduation/personal)" value={mediaPayload.category} onChange={(event) => setMediaPayload({ ...mediaPayload, category: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Image URL" value={mediaPayload.imageUrl} onChange={(event) => setMediaPayload({ ...mediaPayload, imageUrl: event.target.value })} />
@@ -407,12 +641,35 @@ export default function AdminPage() {
               ? 'Update Photo'
               : 'Add Photo'}
         </button>
+        <button className="ghost-btn" onClick={() => setMediaPayload(emptyMediaPayload)}>Clear Photo Form</button>
+      </section>
+
+      <section className="glass-card space-y-4 p-6">
+        <h2 className="text-xl font-semibold text-white">Your Photos ({mediaAssets.length})</h2>
+        {!mediaAssets.length ? <p className="text-subtle">No photos yet.</p> : null}
+        <div className="space-y-3">
+          {mediaAssets.map((item) => (
+            <article key={item.id} className="rounded-xl border border-white/10 bg-muted/30 p-4">
+              <h3 className="font-semibold text-white">{item.title}</h3>
+              <p className="mt-1 text-sm text-subtle">{item.category}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button className="ghost-btn" onClick={() => editMedia(item)}>Edit</button>
+                <button
+                  className="ghost-btn border-red-400/40 text-red-300 hover:bg-red-500/10"
+                  onClick={() => deleteMedia(item.id)}
+                  disabled={loadingAction === `media-delete-${item.id}`}
+                >
+                  {loadingAction === `media-delete-${item.id}` ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="glass-card space-y-4 p-6">
         <h2 className="text-xl font-semibold text-white">Add Resume / CV</h2>
         <div className="grid gap-3 md:grid-cols-2">
-          <input className="rounded-lg bg-muted p-3" placeholder="Resume/CV ID (for update only)" value={resumePayload.id} onChange={(event) => setResumePayload({ ...resumePayload, id: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Title" value={resumePayload.title} onChange={(event) => setResumePayload({ ...resumePayload, title: event.target.value })} />
           <select className="rounded-lg bg-muted p-3" value={resumePayload.type} onChange={(event) => setResumePayload({ ...resumePayload, type: event.target.value })}>
             <option value="resume">Resume</option>
@@ -442,6 +699,30 @@ export default function AdminPage() {
               ? 'Update Resume/CV'
               : 'Add Resume/CV'}
         </button>
+        <button className="ghost-btn" onClick={() => setResumePayload(emptyResumePayload)}>Clear Resume/CV Form</button>
+      </section>
+
+      <section className="glass-card space-y-4 p-6">
+        <h2 className="text-xl font-semibold text-white">Your Resume/CV Files ({resumes.length})</h2>
+        {!resumes.length ? <p className="text-subtle">No resume/CV records yet.</p> : null}
+        <div className="space-y-3">
+          {resumes.map((item) => (
+            <article key={item.id} className="rounded-xl border border-white/10 bg-muted/30 p-4">
+              <h3 className="font-semibold text-white">{item.title}</h3>
+              <p className="mt-1 text-sm text-subtle">Type: {item.type} {item.isPrimary ? '• Primary' : ''}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button className="ghost-btn" onClick={() => editResume(item)}>Edit</button>
+                <button
+                  className="ghost-btn border-red-400/40 text-red-300 hover:bg-red-500/10"
+                  onClick={() => deleteResume(item.id)}
+                  disabled={loadingAction === `resume-delete-${item.id}`}
+                >
+                  {loadingAction === `resume-delete-${item.id}` ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
       </>
       )}
