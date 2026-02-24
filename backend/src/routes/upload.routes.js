@@ -9,7 +9,13 @@ uploadRouter.post('/', requireAuth, upload.single('file'), (req, res) => {
     return res.status(400).json({ message: 'No file uploaded' });
   }
 
-  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  const forwardedProto = req.headers['x-forwarded-proto'];
+  const protocolHeader = Array.isArray(forwardedProto) ? forwardedProto[0] : forwardedProto;
+  const protocol =
+    protocolHeader ||
+    (process.env.NODE_ENV === 'production' ? 'https' : req.protocol || 'http');
+
+  const baseUrl = `${protocol}://${req.get('host')}`;
   const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
 
   return res.status(201).json({
