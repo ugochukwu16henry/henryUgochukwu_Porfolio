@@ -197,6 +197,8 @@ export default async function HomePage() {
           <div>
             <p className="font-semibold text-white">Email</p>
             <p className="text-subtle">{profile?.email || 'henry@example.com'}</p>
+            <p className="mt-3 font-semibold text-white">WhatsApp</p>
+            <p className="text-subtle">+234 901 571 8484</p>
           </div>
           <div className="flex flex-wrap gap-3">
             {profile?.githubUrl ? (
@@ -209,6 +211,14 @@ export default async function HomePage() {
                 LinkedIn
               </a>
             ) : null}
+            <a
+              href="https://wa.me/2349015718484"
+              className="ghost-btn"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Chat on WhatsApp
+            </a>
           </div>
         </div>
       </section>
