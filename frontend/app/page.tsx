@@ -109,6 +109,40 @@ export default async function HomePage() {
       </section>
 
       <section className="section-container">
+        <SectionTitle
+          eyebrow="Services"
+          title="What I Build for You"
+          description="End-to-end solutions from clean UI to reliable databases, tailored for real-world products."
+        />
+        <div className="grid gap-4 md:grid-cols-4">
+          <article className="glass-card p-4">
+            <h3 className="font-semibold text-white">Web Development</h3>
+            <p className="mt-2 text-sm text-subtle">
+              Full-stack web applications built with modern frameworks, API integrations, auth, and deployment.
+            </p>
+          </article>
+          <article className="glass-card p-4">
+            <h3 className="font-semibold text-white">Web Design</h3>
+            <p className="mt-2 text-sm text-subtle">
+              Clean, responsive interfaces focused on usability, accessibility, and clear storytelling for your brand.
+            </p>
+          </article>
+          <article className="glass-card p-4">
+            <h3 className="font-semibold text-white">Dynamic Websites</h3>
+            <p className="mt-2 text-sm text-subtle">
+              Interactive dashboards, content-driven sites, and portals with real-time and personalized experiences.
+            </p>
+          </article>
+          <article className="glass-card p-4">
+            <h3 className="font-semibold text-white">Database Design</h3>
+            <p className="mt-2 text-sm text-subtle">
+              Relational schemas, data modeling, and performance-aware queries using PostgreSQL and Prisma.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section-container">
         <SectionTitle eyebrow="Certificates" title="Training & Credentials" />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {certificates.map((item) => (
