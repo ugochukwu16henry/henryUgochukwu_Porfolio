@@ -102,6 +102,26 @@ export default function AdminPage() {
     setMessage(text);
   };
 
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const withRetryOnTransientFailure = async (action: () => Promise<void>) => {
+    try {
+      await action();
+      return;
+    } catch (error) {
+      const text = (error as Error).message || 'Request failed';
+      const shouldRetry = /network error|failed to fetch|bad gateway|\(502\)/i.test(text);
+
+      if (!shouldRetry) {
+        throw error;
+      }
+
+      setMessage('Temporary server/network issue detected. Retrying...');
+      await wait(800);
+      await action();
+    }
+  };
+
   useEffect(() => {
     const restoreSession = async () => {
       const savedToken = localStorage.getItem('admin_token');
@@ -214,13 +234,15 @@ export default function AdminPage() {
     if (!requireToken()) return;
     setLoadingAction('resume');
     try {
-      if (resumePayload.id) {
-        await api.updateResume(resumePayload.id, resumePayload, token);
-        setMessage('Resume/CV updated successfully.');
-      } else {
-        await api.createResume(resumePayload, token);
-        setMessage('Resume/CV added successfully.');
-      }
+      await withRetryOnTransientFailure(async () => {
+        if (resumePayload.id) {
+          await api.updateResume(resumePayload.id, resumePayload, token);
+          setMessage('Resume/CV updated successfully.');
+        } else {
+          await api.createResume(resumePayload, token);
+          setMessage('Resume/CV added successfully.');
+        }
+      });
     } catch (error) {
       handleRequestError(error);
     } finally {

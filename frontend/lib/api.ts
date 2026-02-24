@@ -24,8 +24,10 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   }
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: 'Request failed' }));
-    throw new Error(error.message || 'Request failed');
+    const error = await response
+      .json()
+      .catch(() => ({ message: `Request failed (${response.status})` }));
+    throw new Error(error.message || `Request failed (${response.status})`);
   }
 
   if (response.status === 204) {
@@ -94,8 +96,10 @@ export const uploadFile = async (file: File, token: string) => {
   }
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: 'Upload failed' }));
-    throw new Error(error.message || 'Upload failed');
+    const error = await response
+      .json()
+      .catch(() => ({ message: `Upload failed (${response.status})` }));
+    throw new Error(error.message || `Upload failed (${response.status})`);
   }
 
   return response.json() as Promise<{ fileName: string; fileUrl: string }>;
