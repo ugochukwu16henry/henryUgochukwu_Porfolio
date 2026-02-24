@@ -2,6 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { api } from '@/lib/api';
 
+const ensureAbsoluteUrl = (url: string) => {
+  if (!url) return '#';
+  if (/^https?:\/\//i.test(url)) return url;
+  return `https://${url}`;
+};
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -26,11 +32,11 @@ export default async function ProjectDetailsPage({ params }: Props) {
             <h1 className="text-3xl font-bold text-white">{project.title}</h1>
             <p className="text-subtle">{project.summary}</p>
             <div className="flex flex-wrap gap-3">
-              <a className="primary-btn" href={project.liveUrl} target="_blank" rel="noreferrer">
+              <a className="primary-btn" href={ensureAbsoluteUrl(project.liveUrl)} target="_blank" rel="noreferrer">
                 Open Live Project
               </a>
               {project.repoUrl ? (
-                <a className="ghost-btn" href={project.repoUrl} target="_blank" rel="noreferrer">
+                <a className="ghost-btn" href={ensureAbsoluteUrl(project.repoUrl)} target="_blank" rel="noreferrer">
                   Open Repository
                 </a>
               ) : null}

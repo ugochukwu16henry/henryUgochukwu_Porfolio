@@ -2,6 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from '@/lib/types';
 
+const ensureAbsoluteUrl = (url: string) => {
+  if (!url) return '#';
+  if (/^https?:\/\//i.test(url)) return url;
+  return `https://${url}`;
+};
+
 type Props = {
   project: Project;
 };
@@ -27,11 +33,11 @@ export const ProjectCard = ({ project }: Props) => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <a href={project.liveUrl} target="_blank" rel="noreferrer" className="primary-btn">
+          <a href={ensureAbsoluteUrl(project.liveUrl)} target="_blank" rel="noreferrer" className="primary-btn">
             Live Project
           </a>
           {project.repoUrl ? (
-            <a href={project.repoUrl} target="_blank" rel="noreferrer" className="ghost-btn">
+            <a href={ensureAbsoluteUrl(project.repoUrl)} target="_blank" rel="noreferrer" className="ghost-btn">
               GitHub Repo
             </a>
           ) : null}
