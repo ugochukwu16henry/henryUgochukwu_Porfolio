@@ -210,8 +210,6 @@ export default function AdminPage() {
     };
 
     restoreSession();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectsPage, projectsPageSize, projectsSearch, certificatesPage, certificatesPageSize, certificatesSearch, mediaPage, mediaPageSize, mediaSearch, resumesPage, resumesPageSize, resumesSearch]);
   }, []);
 
   useEffect(() => {
