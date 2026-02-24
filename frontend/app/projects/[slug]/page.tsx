@@ -8,6 +8,21 @@ const ensureAbsoluteUrl = (url: string) => {
   return `https://${url}`;
 };
 
+const normalizeImageUrl = (url: string) => {
+  if (!url) return '';
+  const railwayHost = 'henryugochukwuporfolio-production.up.railway.app';
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === railwayHost && parsed.protocol === 'http:') {
+      parsed.protocol = 'https:';
+      return parsed.toString();
+    }
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+};
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -24,7 +39,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
 
       <article className="glass-card overflow-hidden">
         <div className="relative h-72 w-full md:h-96">
-          <Image src={project.imageUrl} alt={project.title} fill className="object-cover" />
+          <Image src={normalizeImageUrl(project.imageUrl)} alt={project.title} fill className="object-cover" />
         </div>
 
         <div className="space-y-8 p-6 md:p-10">
@@ -89,7 +104,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {project.galleryImages.map((url) => (
                   <div key={url} className="relative h-56 w-full overflow-hidden rounded-xl border border-white/10">
-                    <Image src={url} alt={project.title} fill className="object-cover" />
+                    <Image src={normalizeImageUrl(url)} alt={project.title} fill className="object-cover" />
                   </div>
                 ))}
               </div>

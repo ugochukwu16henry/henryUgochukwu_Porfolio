@@ -1,6 +1,21 @@
 import Image from 'next/image';
 import { MediaAsset } from '@/lib/types';
 
+const normalizeImageUrl = (url: string) => {
+  if (!url) return '';
+  const railwayHost = 'henryugochukwuporfolio-production.up.railway.app';
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === railwayHost && parsed.protocol === 'http:') {
+      parsed.protocol = 'https:';
+      return parsed.toString();
+    }
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+};
+
 type Props = {
   items: MediaAsset[];
 };
@@ -15,7 +30,7 @@ export const MediaGrid = ({ items }: Props) => {
       {items.map((item) => (
         <article key={item.id} className="glass-card overflow-hidden">
           <div className="relative h-48 w-full">
-            <Image src={item.imageUrl} alt={item.title} fill className="object-cover" />
+            <Image src={normalizeImageUrl(item.imageUrl)} alt={item.title} fill className="object-cover" />
           </div>
           <div className="space-y-1 p-3">
             <h4 className="font-medium text-white">{item.title}</h4>
