@@ -25,6 +25,7 @@ export type Project = {
   actionTaken: string;
   result: string;
   techStack: string[];
+  galleryImages?: string[];
   hostingFrontend?: string;
   hostingBackend?: string;
   databaseStorage?: string;

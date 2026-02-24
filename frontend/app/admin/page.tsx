@@ -101,6 +101,7 @@ export default function AdminPage() {
   const [resumesSearch, setResumesSearch] = useState('');
 
   const [projectPayload, setProjectPayload] = useState(emptyProjectPayload);
+  const [projectGalleryImages, setProjectGalleryImages] = useState<string[]>([]);
   const [certificatePayload, setCertificatePayload] = useState(emptyCertificatePayload);
   const [mediaPayload, setMediaPayload] = useState(emptyMediaPayload);
   const [resumePayload, setResumePayload] = useState(emptyResumePayload);
@@ -248,7 +249,8 @@ export default function AdminPage() {
         techStack: projectPayload.techStack
           .split(',')
           .map((item) => item.trim())
-          .filter(Boolean)
+          .filter(Boolean),
+        galleryImages: projectGalleryImages
       };
 
       if (projectPayload.id) {
@@ -259,6 +261,7 @@ export default function AdminPage() {
         setMessage('Project added successfully.');
       }
       setProjectPayload(emptyProjectPayload);
+      setProjectGalleryImages([]);
       await refreshDashboardData(token);
     } catch (error) {
       handleRequestError(error);
@@ -361,6 +364,7 @@ export default function AdminPage() {
       featured: item.featured,
       displayOrder: 0
     });
+    setProjectGalleryImages(item.galleryImages || []);
     setMessage(`Editing project: ${item.title}`);
   };
 
@@ -469,6 +473,40 @@ export default function AdminPage() {
             {loadingAction === 'login' ? 'Signing In...' : 'Sign In'}
           </button>
         </div>
+        <div className="md:col-span-2 space-y-2">
+          <p className="text-sm text-subtle">Additional project screenshots (shown only on View Details)</p>
+          {projectGalleryImages.length ? (
+            <div className="space-y-1 text-xs text-subtle">
+              {projectGalleryImages.map((url, index) => (
+                <div key={`${url}-${index}`} className="flex items-center gap-2">
+                  <span className="truncate max-w-[260px]">{url}</span>
+                  <button
+                    type="button"
+                    className="ghost-btn px-2 py-1 text-[11px]"
+                    onClick={() =>
+                      setProjectGalleryImages((prev) => prev.filter((_, i) => i !== index))
+                    }
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : null}
+          <label className="rounded-lg bg-muted p-3 text-sm text-subtle">
+            Upload additional screenshot
+            <input
+              type="file"
+              className="mt-2 block"
+              disabled={uploading}
+              onChange={(event) =>
+                handleUpload(event, (url) =>
+                  setProjectGalleryImages((prev) => [...prev, url])
+                )
+              }
+            />
+          </label>
+        </div>
         {isAuthenticated ? (
           <button className="ghost-btn" onClick={logout}>Logout</button>
         ) : null}
@@ -547,7 +585,15 @@ export default function AdminPage() {
               ? 'Update Project'
               : 'Add Project'}
         </button>
-        <button className="ghost-btn" onClick={() => setProjectPayload(emptyProjectPayload)}>Clear Project Form</button>
+        <button
+          className="ghost-btn"
+          onClick={() => {
+            setProjectPayload(emptyProjectPayload);
+            setProjectGalleryImages([]);
+          }}
+        >
+          Clear Project Form
+        </button>
       </section>
 
       <section className="glass-card space-y-4 p-6">

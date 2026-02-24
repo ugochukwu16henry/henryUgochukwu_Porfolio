@@ -76,6 +76,19 @@ export default async function ProjectDetailsPage({ params }: Props) {
               </p>
             </div>
           </section>
+
+          {project.galleryImages && project.galleryImages.length > 0 ? (
+            <section className="space-y-4">
+              <h2 className="text-xl font-semibold text-white">Additional Screenshots</h2>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {project.galleryImages.map((url) => (
+                  <div key={url} className="relative h-56 w-full overflow-hidden rounded-xl border border-white/10">
+                    <Image src={url} alt={project.title} fill className="object-cover" />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </article>
     </main>

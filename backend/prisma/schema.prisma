@@ -35,6 +35,7 @@ model Project {
   actionTaken      String
   result           String
   techStack        String[]
+  galleryImages    String[] @default([])
   hostingFrontend  String?
   hostingBackend   String?
   databaseStorage  String?
