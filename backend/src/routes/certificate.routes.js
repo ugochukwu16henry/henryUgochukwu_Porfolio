@@ -10,13 +10,15 @@ certificateRouter.get('/', async (_, res) => {
 });
 
 certificateRouter.post('/', requireAuth, async (req, res) => {
-  const certificate = await prisma.certificate.create({ data: req.body });
+  const { id, createdAt, updatedAt, ...payload } = req.body;
+  const certificate = await prisma.certificate.create({ data: payload });
   res.status(201).json(certificate);
 });
 
 certificateRouter.put('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
-  const certificate = await prisma.certificate.update({ where: { id }, data: req.body });
+  const { id: bodyId, createdAt, updatedAt, ...payload } = req.body;
+  const certificate = await prisma.certificate.update({ where: { id }, data: payload });
   res.json(certificate);
 });
 

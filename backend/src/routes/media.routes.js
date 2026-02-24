@@ -10,13 +10,15 @@ mediaRouter.get('/', async (_, res) => {
 });
 
 mediaRouter.post('/', requireAuth, async (req, res) => {
-  const asset = await prisma.mediaAsset.create({ data: req.body });
+  const { id, createdAt, updatedAt, ...payload } = req.body;
+  const asset = await prisma.mediaAsset.create({ data: payload });
   res.status(201).json(asset);
 });
 
 mediaRouter.put('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
-  const asset = await prisma.mediaAsset.update({ where: { id }, data: req.body });
+  const { id: bodyId, createdAt, updatedAt, ...payload } = req.body;
+  const asset = await prisma.mediaAsset.update({ where: { id }, data: payload });
   res.json(asset);
 });
 
