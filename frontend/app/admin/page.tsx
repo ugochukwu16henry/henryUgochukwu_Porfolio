@@ -638,6 +638,19 @@ export default function AdminPage() {
           <input className="rounded-lg bg-muted p-3" placeholder="Issued date" value={certificatePayload.issuedDate} onChange={(event) => setCertificatePayload({ ...certificatePayload, issuedDate: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Credential URL" value={certificatePayload.credentialUrl} onChange={(event) => setCertificatePayload({ ...certificatePayload, credentialUrl: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Image URL" value={certificatePayload.imageUrl} onChange={(event) => setCertificatePayload({ ...certificatePayload, imageUrl: event.target.value })} />
+          <label className="rounded-lg bg-muted p-3 text-sm text-subtle">
+            Upload certificate image
+            <input
+              type="file"
+              className="mt-2 block"
+              disabled={uploading}
+              onChange={(event) =>
+                handleUpload(event, (url) =>
+                  setCertificatePayload({ ...certificatePayload, imageUrl: url })
+                )
+              }
+            />
+          </label>
         </div>
         <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveCertificate} disabled={loadingAction === 'certificate'}>
           {loadingAction === 'certificate'
