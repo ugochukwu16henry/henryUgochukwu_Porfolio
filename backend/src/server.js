@@ -11,7 +11,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 const normalizeOrigin = (value = '') => value.trim().toLowerCase().replace(/\/+$/, '');
 
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
+const defaultCorsOrigins = [
+  'http://localhost:3000',
+  'https://henry-ugochukwu-porfolio.vercel.app'
+];
+
+const allowedOrigins = (process.env.CORS_ORIGIN || defaultCorsOrigins.join(','))
   .split(',')
   .map((origin) => normalizeOrigin(origin))
   .filter(Boolean);

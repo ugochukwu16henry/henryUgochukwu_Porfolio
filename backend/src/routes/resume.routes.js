@@ -12,7 +12,7 @@ resumeRouter.get('/', async (_, res) => {
 });
 
 resumeRouter.post('/', requireAuth, async (req, res) => {
-  const payload = req.body;
+  const { id, createdAt, updatedAt, ...payload } = req.body;
 
   if (payload.isPrimary) {
     await prisma.resumeAsset.updateMany({ data: { isPrimary: false } });
@@ -24,7 +24,7 @@ resumeRouter.post('/', requireAuth, async (req, res) => {
 
 resumeRouter.put('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
-  const payload = req.body;
+  const { id: bodyId, createdAt, updatedAt, ...payload } = req.body;
 
   if (payload.isPrimary) {
     await prisma.resumeAsset.updateMany({
