@@ -6,6 +6,8 @@ import { MediaGrid } from '@/components/media-grid';
 import { ProjectCard } from '@/components/project-card';
 import { SectionTitle } from '@/components/section-title';
 
+const siteUrl = 'https://henry-ugochukwu-porfolio.vercel.app';
+
 export default async function HomePage() {
   const [profile, projectsPage, certificatesPage, mediaPage, resumesPage] = await Promise.all([
     api.getProfile().catch(() => null),
@@ -22,6 +24,11 @@ export default async function HomePage() {
 
   const primaryResume = resumes.find((item) => item.isPrimary) || resumes[0];
   const primaryResumeUrl = primaryResume?.fileUrl || primaryResume?.linkUrl || '';
+  const shareUrl = siteUrl;
+  const encodedShareUrl = encodeURIComponent(shareUrl);
+  const encodedShareText = encodeURIComponent(
+    'Check out Henry M. Ugochukwu – Full Stack Developer portfolio'
+  );
 
   return (
     <main className="space-y-20 pb-16">
@@ -51,6 +58,33 @@ export default async function HomePage() {
                   LinkedIn
                 </a>
               ) : null}
+            </div>
+            <div className="flex flex-wrap gap-2 pt-2 text-xs text-subtle">
+              <span className="mr-1">Share:</span>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`}
+                target="_blank"
+                rel="noreferrer"
+                className="ghost-btn px-3 py-1 text-[11px]"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodedShareUrl}&text=${encodedShareText}`}
+                target="_blank"
+                rel="noreferrer"
+                className="ghost-btn px-3 py-1 text-[11px]"
+              >
+                X / Twitter
+              </a>
+              <a
+                href={`https://wa.me/?text=${encodedShareText}%20${encodedShareUrl}`}
+                target="_blank"
+                rel="noreferrer"
+                className="ghost-btn px-3 py-1 text-[11px]"
+              >
+                WhatsApp
+              </a>
             </div>
           </div>
 
