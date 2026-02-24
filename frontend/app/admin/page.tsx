@@ -12,6 +12,9 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [loadingAction, setLoadingAction] = useState<
+    'login' | 'profile' | 'project' | 'certificate' | 'media' | 'resume' | null
+  >(null);
 
   const [projectPayload, setProjectPayload] = useState({
     id: '',
@@ -129,6 +132,7 @@ export default function AdminPage() {
   }, [isAuthenticated, isCheckingAuth]);
 
   const login = async () => {
+    setLoadingAction('login');
     try {
       const data = await api.login(email, password);
       setToken(data.token);
@@ -138,6 +142,8 @@ export default function AdminPage() {
     } catch (error) {
       setIsAuthenticated(false);
       handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
@@ -147,6 +153,7 @@ export default function AdminPage() {
 
   const saveProject = async () => {
     if (!requireToken()) return;
+    setLoadingAction('project');
     try {
       const payload = {
         ...projectPayload,
@@ -162,11 +169,14 @@ export default function AdminPage() {
       }
     } catch (error) {
       handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
   const saveCertificate = async () => {
     if (!requireToken()) return;
+    setLoadingAction('certificate');
     try {
       if (certificatePayload.id) {
         await api.updateCertificate(certificatePayload.id, certificatePayload, token);
@@ -177,11 +187,14 @@ export default function AdminPage() {
       }
     } catch (error) {
       handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
   const saveMedia = async () => {
     if (!requireToken()) return;
+    setLoadingAction('media');
     try {
       if (mediaPayload.id) {
         await api.updateMedia(mediaPayload.id, mediaPayload, token);
@@ -192,11 +205,14 @@ export default function AdminPage() {
       }
     } catch (error) {
       handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
   const saveResume = async () => {
     if (!requireToken()) return;
+    setLoadingAction('resume');
     try {
       if (resumePayload.id) {
         await api.updateResume(resumePayload.id, resumePayload, token);
@@ -207,16 +223,21 @@ export default function AdminPage() {
       }
     } catch (error) {
       handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
   const saveProfile = async () => {
     if (!requireToken()) return;
+    setLoadingAction('profile');
     try {
       await api.updateProfile(profilePayload, token);
       setMessage('Profile updated successfully.');
     } catch (error) {
       handleRequestError(error);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
@@ -250,7 +271,9 @@ export default function AdminPage() {
         <div className="grid gap-3 md:grid-cols-3">
           <input ref={emailInputRef} className="rounded-lg bg-muted p-3" placeholder="Admin email" value={email} onChange={(event) => setEmail(event.target.value)} />
           <input className="rounded-lg bg-muted p-3" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
-          <button className="primary-btn" onClick={login}>Sign In</button>
+          <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={login} disabled={loadingAction === 'login'}>
+            {loadingAction === 'login' ? 'Signing In...' : 'Sign In'}
+          </button>
         </div>
         {isAuthenticated ? (
           <button className="ghost-btn" onClick={logout}>Logout</button>
@@ -282,7 +305,9 @@ export default function AdminPage() {
           </label>
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" placeholder="Bio" rows={4} value={profilePayload.bio} onChange={(event) => setProfilePayload({ ...profilePayload, bio: event.target.value })} />
         </div>
-        <button className="primary-btn" onClick={saveProfile}>Save Profile</button>
+        <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveProfile} disabled={loadingAction === 'profile'}>
+          {loadingAction === 'profile' ? 'Saving...' : 'Save Profile'}
+        </button>
       </section>
 
       <section className="glass-card space-y-4 p-6">
@@ -306,7 +331,15 @@ export default function AdminPage() {
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Action Taken" value={projectPayload.actionTaken} onChange={(event) => setProjectPayload({ ...projectPayload, actionTaken: event.target.value })} />
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Result" value={projectPayload.result} onChange={(event) => setProjectPayload({ ...projectPayload, result: event.target.value })} />
         </div>
-        <button className="primary-btn" onClick={saveProject}>{projectPayload.id ? 'Update Project' : 'Add Project'}</button>
+        <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveProject} disabled={loadingAction === 'project'}>
+          {loadingAction === 'project'
+            ? projectPayload.id
+              ? 'Updating Project...'
+              : 'Adding Project...'
+            : projectPayload.id
+              ? 'Update Project'
+              : 'Add Project'}
+        </button>
       </section>
 
       <section className="glass-card space-y-4 p-6">
@@ -319,7 +352,15 @@ export default function AdminPage() {
           <input className="rounded-lg bg-muted p-3" placeholder="Credential URL" value={certificatePayload.credentialUrl} onChange={(event) => setCertificatePayload({ ...certificatePayload, credentialUrl: event.target.value })} />
           <input className="rounded-lg bg-muted p-3" placeholder="Image URL" value={certificatePayload.imageUrl} onChange={(event) => setCertificatePayload({ ...certificatePayload, imageUrl: event.target.value })} />
         </div>
-        <button className="primary-btn" onClick={saveCertificate}>{certificatePayload.id ? 'Update Certificate' : 'Add Certificate'}</button>
+        <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveCertificate} disabled={loadingAction === 'certificate'}>
+          {loadingAction === 'certificate'
+            ? certificatePayload.id
+              ? 'Updating Certificate...'
+              : 'Adding Certificate...'
+            : certificatePayload.id
+              ? 'Update Certificate'
+              : 'Add Certificate'}
+        </button>
       </section>
 
       <section className="glass-card space-y-4 p-6">
@@ -335,7 +376,15 @@ export default function AdminPage() {
           </label>
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Description" value={mediaPayload.description} onChange={(event) => setMediaPayload({ ...mediaPayload, description: event.target.value })} />
         </div>
-        <button className="primary-btn" onClick={saveMedia}>{mediaPayload.id ? 'Update Photo' : 'Add Photo'}</button>
+        <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveMedia} disabled={loadingAction === 'media'}>
+          {loadingAction === 'media'
+            ? mediaPayload.id
+              ? 'Updating Photo...'
+              : 'Adding Photo...'
+            : mediaPayload.id
+              ? 'Update Photo'
+              : 'Add Photo'}
+        </button>
       </section>
 
       <section className="glass-card space-y-4 p-6">
@@ -362,7 +411,15 @@ export default function AdminPage() {
             Set as primary
           </label>
         </div>
-        <button className="primary-btn" onClick={saveResume}>{resumePayload.id ? 'Update Resume/CV' : 'Add Resume/CV'}</button>
+        <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveResume} disabled={loadingAction === 'resume'}>
+          {loadingAction === 'resume'
+            ? resumePayload.id
+              ? 'Updating Resume/CV...'
+              : 'Adding Resume/CV...'
+            : resumePayload.id
+              ? 'Update Resume/CV'
+              : 'Add Resume/CV'}
+        </button>
       </section>
       </>
       )}
