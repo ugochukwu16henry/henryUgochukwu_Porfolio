@@ -7,13 +7,18 @@ import { ProjectCard } from '@/components/project-card';
 import { SectionTitle } from '@/components/section-title';
 
 export default async function HomePage() {
-  const [profile, projects, certificates, media, resumes] = await Promise.all([
+  const [profile, projectsPage, certificatesPage, mediaPage, resumesPage] = await Promise.all([
     api.getProfile().catch(() => null),
-    api.getProjects().catch(() => []),
-    api.getCertificates().catch(() => []),
-    api.getMedia().catch(() => []),
-    api.getResumes().catch(() => [])
+    api.getProjects().catch(() => ({ items: [], total: 0 })),
+    api.getCertificates().catch(() => ({ items: [], total: 0 })),
+    api.getMedia().catch(() => ({ items: [], total: 0 })),
+    api.getResumes().catch(() => ({ items: [], total: 0 }))
   ]);
+
+  const projects = projectsPage.items;
+  const certificates = certificatesPage.items;
+  const media = mediaPage.items;
+  const resumes = resumesPage.items;
 
   const primaryResume = resumes.find((item) => item.isPrimary) || resumes[0];
 
