@@ -4,33 +4,32 @@ import { requireAuth } from '../middleware/auth.js';
 
 export const mediaRouter = Router();
 
-mediaRouter.get('/', async (_, res) => {
-  const assets = await prisma.mediaAsset.findMany({ orderBy: { createdAt: 'desc' } });
-  res.json(assets);
-});
-  mediaRouter.get('/', async (req, res) => {
-    const { page = 1, pageSize = 10, search = '' } = req.query;
-    const skip = (parseInt(page) - 1) * parseInt(pageSize);
-    const take = parseInt(pageSize);
-    const where = search
-      ? {
+mediaRouter.get('/', async (req, res) => {
+  const page = Number(req.query.page) || 1;
+  const pageSize = Math.min(Number(req.query.pageSize) || 10, 50);
+  const search = (req.query.search || '').toString().trim();
+
+  const where = search
+    ? {
         OR: [
           { title: { contains: search, mode: 'insensitive' } },
           { description: { contains: search, mode: 'insensitive' } }
         ]
       }
-      : {};
-    const [assets, total] = await Promise.all([
-      prisma.mediaAsset.findMany({
-        where,
-        orderBy: { createdAt: 'desc' },
-        skip,
-        take
-      }),
-      prisma.mediaAsset.count({ where })
-    ]);
-    res.json({ items: assets, total });
-  });
+    : {};
+
+  const [items, total] = await Promise.all([
+    prisma.mediaAsset.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      skip: (page - 1) * pageSize,
+      take: pageSize
+    }),
+    prisma.mediaAsset.count({ where })
+  ]);
+
+  res.json({ items, total });
+});
 
 mediaRouter.post('/', requireAuth, async (req, res) => {
   const { id, createdAt, updatedAt, ...payload } = req.body;

@@ -5,11 +5,31 @@ import { slugify } from '../utils/slugify.js';
 
 export const projectRouter = Router();
 
-projectRouter.get('/', async (_, res) => {
-  const projects = await prisma.project.findMany({
-    orderBy: [{ featured: 'desc' }, { displayOrder: 'asc' }, { createdAt: 'desc' }]
-  });
-  res.json(projects);
+projectRouter.get('/', async (req, res) => {
+  const page = Number(req.query.page) || 1;
+  const pageSize = Math.min(Number(req.query.pageSize) || 10, 50);
+  const search = (req.query.search || '').toString().trim();
+
+  const where = search
+    ? {
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { summary: { contains: search, mode: 'insensitive' } }
+        ]
+      }
+    : {};
+
+  const [items, total] = await Promise.all([
+    prisma.project.findMany({
+      where,
+      orderBy: [{ featured: 'desc' }, { displayOrder: 'asc' }, { createdAt: 'desc' }],
+      skip: (page - 1) * pageSize,
+      take: pageSize
+    }),
+    prisma.project.count({ where })
+  ]);
+
+  res.json({ items, total });
 });
   projectRouter.get('/', async (req, res) => {
     const { page = 1, pageSize = 10, search = '' } = req.query;
