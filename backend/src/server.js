@@ -1,3 +1,4 @@
+import 'express-async-errors';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -46,6 +47,21 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use('/uploads', express.static(path.resolve('uploads')));
 app.use('/api', apiRouter);
+
+app.use('/api/*', (_, res) => {
+  res.status(404).json({ message: 'Endpoint not found' });
+});
+
+app.use((error, _, res, __) => {
+  const statusCode = error?.status || error?.statusCode || 500;
+  const message = statusCode >= 500 ? 'Internal server error' : error.message;
+
+  if (statusCode >= 500) {
+    console.error('[API ERROR]', error);
+  }
+
+  res.status(statusCode).json({ message });
+});
 
 app.listen(port, () => {
   console.log(`Portfolio API running on port ${port}`);
