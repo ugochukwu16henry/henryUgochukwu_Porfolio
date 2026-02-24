@@ -29,8 +29,8 @@ projectRouter.get('/:idOrSlug', async (req, res) => {
 });
 
 projectRouter.post('/', requireAuth, async (req, res) => {
-  const payload = req.body;
-  const slug = payload.slug || slugify(payload.title);
+  const { id, slug: bodySlug, createdAt, updatedAt, ...payload } = req.body;
+  const slug = bodySlug || slugify(payload.title);
 
   const project = await prisma.project.create({
     data: {
@@ -45,14 +45,23 @@ projectRouter.post('/', requireAuth, async (req, res) => {
 
 projectRouter.put('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
-  const payload = req.body;
+  const { id: bodyId, slug: bodySlug, createdAt, updatedAt, ...payload } = req.body;
+
+  const data = {
+    ...payload,
+    techStack: payload.techStack || []
+  };
+
+  // If title changed and no explicit slug provided, regenerate slug from title
+  if (payload.title && !bodySlug) {
+    data.slug = slugify(payload.title);
+  } else if (bodySlug) {
+    data.slug = bodySlug;
+  }
 
   const project = await prisma.project.update({
     where: { id },
-    data: {
-      ...payload,
-      techStack: payload.techStack || []
-    }
+    data
   });
 
   res.json(project);
