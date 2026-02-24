@@ -473,40 +473,6 @@ export default function AdminPage() {
             {loadingAction === 'login' ? 'Signing In...' : 'Sign In'}
           </button>
         </div>
-        <div className="md:col-span-2 space-y-2">
-          <p className="text-sm text-subtle">Additional project screenshots (shown only on View Details)</p>
-          {projectGalleryImages.length ? (
-            <div className="space-y-1 text-xs text-subtle">
-              {projectGalleryImages.map((url, index) => (
-                <div key={`${url}-${index}`} className="flex items-center gap-2">
-                  <span className="truncate max-w-[260px]">{url}</span>
-                  <button
-                    type="button"
-                    className="ghost-btn px-2 py-1 text-[11px]"
-                    onClick={() =>
-                      setProjectGalleryImages((prev) => prev.filter((_, i) => i !== index))
-                    }
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : null}
-          <label className="rounded-lg bg-muted p-3 text-sm text-subtle">
-            Upload additional screenshot
-            <input
-              type="file"
-              className="mt-2 block"
-              disabled={uploading}
-              onChange={(event) =>
-                handleUpload(event, (url) =>
-                  setProjectGalleryImages((prev) => [...prev, url])
-                )
-              }
-            />
-          </label>
-        </div>
         {isAuthenticated ? (
           <button className="ghost-btn" onClick={logout}>Logout</button>
         ) : null}
@@ -575,6 +541,40 @@ export default function AdminPage() {
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Problem" value={projectPayload.problem} onChange={(event) => setProjectPayload({ ...projectPayload, problem: event.target.value })} />
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Action Taken" value={projectPayload.actionTaken} onChange={(event) => setProjectPayload({ ...projectPayload, actionTaken: event.target.value })} />
           <textarea className="rounded-lg bg-muted p-3 md:col-span-2" rows={2} placeholder="Result" value={projectPayload.result} onChange={(event) => setProjectPayload({ ...projectPayload, result: event.target.value })} />
+        </div>
+        <div className="space-y-2 mt-2">
+          <p className="text-sm text-subtle">Additional project screenshots (shown only on View Details)</p>
+          {projectGalleryImages.length ? (
+            <div className="space-y-1 text-xs text-subtle">
+              {projectGalleryImages.map((url, index) => (
+                <div key={`${url}-${index}`} className="flex items-center gap-2">
+                  <span className="truncate max-w-[260px]">{url}</span>
+                  <button
+                    type="button"
+                    className="ghost-btn px-2 py-1 text-[11px]"
+                    onClick={() =>
+                      setProjectGalleryImages((prev) => prev.filter((_, i) => i !== index))
+                    }
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : null}
+          <label className="rounded-lg bg-muted p-3 text-sm text-subtle">
+            Upload additional screenshot
+            <input
+              type="file"
+              className="mt-2 block"
+              disabled={uploading}
+              onChange={(event) =>
+                handleUpload(event, (url) =>
+                  setProjectGalleryImages((prev) => [...prev, url])
+                )
+              }
+            />
+          </label>
         </div>
         <button className="primary-btn disabled:cursor-not-allowed disabled:opacity-70" onClick={saveProject} disabled={loadingAction === 'project'}>
           {loadingAction === 'project'
