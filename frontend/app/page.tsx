@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { api } from '@/lib/api';
@@ -22,6 +23,31 @@ const normalizeImageUrl = (url?: string | null) => {
     return url;
   }
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await api.getProfile().catch(() => null);
+  const imageUrl =
+    normalizeImageUrl(profile?.heroImageUrl) ||
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200';
+
+  return {
+    openGraph: {
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: profile?.fullName
+            ? `${profile.fullName} – Full Stack Developer`
+            : 'Henry M. Ugochukwu – Full Stack Developer'
+        }
+      ]
+    },
+    twitter: {
+      images: [imageUrl]
+    }
+  };
+}
 
 export default async function HomePage() {
   const [profile, projectsPage, certificatesPage, mediaPage, resumesPage] = await Promise.all([
