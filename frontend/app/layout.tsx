@@ -35,22 +35,13 @@ export const metadata: Metadata = {
     title: 'Henry M. Ugochukwu | Full Stack Developer',
     description:
       'Showcasing full stack web development, web design, dynamic websites, and database design projects by Henry M. Ugochukwu.',
-    siteName: 'Henry M. Ugochukwu Portfolio',
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200',
-        width: 1200,
-        height: 630,
-        alt: 'Henry M. Ugochukwu – Full Stack Developer'
-      }
-    ]
+    siteName: 'Henry M. Ugochukwu Portfolio'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Henry M. Ugochukwu | Full Stack Developer',
     description:
-      'Full stack developer building modern, scalable web applications, dynamic websites, and well-designed databases.',
-    images: ['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200']
+      'Full stack developer building modern, scalable web applications, dynamic websites, and well-designed databases.'
   },
   icons: {
     icon: '/favicon.ico',
