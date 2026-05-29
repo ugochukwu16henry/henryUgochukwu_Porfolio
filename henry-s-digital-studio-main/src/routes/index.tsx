@@ -29,7 +29,7 @@ import {
 } from "@/lib/portfolio-store";
 import { getLivePortfolio } from "@/lib/api/portfolio.functions";
 import { ThemeToggle } from "@/lib/theme";
-import { portraitImage, resolvePortfolioImage } from "@/lib/cert-assets";
+import { portraitImage, resumePdf, resolvePortfolioImage } from "@/lib/cert-assets";
 import { openStaticAsset } from "@/lib/open-static-asset";
 import {
   Dialog,
@@ -129,6 +129,13 @@ function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle variant="inline" />
+          <a
+            href={resumePdf}
+            onClick={(e) => openStaticAsset(resumePdf, e)}
+            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
+          >
+            Resume
+          </a>
           <Link
             to="/dashboard"
             className="font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
@@ -195,6 +202,14 @@ function Hero({ profile }: { profile: Profile }) {
               className="inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors"
             >
               Get in touch
+            </a>
+            <a
+              href={resumePdf}
+              onClick={(e) => openStaticAsset(resumePdf, e)}
+              className="inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors"
+            >
+              <FileText className="size-4" />
+              Resume
             </a>
           </motion.div>
           <div className="flex items-center gap-5 pt-6 text-muted-foreground text-sm">
@@ -602,9 +617,16 @@ function Contact({ profile }: { profile: Profile }) {
         <p className="mt-6 text-muted-foreground text-lg max-w-2xl">
           I'm open to remote full-stack engineering roles, contract builds, and meaningful collaborations. The fastest way to reach me is email.
         </p>
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
           <ContactCard icon={Mail} label="Email" value={profile.email} href={`mailto:${profile.email}`} />
           <ContactCard icon={Phone} label="Phone" value={profile.phone} href={`tel:${profile.phone.replace(/\s/g, "")}`} />
+          <ContactCard
+            icon={FileText}
+            label="Resume"
+            value="May 2026 · PDF"
+            href={resumePdf}
+            onClick={(e) => openStaticAsset(resumePdf, e)}
+          />
           <ContactCard icon={Linkedin} label="LinkedIn" value="ugochukwuhenry" href={profile.linkedin} />
           <ContactCard icon={Github} label="GitHub" value="ugochukwu16henry" href={profile.github} />
         </div>
@@ -613,9 +635,27 @@ function Contact({ profile }: { profile: Profile }) {
   );
 }
 
-function ContactCard({ icon: Icon, label, value, href }: { icon: typeof Mail; label: string; value: string; href: string }) {
+function ContactCard({
+  icon: Icon,
+  label,
+  value,
+  href,
+  onClick,
+}: {
+  icon: typeof Mail;
+  label: string;
+  value: string;
+  href: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
   return (
-    <a href={href} target="_blank" rel="noreferrer" className="group rounded-2xl border border-hairline bg-surface/60 p-5 hover:border-primary hover:bg-surface transition-colors block">
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      onClick={onClick}
+      className="group rounded-2xl border border-hairline bg-surface/60 p-5 hover:border-primary hover:bg-surface transition-colors block"
+    >
       <Icon className="size-4 text-primary mb-3" />
       <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</p>
       <p className="mt-1 text-sm break-all group-hover:text-primary transition-colors">{value}</p>

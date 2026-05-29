@@ -25,6 +25,8 @@ export const imageAssets: Record<string, string> = {
 
 export const portraitImage = "/images/henry-profile.jpeg";
 
+export const resumePdf = "/HenryUgochukwu_resumeMay2026.pdf";
+
 export function hasPortfolioImageKey(key: string | undefined): boolean {
   if (!key?.trim()) return false;
   return key.trim() in imageAssets;
