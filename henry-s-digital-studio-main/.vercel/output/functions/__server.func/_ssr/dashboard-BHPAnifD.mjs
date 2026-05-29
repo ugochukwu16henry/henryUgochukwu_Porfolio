@@ -1,9 +1,9 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { T as Toaster, t as toast } from "../_libs/sonner.mjs";
-import { u as useTheme, T as ThemeToggle } from "./router-D1hX6Gdx.mjs";
-import { g as getLivePortfolio, m as mergeWithSeed, s as savePortfolio, l as loadPortfolio, a as saveLivePortfolio, e as exportJson, r as resetStore } from "./portfolio.functions-DEQP_1DH.mjs";
-import { s as seed } from "./portfolio-BMxTfVw5.mjs";
+import { u as useTheme, T as ThemeToggle } from "./router-BqKAm5ah.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, s as savePortfolio, l as loadPortfolio, a as saveLivePortfolio, e as exportJson, r as resetStore } from "./portfolio.functions-D1FKdXl7.mjs";
+import { s as seed } from "./portfolio-BGiy4pfb.mjs";
 import "../_libs/seroval.mjs";
 import { A as ArrowLeft, a as Save, D as Download, R as RotateCcw, L as Lock, P as Plus, T as Trash2 } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -20,14 +20,14 @@ import "stream";
 import "../_libs/isbot.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
-import "./server-WXc0ypUF.mjs";
+import "./server-DgkD2R5K.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
 import "../_libs/srvx.mjs";
 import "../_libs/zod.mjs";
 const PASS_KEY = "henry-dash:auth";
-const PASSCODE = "henry2026";
+const PASSCODE = "1995Mobuchi@";
 const normalizePasscode = (value) => value.trim();
 function Dashboard() {
   const {
@@ -463,9 +463,7 @@ function Gate({
     err && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-destructive", children: "Incorrect passcode." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "w-full bg-primary text-primary-foreground rounded-full py-2.5 font-medium", children: "Enter" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center", children: [
-      "Default: ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "henry2026" }),
-      " — edit in ",
+      "Passcode is configured in ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "src/routes/dashboard.tsx" })
     ] })
   ] }) });

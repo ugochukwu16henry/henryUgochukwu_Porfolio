@@ -1,14 +1,14 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio, p as portraitImage, b as resolvePortfolioImage } from "./portfolio.functions-DEQP_1DH.mjs";
-import { T as ThemeToggle } from "./router-D1hX6Gdx.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio, p as portraitImage, b as resumePdf, c as resolvePortfolioImage } from "./portfolio.functions-D1FKdXl7.mjs";
+import { T as ThemeToggle } from "./router-BqKAm5ah.mjs";
 import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-import { s as seed } from "./portfolio-BMxTfVw5.mjs";
+import { s as seed } from "./portfolio-BGiy4pfb.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { b as Sparkles, c as ArrowUpRight, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, g as GraduationCap, h as Award, F as FileText, i as Mail, j as Phone, X } from "../_libs/lucide-react.mjs";
+import { b as Sparkles, c as ArrowUpRight, F as FileText, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, g as GraduationCap, h as Award, i as Mail, j as Phone, X } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -21,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-WXc0ypUF.mjs";
+import "./server-DgkD2R5K.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -162,6 +162,13 @@ function Home() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
+const resumeDownloadName = "Henry-Ugochukwu-Resume-May-2026.pdf";
+function ResumeLink({
+  className,
+  children
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: resumePdf, download: resumeDownloadName, target: "_blank", rel: "noopener noreferrer", className, children });
+}
 function Nav() {
   const links = [{
     href: "#about",
@@ -187,6 +194,7 @@ function Nav() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "hidden md:flex items-center gap-7 text-sm", children: links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: l.href, className: "text-muted-foreground hover:text-foreground transition-colors", children: l.label }, l.href)) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, { variant: "inline" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ResumeLink, { className: "font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors", children: "Resume" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/dashboard", className: "font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors", children: "Dashboard" })
     ] })
   ] }) });
@@ -250,7 +258,11 @@ function Hero({
             "See selected work",
             /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#contact", className: "inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors", children: "Get in touch" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#contact", className: "inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors", children: "Get in touch" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(ResumeLink, { className: "inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "size-4" }),
+            "Resume"
+          ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-5 pt-6 text-muted-foreground text-sm", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2", children: [
@@ -265,6 +277,10 @@ function Hero({
           /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: profile.linkedin, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 hover:text-foreground", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Linkedin, { className: "size-4" }),
             " LinkedIn"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(ResumeLink, { className: "inline-flex items-center gap-2 hover:text-foreground", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "size-4" }),
+            " Resume"
           ] })
         ] })
       ] }),
@@ -528,9 +544,10 @@ function Contact({
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: "Bring it." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 text-muted-foreground text-lg max-w-2xl", children: "I'm open to remote full-stack engineering roles, contract builds, and meaningful collaborations. The fastest way to reach me is email." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Mail, label: "Email", value: profile.email, href: `mailto:${profile.email}` }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Phone, label: "Phone", value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, "")}` }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: FileText, label: "Resume", value: "May 2026 · PDF", href: resumePdf, download: resumeDownloadName }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Linkedin, label: "LinkedIn", value: "ugochukwuhenry", href: profile.linkedin }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Github, label: "GitHub", value: "ugochukwu16henry", href: profile.github })
       ] })
@@ -541,9 +558,10 @@ function ContactCard({
   icon: Icon,
   label,
   value,
-  href
+  href,
+  download
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href, target: "_blank", rel: "noreferrer", className: "group rounded-2xl border border-hairline bg-surface/60 p-5 hover:border-primary hover:bg-surface transition-colors block", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href, target: "_blank", rel: "noreferrer", download, className: "group rounded-2xl border border-hairline bg-surface/60 p-5 hover:border-primary hover:bg-surface transition-colors block", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4 text-primary mb-3" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground", children: label }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm break-all group-hover:text-primary transition-colors", children: value })
@@ -552,7 +570,10 @@ function ContactCard({
 function Footer() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "border-t border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-10 py-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-widest", children: "© 2026 Henry Ugochukwu" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-widest", children: "Built with intent · React · TanStack Start" })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ResumeLink, { className: "font-mono text-xs uppercase tracking-widest hover:text-primary transition-colors", children: "Download resume" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-widest", children: "Built with intent · React · TanStack Start" })
+    ] })
   ] }) });
 }
 export {

@@ -104,6 +104,28 @@ function Home() {
   );
 }
 
+const resumeDownloadName = "Henry-Ugochukwu-Resume-May-2026.pdf";
+
+function ResumeLink({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={resumePdf}
+      download={resumeDownloadName}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+    >
+      {children}
+    </a>
+  );
+}
+
 /* ───────── Nav ───────── */
 function Nav() {
   const links = [
@@ -129,13 +151,9 @@ function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle variant="inline" />
-          <a
-            href={resumePdf}
-            onClick={(e) => openStaticAsset(resumePdf, e)}
-            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
-          >
+          <ResumeLink className="font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors">
             Resume
-          </a>
+          </ResumeLink>
           <Link
             to="/dashboard"
             className="font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
@@ -203,19 +221,18 @@ function Hero({ profile }: { profile: Profile }) {
             >
               Get in touch
             </a>
-            <a
-              href={resumePdf}
-              onClick={(e) => openStaticAsset(resumePdf, e)}
-              className="inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors"
-            >
+            <ResumeLink className="inline-flex items-center gap-2 border border-hairline px-5 py-3 rounded-full hover:border-primary hover:text-primary transition-colors">
               <FileText className="size-4" />
               Resume
-            </a>
+            </ResumeLink>
           </motion.div>
           <div className="flex items-center gap-5 pt-6 text-muted-foreground text-sm">
             <span className="inline-flex items-center gap-2"><MapPin className="size-4" /> {profile.location}</span>
             <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><Github className="size-4" /> GitHub</a>
             <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><Linkedin className="size-4" /> LinkedIn</a>
+            <ResumeLink className="inline-flex items-center gap-2 hover:text-foreground">
+              <FileText className="size-4" /> Resume
+            </ResumeLink>
           </div>
         </div>
 
@@ -625,7 +642,7 @@ function Contact({ profile }: { profile: Profile }) {
             label="Resume"
             value="May 2026 · PDF"
             href={resumePdf}
-            onClick={(e) => openStaticAsset(resumePdf, e)}
+            download={resumeDownloadName}
           />
           <ContactCard icon={Linkedin} label="LinkedIn" value="ugochukwuhenry" href={profile.linkedin} />
           <ContactCard icon={Github} label="GitHub" value="ugochukwu16henry" href={profile.github} />
@@ -640,20 +657,20 @@ function ContactCard({
   label,
   value,
   href,
-  onClick,
+  download,
 }: {
   icon: typeof Mail;
   label: string;
   value: string;
   href: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  download?: string;
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
-      onClick={onClick}
+      download={download}
       className="group rounded-2xl border border-hairline bg-surface/60 p-5 hover:border-primary hover:bg-surface transition-colors block"
     >
       <Icon className="size-4 text-primary mb-3" />
@@ -668,7 +685,12 @@ function Footer() {
     <footer className="border-t border-hairline">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
         <p className="font-mono text-xs uppercase tracking-widest">© 2026 Henry Ugochukwu</p>
-        <p className="font-mono text-xs uppercase tracking-widest">Built with intent · React · TanStack Start</p>
+        <div className="flex flex-wrap items-center gap-4">
+          <ResumeLink className="font-mono text-xs uppercase tracking-widest hover:text-primary transition-colors">
+            Download resume
+          </ResumeLink>
+          <p className="font-mono text-xs uppercase tracking-widest">Built with intent · React · TanStack Start</p>
+        </div>
       </div>
     </footer>
   );

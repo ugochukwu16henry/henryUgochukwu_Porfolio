@@ -88,7 +88,7 @@ function ThemeInitScript() {
 })();`;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("script", { dangerouslySetInnerHTML: { __html: code } });
 }
-const appCss = "/assets/styles-DIXEWZcB.css";
+const appCss = "/assets/styles-C5PaX8Ly.css";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -177,7 +177,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-C8XClCr7.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-BHPAnifD.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -192,7 +192,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-CfWHPBeu.mjs");
+const $$splitComponentImporter = () => import("./index-DiwJJ75H.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{

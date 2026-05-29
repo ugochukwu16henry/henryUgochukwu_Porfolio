@@ -1,5 +1,5 @@
-import { s as seed } from "./portfolio-BMxTfVw5.mjs";
-import { c as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-WXc0ypUF.mjs";
+import { s as seed } from "./portfolio-BGiy4pfb.mjs";
+import { c as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-DgkD2R5K.mjs";
 import { o as objectType, a as arrayType, b as anyType } from "../_libs/zod.mjs";
 const certificateAssets = {
   "byui-degree": "/certificates/byui-degree.png",
@@ -20,6 +20,7 @@ const imageAssets = {
   ...projectAssets
 };
 const portraitImage = "/images/henry-profile.jpeg";
+const resumePdf = "/resume/henry-ugochukwu-resume-2026.pdf";
 function hasPortfolioImageKey(key) {
   if (!key?.trim()) return false;
   return key.trim() in imageAssets;
@@ -128,7 +129,8 @@ const saveLivePortfolio = createServerFn({
 }).inputValidator(portfolioSchema).handler(createSsrRpc("1215845bd484752425ae7a8c6700e00e8d68881d0b929bb098c8d0cbf0ea770d"));
 export {
   saveLivePortfolio as a,
-  resolvePortfolioImage as b,
+  resumePdf as b,
+  resolvePortfolioImage as c,
   exportJson as e,
   getLivePortfolio as g,
   loadPortfolio as l,
