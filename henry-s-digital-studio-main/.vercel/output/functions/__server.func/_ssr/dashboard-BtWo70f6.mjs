@@ -1,9 +1,9 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { T as Toaster, t as toast } from "../_libs/sonner.mjs";
-import { u as useTheme, T as ThemeToggle } from "./router-mef_sxvf.mjs";
-import { g as getLivePortfolio, s as savePortfolio, l as loadPortfolio, a as saveLivePortfolio, e as exportJson, r as resetStore } from "./portfolio.functions-X4qNoEio.mjs";
-import { s as seed } from "./portfolio-DerBPmEO.mjs";
+import { u as useTheme, T as ThemeToggle } from "./router-C4dXpfOg.mjs";
+import { g as getLivePortfolio, s as savePortfolio, l as loadPortfolio, a as saveLivePortfolio, e as exportJson, r as resetStore } from "./portfolio.functions-2Dhj52De.mjs";
+import { s as seed } from "./portfolio-DSXK1LEK.mjs";
 import "../_libs/seroval.mjs";
 import { A as ArrowLeft, a as Save, D as Download, R as RotateCcw, L as Lock, P as Plus, T as Trash2 } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -20,7 +20,7 @@ import "stream";
 import "../_libs/isbot.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
-import "./server-BOtxhaB1.mjs";
+import "./server-ROBbq_ej.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -221,9 +221,13 @@ function ProjectsEditor({
     year: String((/* @__PURE__ */ new Date()).getFullYear()),
     role: "Lead Developer",
     stack: ["React"],
-    description: "Describe what you built and the impact.",
+    description: "One-line summary for the card header.",
+    problem: "What problem does this solve?",
+    challenge: "What was hard — technically or architecturally?",
+    result: "What shipped and what impact did it have?",
     image: "",
-    link: ""
+    link: "",
+    github: ""
   }, ...projects]);
   const remove = (id) => onChange(projects.filter((x) => x.id !== id));
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
@@ -241,14 +245,26 @@ function ProjectsEditor({
       /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-12", label: "Stack (comma separated)", value: p.stack.join(", "), onChange: (v) => update(p.id, {
         stack: v.split(",").map((s) => s.trim()).filter(Boolean)
       }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-6", label: "Link (URL)", value: p.link ?? "", onChange: (v) => update(p.id, {
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-6", label: "Live demo URL", value: p.link ?? "", onChange: (v) => update(p.id, {
         link: v
       }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-6", label: "Image key (project-mummyj2, project-riseflow…)", value: p.image ?? "", onChange: (v) => update(p.id, {
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-6", label: "GitHub repo URL", value: p.github ?? "", onChange: (v) => update(p.id, {
+        github: v
+      }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-12", label: "Image key (project-mummyj2, project-riseflow…)", value: p.image ?? "", onChange: (v) => update(p.id, {
         image: v
       }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TextArea, { className: "md:col-span-12", label: "Description", value: p.description, rows: 3, onChange: (v) => update(p.id, {
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TextArea, { className: "md:col-span-12", label: "Summary (one line)", value: p.description, rows: 2, onChange: (v) => update(p.id, {
         description: v
+      }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TextArea, { className: "md:col-span-12", label: "The problem (STAR)", value: p.problem ?? "", rows: 2, onChange: (v) => update(p.id, {
+        problem: v
+      }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TextArea, { className: "md:col-span-12", label: "The challenge (STAR)", value: p.challenge ?? "", rows: 2, onChange: (v) => update(p.id, {
+        challenge: v
+      }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TextArea, { className: "md:col-span-12", label: "The result (STAR)", value: p.result ?? "", rows: 2, onChange: (v) => update(p.id, {
+        result: v
       }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(DeleteRow, { onClick: () => remove(p.id) })
     ] }) }, p.id)),

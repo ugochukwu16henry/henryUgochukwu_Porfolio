@@ -75,17 +75,17 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$m = [
+const __iconNode$l = [
   ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
   ["path", { d: "M19 12H5", key: "x3x0zl" }]
 ];
-const ArrowLeft = createLucideIcon("arrow-left", __iconNode$m);
-const __iconNode$l = [
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$l);
+const __iconNode$k = [
   ["path", { d: "M7 7h10v10", key: "1tivn9" }],
   ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$l);
-const __iconNode$k = [
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -95,12 +95,7 @@ const __iconNode$k = [
   ],
   ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
 ];
-const Award = createLucideIcon("award", __iconNode$k);
-const __iconNode$j = [
-  ["path", { d: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16", key: "jecpp" }],
-  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
-];
-const Briefcase = createLucideIcon("briefcase", __iconNode$j);
+const Award = createLucideIcon("award", __iconNode$j);
 const __iconNode$i = [
   ["path", { d: "m18 16 4-4-4-4", key: "1inbqp" }],
   ["path", { d: "m6 8-4 4 4 4", key: "15zrgr" }],
@@ -276,7 +271,6 @@ const __iconNode = [
 const Wrench = createLucideIcon("wrench", __iconNode);
 export {
   ArrowLeft as A,
-  Briefcase as B,
   CodeXml as C,
   Download as D,
   FileText as F,

@@ -1,11 +1,11 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, l as loadPortfolio } from "./portfolio.functions-X4qNoEio.mjs";
-import { T as ThemeToggle } from "./router-mef_sxvf.mjs";
-import { s as seed } from "./portfolio-DerBPmEO.mjs";
+import { g as getLivePortfolio, l as loadPortfolio } from "./portfolio.functions-2Dhj52De.mjs";
+import { T as ThemeToggle } from "./router-C4dXpfOg.mjs";
+import { s as seed } from "./portfolio-DSXK1LEK.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { b as Sparkles, c as ArrowUpRight, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, B as Briefcase, g as GraduationCap, h as Award, F as FileText, i as Mail, j as Phone } from "../_libs/lucide-react.mjs";
+import { b as Sparkles, c as ArrowUpRight, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, g as GraduationCap, h as Award, F as FileText, i as Mail, j as Phone } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -18,7 +18,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-BOtxhaB1.mjs";
+import "./server-ROBbq_ej.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -283,11 +283,11 @@ function Projects({
   projects
 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "work", className: "border-t border-hairline bg-surface/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-10 py-28", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SectionHead, { kicker: "02 · Selected Work", title: "Shipped products, test pipelines, and platforms.", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/dashboard", className: "hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SectionHead, { kicker: "02 · Selected Work", title: "Three flagship products — full-stack, shipped, and live.", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/dashboard", className: "hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary", children: [
       "Manage ",
       /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-6", children: projects.map((p, i) => {
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-8 max-w-4xl", children: projects.map((p, i) => {
       const img = p.image ? imageAssets[p.image] : void 0;
       return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.article, { initial: {
         opacity: 0,
@@ -302,21 +302,45 @@ function Projects({
         duration: 0.5,
         delay: i * 0.05
       }, className: "group relative rounded-3xl border border-hairline bg-background overflow-hidden hover:border-primary/60 transition-colors", children: [
-        img && /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: p.link || void 0, target: p.link ? "_blank" : void 0, rel: "noreferrer", className: "block aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: img, alt: `${p.title} preview`, className: "size-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-700" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4 mb-4", children: [
+        img && p.link && /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: p.link, target: "_blank", rel: "noreferrer", className: "block aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: img, alt: `${p.title} preview`, className: "size-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-700" }) }),
+        img && !p.link && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: img, alt: `${p.title} preview`, className: "size-full object-cover object-top" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7 space-y-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-mono text-xs uppercase tracking-widest text-muted-foreground", children: [
                 p.year,
                 " · ",
                 p.role
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl mt-1", children: p.title })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl mt-1", children: p.title }),
+              p.description && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-2 text-sm leading-relaxed", children: p.description })
             ] }),
-            p.link ? /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: p.link, target: "_blank", rel: "noreferrer", className: "size-10 rounded-full border border-hairline flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-colors shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-4" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "size-10 rounded-full border border-hairline flex items-center justify-center text-muted-foreground shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Briefcase, { className: "size-4" }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2 shrink-0", children: [
+              p.link && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: p.link, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors", children: [
+                "Live demo ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
+              ] }),
+              p.github && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: p.github, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-3" }),
+                " GitHub"
+              ] })
+            ] })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed mb-5", children: p.description }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: p.stack.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] font-mono uppercase tracking-wider px-2 py-1 rounded-full bg-surface-2 border border-hairline", children: s }, s)) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: p.stack.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] font-mono uppercase tracking-wider px-2 py-1 rounded-full bg-surface-2 border border-hairline", children: s }, s)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { className: "space-y-4 text-sm", children: [
+            p.problem && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-widest text-primary mb-1", children: "The problem" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "text-muted-foreground leading-relaxed", children: p.problem })
+            ] }),
+            p.challenge && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-widest text-primary mb-1", children: "The challenge" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "text-muted-foreground leading-relaxed", children: p.challenge })
+            ] }),
+            p.result && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-widest text-primary mb-1", children: "The result" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "text-muted-foreground leading-relaxed", children: p.result })
+            ] })
+          ] })
         ] })
       ] }, p.id);
     }) })
