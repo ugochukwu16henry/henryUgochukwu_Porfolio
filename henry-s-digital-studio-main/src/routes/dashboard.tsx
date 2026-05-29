@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Plus, Trash2, Save, RotateCcw, Download, Lock, ArrowLeft } from "lucide-react";
 import { toast, Toaster } from "sonner";
+import { useTheme } from "@/lib/theme";
 import {
   loadPortfolio,
   savePortfolio,
@@ -29,9 +30,12 @@ export const Route = createFileRoute("/dashboard")({
 const PASS_KEY = "henry-dash:auth";
 const PASSCODE = "henry2026";
 
+const normalizePasscode = (value: string) => value.trim();
+
 type Tab = "profile" | "skills" | "projects" | "experience" | "education" | "certificates";
 
 function Dashboard() {
+  const { theme } = useTheme();
   const [authed, setAuthed] = useState(false);
   const [data, setData] = useState<Portfolio>(seed as Portfolio);
   const [tab, setTab] = useState<Tab>("projects");
@@ -84,7 +88,7 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Toaster theme="dark" position="top-right" richColors />
+      <Toaster theme={theme} position="top-right" richColors />
       <header className="border-b border-hairline sticky top-0 bg-background/80 backdrop-blur z-40">
         <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
@@ -386,7 +390,7 @@ function Gate({ onPass }: { onPass: () => void }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (v === PASSCODE) {
+          if (normalizePasscode(v) === normalizePasscode(PASSCODE)) {
             localStorage.setItem(PASS_KEY, "1");
             onPass();
           } else {

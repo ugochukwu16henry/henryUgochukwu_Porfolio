@@ -42,7 +42,43 @@
 :root {
   --radius: 0.75rem;
 
-  /* Editorial dark — warm ink + ember accent */
+  /* Editorial day — warm paper + ember accent */
+  --background: oklch(0.985 0.006 85);
+  --foreground: oklch(0.28 0.02 55);
+  --surface: oklch(0.955 0.01 85);
+  --surface-2: oklch(0.93 0.012 80);
+  --hairline: oklch(0.72 0.018 70 / 0.75);
+
+  --card: oklch(0.97 0.008 86);
+  --card-foreground: oklch(0.28 0.02 55);
+  --popover: oklch(0.97 0.008 86);
+  --popover-foreground: oklch(0.28 0.02 55);
+
+  --primary: oklch(0.64 0.16 62);
+  --primary-foreground: oklch(0.985 0.006 85);
+
+  --secondary: oklch(0.92 0.012 78);
+  --secondary-foreground: oklch(0.34 0.02 58);
+
+  --muted: oklch(0.94 0.008 82);
+  --muted-foreground: oklch(0.48 0.02 62);
+
+  --accent: oklch(0.64 0.16 62);
+  --accent-foreground: oklch(0.985 0.006 85);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.82 0.015 72);
+  --input: oklch(0.84 0.014 74);
+  --ring: oklch(0.64 0.16 62);
+
+  --gradient-glow: radial-gradient(60% 60% at 50% 0%, oklch(0.64 0.16 62 / 0.18) 0%, transparent 70%);
+  --shadow-elegant: 0 26px 70px -32px oklch(0.15 0.02 50 / 0.25), 0 10px 24px -18px oklch(0.15 0.02 50 / 0.22);
+  --shadow-glow: 0 0 50px -12px oklch(0.64 0.16 62 / 0.45);
+}
+
+.dark {
   --background: oklch(0.16 0.012 60);
   --foreground: oklch(0.96 0.012 80);
   --surface: oklch(0.20 0.014 60);
@@ -54,7 +90,7 @@
   --popover: oklch(0.20 0.014 60);
   --popover-foreground: oklch(0.96 0.012 80);
 
-  --primary: oklch(0.82 0.16 75);       /* ember/amber */
+  --primary: oklch(0.82 0.16 75);
   --primary-foreground: oklch(0.18 0.02 60);
 
   --secondary: oklch(0.26 0.018 60);
