@@ -23,7 +23,8 @@ export const Route = createFileRoute("/dashboard")({
     meta: [
       { title: "Dashboard · Henry Ugochukwu" },
       { name: "description", content: "Manage portfolio content." },
-      { name: "robots", content: "noindex,nofollow" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+      { name: "googlebot", content: "noindex, nofollow" },
     ],
   }),
   component: Dashboard,

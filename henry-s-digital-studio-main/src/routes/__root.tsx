@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { ThemeProvider, ThemeToggle, ThemeInitScript } from "@/lib/theme";
+import { buildPortfolioHead } from "@/lib/seo";
 
 import appCss from "../styles.css?url";
 
@@ -69,25 +70,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Henry Ugochukwu Portfolio" },
-      { name: "description", content: "Portfolio of Henry Ugochukwu — software engineer and full-stack developer." },
-      { name: "author", content: "Henry Ugochukwu" },
-      { property: "og:title", content: "Henry Ugochukwu Portfolio" },
-      { property: "og:description", content: "Portfolio of Henry Ugochukwu — software engineer and full-stack developer." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
+  head: () => {
+    const seo = buildPortfolioHead();
+    return {
+      meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, ...seo.meta],
+      links: [{ rel: "stylesheet", href: appCss }, ...seo.links],
+      scripts: seo.scripts,
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,

@@ -40,24 +40,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import seed from "@/data/portfolio.json";
+import { buildPortfolioHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Henry Ugochukwu — Software Engineer & Full-Stack Developer" },
-      {
-        name: "description",
-        content:
-          "Portfolio of Henry Ugochukwu — full-stack engineer building resilient, human-centered web products with React, Next.js, Node.js, and PostgreSQL.",
-      },
-      { property: "og:title", content: "Henry Ugochukwu — Software Engineer" },
-      {
-        property: "og:description",
-        content: "Full-stack engineer. Founder of Henrymo Technologies. React · Next.js · Node.js · PostgreSQL.",
-      },
-      { property: "og:type", content: "website" },
-    ],
-  }),
+  head: () => buildPortfolioHead({ path: "/", profile: seed.profile }),
   component: Home,
 });
 

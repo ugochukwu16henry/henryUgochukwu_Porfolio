@@ -49,11 +49,13 @@ Use values from `.env.example`:
 | `GITHUB_BRANCH` | `main` |
 | `GITHUB_PORTFOLIO_PATH` | `henry-s-digital-studio-main/src/data/portfolio.json` |
 
-Optional:
+Required for link previews (WhatsApp, LinkedIn, iMessage) and SEO:
 
 | Variable | Purpose |
 | --- | --- |
-| `VITE_APP_URL` | Public site URL (e.g. `https://your-domain.vercel.app`) |
+| `VITE_APP_URL` | Production URL with no trailing slash (e.g. `https://your-domain.vercel.app`). Used for `og:image`, canonical URLs, and JSON-LD. |
+
+Without `VITE_APP_URL`, share cards may use a fallback domain and the wrong preview image URL.
 
 Never commit real tokens to git.
 
