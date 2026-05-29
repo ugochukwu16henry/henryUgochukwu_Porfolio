@@ -136,9 +136,9 @@
   ],
   "certificates": [
     { "id": "byui-bsmfs", "title": "B.S. Marriage and Family Studies", "issuer": "Brigham Young University-Idaho", "date": "Apr 2026", "image": "byui-degree", "file": "" },
-    { "id": "byui-aas-sd", "title": "Associate of Applied Science · Software Development", "issuer": "BYU-Idaho", "date": "Apr 2026", "image": "", "file": "/certificates/aas-software-development.pdf" },
-    { "id": "byui-cert-webdev", "title": "Certificate · Web Development", "issuer": "BYU-Idaho", "date": "Feb 2026", "image": "", "file": "/certificates/web-development.pdf" },
-    { "id": "byui-cert-wcp", "title": "Certificate · Web & Computer Programming", "issuer": "BYU-Idaho", "date": "Oct 2025", "image": "", "file": "/certificates/web-and-computer-programming.pdf" },
+    { "id": "byui-aas-sd", "title": "Associate of Applied Science · Software Development", "issuer": "BYU-Idaho", "date": "Apr 2026", "image": "aas-software-development", "file": "/certificates/aas-software-development.pdf" },
+    { "id": "byui-cert-webdev", "title": "Certificate · Web Development", "issuer": "BYU-Idaho", "date": "Feb 2026", "image": "web-development-certificate", "file": "/certificates/web-development.pdf" },
+    { "id": "byui-cert-wcp", "title": "Certificate · Web & Computer Programming", "issuer": "BYU-Idaho", "date": "Oct 2025", "image": "web-and-computer-programming-certificate", "file": "/certificates/web-and-computer-programming.pdf" },
     { "id": "byui-cert-advmf", "title": "Certificate · Advanced Marriage and Family", "issuer": "BYU-Idaho", "date": "2025", "image": "", "file": "/certificates/advanced-marriage-and-family.pdf" },
     { "id": "byui-cert-pfe", "title": "Certificate · Parent and Family Education", "issuer": "BYU-Idaho", "date": "2025", "image": "", "file": "/certificates/parent-and-family-education.pdf" },
     { "id": "genai-evo", "title": "Generative AI: The Evolution of Thoughtful Online Search", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },

@@ -391,7 +391,9 @@ function Education({ education }: { education: EducationItem[] }) {
 
 /* ───────── Certificates ───────── */
 function Certificates({ certificates }: { certificates: Certificate[] }) {
-  const featured = certificates.find((c) => c.image && imageAssets[c.image]);
+  const featured =
+    certificates.find((c) => c.image === "byui-degree" && imageAssets[c.image]) ??
+    certificates.find((c) => c.image && imageAssets[c.image]);
   return (
     <section id="certificates" className="mx-auto max-w-7xl px-6 lg:px-10 py-28">
       <SectionHead kicker="05 · Certificates" title="Conferred degrees and continuing study." />
