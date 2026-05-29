@@ -23,9 +23,13 @@
       "year": "2026",
       "role": "Co-Founder · Full-Stack Engineer",
       "stack": ["React", "Next.js", "Node.js", "PostgreSQL", "AI"],
-      "description": "A structured startup growth platform that helps entrepreneurs turn ideas into scalable companies through technology, guidance, and investor connection. Includes AI-powered idea evaluation, milestone-based pricing, founder dashboards, and an investor marketplace.",
+      "description": "Startup growth platform — idea validation, milestones, and investor connection in one product.",
+      "problem": "Early-stage founders juggle spreadsheets, pitch decks, and scattered tools with no single system to validate ideas, track progress, or reach investors.",
+      "challenge": "Ship milestone-based pricing and AI idea evaluation without overwhelming first-time founders — while keeping auth, dashboards, and marketplace data consistent across roles.",
+      "result": "Live product at app.riseflowhub.app with founder dashboards, investor marketplace, and AI-powered idea scoring used by real startup teams.",
       "image": "project-riseflow",
-      "link": "https://app.riseflowhub.app"
+      "link": "https://app.riseflowhub.app",
+      "github": ""
     },
     {
       "id": "mummyj2-treats",
@@ -33,9 +37,13 @@
       "year": "2025",
       "role": "Full-Stack Developer",
       "stack": ["React", "Next.js", "Node.js", "Stripe", "Tailwind"],
-      "description": "Branded ecommerce experience for a Nigerian parfait, small-chops and zobo brand. Built a featured-treats catalog, cart, order-only flow, customer stories wall, and an admin-friendly menu — “Layers of Love in Every Spoon.”",
+      "description": "Branded ecommerce for a Nigerian treats brand — catalog, cart, and order flow.",
+      "problem": "A growing local food brand needed a professional online storefront instead of manual WhatsApp orders and inconsistent menu updates.",
+      "challenge": "Balance a warm brand story with a fast mobile checkout, Stripe payments, and an admin-friendly menu owners can update without a developer.",
+      "result": "Production site at mummyj2treats.com with featured catalog, cart, customer stories, and order-only flow — “Layers of Love in Every Spoon.”",
       "image": "project-mummyj2",
-      "link": "https://www.mummyj2treats.com"
+      "link": "https://www.mummyj2treats.com",
+      "github": ""
     },
     {
       "id": "henrymo-platform",
@@ -43,29 +51,13 @@
       "year": "2025",
       "role": "Founder & Lead Developer",
       "stack": ["Next.js", "React", "Node.js", "PostgreSQL"],
-      "description": "End-to-end agency platform turning startup concepts into shipped, scalable web products. Reusable component system, secure REST integrations, sub-second page loads.",
+      "description": "Agency delivery platform — reusable components, REST integrations, and sub-second loads.",
+      "problem": "Client startups needed repeatable full-stack delivery without rebuilding auth, APIs, and UI foundations for every engagement.",
+      "challenge": "Design a reusable component system and secure REST layer that stays fast across projects while supporting CRUD-heavy client dashboards.",
+      "result": "Internal platform and delivery playbook used to ship multiple client products with shared patterns for auth, APIs, and performance tuning.",
       "image": "",
-      "link": "https://github.com/ugochukwu16henry"
-    },
-    {
-      "id": "qa-suite-h10",
-      "title": "H10 AI · QA Test Architecture",
-      "year": "2026",
-      "role": "QA Software Developer (Intern)",
-      "stack": ["JavaScript", "Jest", "Playwright", "GitHub Actions"],
-      "description": "Designed unit and system test suites that caught regressions before deploy. Pair-reviewed core feature PRs with senior engineers and stabilized release pipelines.",
-      "image": "",
-      "link": ""
-    },
-    {
-      "id": "sff-learning",
-      "title": "Strengthening Families · LMS Optimization",
-      "year": "2025",
-      "role": "Web Developer & Data Analyst",
-      "stack": ["LearnDash", "SQL", "Analytics"],
-      "description": "Tuned database queries, hardened client-facing web infrastructure, and lifted quiz completion 20% through interactive module refactors.",
-      "image": "",
-      "link": ""
+      "link": "",
+      "github": "https://github.com/ugochukwu16henry"
     }
   ],
   "experience": [

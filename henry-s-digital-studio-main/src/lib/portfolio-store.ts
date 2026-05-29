@@ -6,9 +6,14 @@ export type Project = {
   year: string;
   role: string;
   stack: string[];
+  /** Short summary; STAR fields carry the deep-dive on the home page. */
   description: string;
+  problem: string;
+  challenge: string;
+  result: string;
   image?: string;
   link?: string;
+  github?: string;
 };
 
 export type Experience = {

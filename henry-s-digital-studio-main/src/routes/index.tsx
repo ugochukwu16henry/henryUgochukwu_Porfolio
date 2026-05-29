@@ -14,7 +14,6 @@ import {
   Wrench,
   GraduationCap,
   Award,
-  Briefcase,
   FileText,
 } from "lucide-react";
 import portraitImg from "@/assets/henry-profile.jpeg";
@@ -295,12 +294,12 @@ function Projects({ projects }: { projects: Project[] }) {
   return (
     <section id="work" className="border-t border-hairline bg-surface/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-28">
-        <SectionHead kicker="02 · Selected Work" title="Shipped products, test pipelines, and platforms.">
+        <SectionHead kicker="02 · Selected Work" title="Three flagship products — full-stack, shipped, and live.">
           <Link to="/dashboard" className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary">
             Manage <ArrowUpRight className="size-3" />
           </Link>
         </SectionHead>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-8 max-w-4xl">
           {projects.map((p, i) => {
             const img = p.image ? imageAssets[p.image] : undefined;
             return (
@@ -312,10 +311,10 @@ function Projects({ projects }: { projects: Project[] }) {
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="group relative rounded-3xl border border-hairline bg-background overflow-hidden hover:border-primary/60 transition-colors"
               >
-                {img && (
+                {img && p.link && (
                   <a
-                    href={p.link || undefined}
-                    target={p.link ? "_blank" : undefined}
+                    href={p.link}
+                    target="_blank"
                     rel="noreferrer"
                     className="block aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline"
                   >
@@ -326,23 +325,43 @@ function Projects({ projects }: { projects: Project[] }) {
                     />
                   </a>
                 )}
-                <div className="p-7">
-                  <div className="flex items-start justify-between gap-4 mb-4">
+                {img && !p.link && (
+                  <div className="aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline">
+                    <img src={img} alt={`${p.title} preview`} className="size-full object-cover object-top" />
+                  </div>
+                )}
+                <div className="p-7 space-y-5">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
                       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{p.year} · {p.role}</p>
                       <h3 className="font-display text-2xl mt-1">{p.title}</h3>
+                      {p.description && (
+                        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{p.description}</p>
+                      )}
                     </div>
-                    {p.link ? (
-                      <a href={p.link} target="_blank" rel="noreferrer" className="size-10 rounded-full border border-hairline flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-colors shrink-0">
-                        <ArrowUpRight className="size-4" />
-                      </a>
-                    ) : (
-                      <span className="size-10 rounded-full border border-hairline flex items-center justify-center text-muted-foreground shrink-0">
-                        <Briefcase className="size-4" />
-                      </span>
-                    )}
+                    <div className="flex flex-wrap gap-2 shrink-0">
+                      {p.link && (
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
+                        >
+                          Live demo <ArrowUpRight className="size-3" />
+                        </a>
+                      )}
+                      {p.github && (
+                        <a
+                          href={p.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <Github className="size-3" /> GitHub
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed mb-5">{p.description}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {p.stack.map((s) => (
                       <span key={s} className="text-[11px] font-mono uppercase tracking-wider px-2 py-1 rounded-full bg-surface-2 border border-hairline">
@@ -350,6 +369,26 @@ function Projects({ projects }: { projects: Project[] }) {
                       </span>
                     ))}
                   </div>
+                  <dl className="space-y-4 text-sm">
+                    {p.problem && (
+                      <div>
+                        <dt className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">The problem</dt>
+                        <dd className="text-muted-foreground leading-relaxed">{p.problem}</dd>
+                      </div>
+                    )}
+                    {p.challenge && (
+                      <div>
+                        <dt className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">The challenge</dt>
+                        <dd className="text-muted-foreground leading-relaxed">{p.challenge}</dd>
+                      </div>
+                    )}
+                    {p.result && (
+                      <div>
+                        <dt className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">The result</dt>
+                        <dd className="text-muted-foreground leading-relaxed">{p.result}</dd>
+                      </div>
+                    )}
+                  </dl>
                 </div>
               </motion.article>
             );

@@ -242,9 +242,13 @@ function ProjectsEditor({ projects, onChange }: { projects: Project[]; onChange:
         year: String(new Date().getFullYear()),
         role: "Lead Developer",
         stack: ["React"],
-        description: "Describe what you built and the impact.",
+        description: "One-line summary for the card header.",
+        problem: "What problem does this solve?",
+        challenge: "What was hard — technically or architecturally?",
+        result: "What shipped and what impact did it have?",
         image: "",
         link: "",
+        github: "",
       },
       ...projects,
     ]);
@@ -261,9 +265,13 @@ function ProjectsEditor({ projects, onChange }: { projects: Project[]; onChange:
             <Field className="md:col-span-5" label="Role" value={p.role} onChange={(v) => update(p.id, { role: v })} />
             <Field className="md:col-span-12" label="Stack (comma separated)" value={p.stack.join(", ")}
               onChange={(v) => update(p.id, { stack: v.split(",").map((s) => s.trim()).filter(Boolean) })} />
-            <Field className="md:col-span-6" label="Link (URL)" value={p.link ?? ""} onChange={(v) => update(p.id, { link: v })} />
-            <Field className="md:col-span-6" label="Image key (project-mummyj2, project-riseflow…)" value={p.image ?? ""} onChange={(v) => update(p.id, { image: v })} />
-            <TextArea className="md:col-span-12" label="Description" value={p.description} rows={3} onChange={(v) => update(p.id, { description: v })} />
+            <Field className="md:col-span-6" label="Live demo URL" value={p.link ?? ""} onChange={(v) => update(p.id, { link: v })} />
+            <Field className="md:col-span-6" label="GitHub repo URL" value={p.github ?? ""} onChange={(v) => update(p.id, { github: v })} />
+            <Field className="md:col-span-12" label="Image key (project-mummyj2, project-riseflow…)" value={p.image ?? ""} onChange={(v) => update(p.id, { image: v })} />
+            <TextArea className="md:col-span-12" label="Summary (one line)" value={p.description} rows={2} onChange={(v) => update(p.id, { description: v })} />
+            <TextArea className="md:col-span-12" label="The problem (STAR)" value={p.problem ?? ""} rows={2} onChange={(v) => update(p.id, { problem: v })} />
+            <TextArea className="md:col-span-12" label="The challenge (STAR)" value={p.challenge ?? ""} rows={2} onChange={(v) => update(p.id, { challenge: v })} />
+            <TextArea className="md:col-span-12" label="The result (STAR)" value={p.result ?? ""} rows={2} onChange={(v) => update(p.id, { result: v })} />
             <DeleteRow onClick={() => remove(p.id)} />
           </div>
         </Panel>
