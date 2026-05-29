@@ -269,7 +269,7 @@ function ProjectsEditor({ projects, onChange }: { projects: Project[]; onChange:
               onChange={(v) => update(p.id, { stack: v.split(",").map((s) => s.trim()).filter(Boolean) })} />
             <Field className="md:col-span-6" label="Live demo URL" value={p.link ?? ""} onChange={(v) => update(p.id, { link: v })} />
             <Field className="md:col-span-6" label="GitHub repo URL" value={p.github ?? ""} onChange={(v) => update(p.id, { github: v })} />
-            <Field className="md:col-span-12" label="Image key (project-mummyj2, project-riseflow…)" value={p.image ?? ""} onChange={(v) => update(p.id, { image: v })} />
+            <Field className="md:col-span-12" label="Image key (gpg, mega, e-book, riseflowschool…)" value={p.image ?? ""} onChange={(v) => update(p.id, { image: v })} />
             <TextArea className="md:col-span-12" label="Summary (one line)" value={p.description} rows={2} onChange={(v) => update(p.id, { description: v })} />
             <TextArea className="md:col-span-12" label="The problem (STAR)" value={p.problem ?? ""} rows={2} onChange={(v) => update(p.id, { problem: v })} />
             <TextArea className="md:col-span-12" label="The challenge (STAR)" value={p.challenge ?? ""} rows={2} onChange={(v) => update(p.id, { challenge: v })} />
