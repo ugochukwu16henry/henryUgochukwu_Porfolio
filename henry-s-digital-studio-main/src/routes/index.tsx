@@ -19,6 +19,7 @@ import {
 import portraitImg from "@/assets/henry-profile.jpeg";
 import {
   loadPortfolio,
+  mergeWithSeed,
   type Portfolio,
   type Project,
   type Experience as ExperienceItem,
@@ -30,6 +31,7 @@ import {
 import { getLivePortfolio } from "@/lib/api/portfolio.functions";
 import { ThemeToggle } from "@/lib/theme";
 import { imageAssets } from "@/lib/cert-assets";
+import { openStaticAsset } from "@/lib/open-static-asset";
 import {
   Dialog,
   DialogContent,
@@ -69,7 +71,7 @@ function Home() {
       try {
         const live = await getLivePortfolio();
         if (!cancelled) {
-          setData(live.portfolio);
+          setData(mergeWithSeed(live.portfolio));
         }
       } catch {
         if (!cancelled) {
@@ -484,47 +486,106 @@ function Education({ education }: { education: EducationItem[] }) {
 }
 
 /* ───────── Certificates ───────── */
+function certImageSrc(certificate: Certificate): string | undefined {
+  const key = certificate.image?.trim();
+  if (!key) return undefined;
+  return imageAssets[key];
+}
+
 function Certificates({ certificates }: { certificates: Certificate[] }) {
-  const featured =
-    certificates.find((c) => c.image === "byui-degree" && imageAssets[c.image]) ??
-    certificates.find((c) => c.image && imageAssets[c.image]);
+  const degree = certificates.find((c) => c.id === "byui-bsmfs");
+  const degreeSrc = degree ? certImageSrc(degree) : undefined;
+  const withImages = certificates.filter((c) => certImageSrc(c));
+
   return (
     <section id="certificates" className="mx-auto max-w-7xl px-6 lg:px-10 py-28">
       <SectionHead kicker="05 · Certificates" title="Conferred degrees and continuing study." />
       <div className="grid lg:grid-cols-3 gap-6">
-        {featured && (
-          <div className="lg:col-span-1 rounded-3xl border border-hairline bg-surface/60 p-3 overflow-hidden">
-            <img src={imageAssets[featured.image!]} alt={featured.title} className="rounded-2xl w-full object-cover" />
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-3 px-2 pb-2">
-              {featured.issuer} · {featured.date}
-            </p>
-          </div>
-        )}
-        <div className={`${featured ? "lg:col-span-2" : "lg:col-span-3"} grid sm:grid-cols-2 gap-3`}>
-          {certificates.map((c) => (
-            <div key={c.id} className="group rounded-2xl border border-hairline bg-background p-5 hover:border-primary/60 transition-colors">
-              <div className="flex items-start gap-3">
-                <span className="size-9 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
-                  <Award className="size-4 text-primary" />
-                </span>
-                <div className="min-w-0">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{c.date}</p>
-                  <h4 className="font-medium leading-snug">{c.title}</h4>
-                  <p className="text-sm text-muted-foreground mt-0.5">{c.issuer}</p>
-                  {c.file && (
-                    <a href={c.file} target="_blank" rel="noreferrer" className="text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline">
-                      <FileText className="size-3" /> View PDF <ArrowUpRight className="size-3" />
+        <div className="lg:col-span-1 space-y-4">
+          {degree && degreeSrc && (
+            <div className="rounded-3xl border border-hairline bg-surface/60 p-3 overflow-hidden">
+              <img src={degreeSrc} alt={degree.title} className="rounded-2xl w-full object-cover" />
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-3 px-2">
+                {degree.title}
+              </p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground px-2 pb-2">
+                {degree.issuer} · {degree.date}
+              </p>
+            </div>
+          )}
+          {withImages.length > 1 && (
+            <div className="grid grid-cols-3 gap-2">
+              {withImages
+                .filter((c) => c.id !== "byui-bsmfs")
+                .map((c) => {
+                  const src = certImageSrc(c)!;
+                  return (
+                    <a
+                      key={c.id}
+                      href={src}
+                      onClick={(e) => openStaticAsset(src, e)}
+                      className="block cursor-pointer rounded-xl border border-hairline overflow-hidden hover:border-primary/60 transition-colors"
+                      title={c.title}
+                    >
+                      <img src={src} alt={c.title} className="aspect-[3/4] w-full object-cover object-top" />
                     </a>
-                  )}
-                  {!c.file && c.image && imageAssets[c.image] && (
-                    <a href={imageAssets[c.image]} target="_blank" rel="noreferrer" className="text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline">
-                      View certificate <ArrowUpRight className="size-3" />
-                    </a>
-                  )}
+                  );
+                })}
+            </div>
+          )}
+        </div>
+        <div className="lg:col-span-2 grid sm:grid-cols-2 gap-3">
+          {certificates.map((c) => {
+            const src = certImageSrc(c);
+            return (
+              <div
+                key={c.id}
+                className="group rounded-2xl border border-hairline bg-background overflow-hidden hover:border-primary/60 transition-colors"
+              >
+                {src && (
+                  <a
+                    href={src}
+                    onClick={(e) => openStaticAsset(src, e)}
+                    className="block cursor-pointer border-b border-hairline bg-surface-2"
+                  >
+                    <img src={src} alt={c.title} className="w-full max-h-40 object-cover object-top" />
+                  </a>
+                )}
+                <div className="p-5">
+                  <div className="flex items-start gap-3">
+                    {!src && (
+                      <span className="size-9 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
+                        <Award className="size-4 text-primary" />
+                      </span>
+                    )}
+                    <div className="min-w-0">
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{c.date}</p>
+                      <h4 className="font-medium leading-snug">{c.title}</h4>
+                      <p className="text-sm text-muted-foreground mt-0.5">{c.issuer}</p>
+                      {c.file && (
+                        <a
+                          href={c.file}
+                          onClick={(e) => openStaticAsset(c.file!, e)}
+                          className="text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline"
+                        >
+                          <FileText className="size-3" /> View PDF <ArrowUpRight className="size-3" />
+                        </a>
+                      )}
+                      {src && !c.file && (
+                        <a
+                          href={src}
+                          onClick={(e) => openStaticAsset(src, e)}
+                          className="text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline"
+                        >
+                          View certificate <ArrowUpRight className="size-3" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

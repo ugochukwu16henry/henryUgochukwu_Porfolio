@@ -5,6 +5,7 @@ import { toast, Toaster } from "sonner";
 import { ThemeToggle, useTheme } from "@/lib/theme";
 import {
   loadPortfolio,
+  mergeWithSeed,
   savePortfolio,
   resetStore,
   exportJson,
@@ -51,8 +52,9 @@ function Dashboard() {
       try {
         const live = await getLivePortfolio();
         if (!cancelled) {
-          setData(live.portfolio);
-          savePortfolio(live.portfolio);
+          const merged = mergeWithSeed(live.portfolio);
+          setData(merged);
+          savePortfolio(merged);
         }
       } catch {
         if (!cancelled) {

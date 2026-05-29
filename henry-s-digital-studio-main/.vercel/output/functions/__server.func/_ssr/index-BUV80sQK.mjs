@@ -1,11 +1,14 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, l as loadPortfolio } from "./portfolio.functions-2Dhj52De.mjs";
-import { T as ThemeToggle } from "./router-C4dXpfOg.mjs";
-import { s as seed } from "./portfolio-DSXK1LEK.mjs";
+import { g as getLivePortfolio, l as loadPortfolio } from "./portfolio.functions-BwXrxY4E.mjs";
+import { T as ThemeToggle } from "./router-BE1Ih542.mjs";
+import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
+import { c as clsx } from "../_libs/clsx.mjs";
+import { t as twMerge } from "../_libs/tailwind-merge.mjs";
+import { s as seed } from "./portfolio-C3mz8jZY.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { b as Sparkles, c as ArrowUpRight, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, g as GraduationCap, h as Award, F as FileText, i as Mail, j as Phone } from "../_libs/lucide-react.mjs";
+import { b as Sparkles, c as ArrowUpRight, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, g as GraduationCap, h as Award, F as FileText, i as Mail, j as Phone, X } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -18,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-ROBbq_ej.mjs";
+import "./server-rSWosdHT.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -26,6 +29,29 @@ import "../_libs/srvx.mjs";
 import "../_libs/zod.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
+import "../_libs/radix-ui__primitive.mjs";
+import "../_libs/radix-ui__react-compose-refs.mjs";
+import "../_libs/radix-ui__react-context.mjs";
+import "../_libs/radix-ui__react-id.mjs";
+import "../_libs/@radix-ui/react-use-layout-effect+[...].mjs";
+import "../_libs/@radix-ui/react-use-controllable-state+[...].mjs";
+import "../_libs/@radix-ui/react-dismissable-layer+[...].mjs";
+import "../_libs/radix-ui__react-primitive.mjs";
+import "../_libs/radix-ui__react-slot.mjs";
+import "../_libs/@radix-ui/react-use-callback-ref+[...].mjs";
+import "../_libs/@radix-ui/react-use-escape-keydown+[...].mjs";
+import "../_libs/radix-ui__react-focus-scope.mjs";
+import "../_libs/radix-ui__react-portal.mjs";
+import "../_libs/radix-ui__react-presence.mjs";
+import "../_libs/radix-ui__react-focus-guards.mjs";
+import "../_libs/react-remove-scroll.mjs";
+import "tslib";
+import "../_libs/react-remove-scroll-bar.mjs";
+import "../_libs/react-style-singleton.mjs";
+import "../_libs/get-nonce.mjs";
+import "../_libs/use-sidecar.mjs";
+import "../_libs/use-callback-ref.mjs";
+import "../_libs/aria-hidden.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
 const portraitImg = "/assets/henry-profile-BBIzd_xn.jpeg";
@@ -43,6 +69,66 @@ const imageAssets = {
   "web-and-computer-programming-certificate": webAndComputerProgrammingImg,
   "web-development-certificate": webDevelopmentImg
 };
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+const Dialog = Root;
+const DialogTrigger = Trigger;
+const DialogPortal = Portal;
+const DialogOverlay = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Overlay,
+  {
+    ref,
+    className: cn(
+      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className
+    ),
+    ...props
+  }
+));
+DialogOverlay.displayName = Overlay.displayName;
+const DialogContent = reactExports.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    Content,
+    {
+      ref,
+      className: cn(
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Close, { className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "h-4 w-4" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
+        ] })
+      ]
+    }
+  )
+] }));
+DialogContent.displayName = Content.displayName;
+const DialogHeader = ({ className, ...props }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("flex flex-col space-y-1.5 text-center sm:text-left", className), ...props });
+DialogHeader.displayName = "DialogHeader";
+const DialogTitle = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Title,
+  {
+    ref,
+    className: cn("text-lg font-semibold leading-none tracking-tight", className),
+    ...props
+  }
+));
+DialogTitle.displayName = Title.displayName;
+const DialogDescription = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Description,
+  {
+    ref,
+    className: cn("text-sm text-muted-foreground", className),
+    ...props
+  }
+));
+DialogDescription.displayName = Description.displayName;
 function Home() {
   const [data, setData] = reactExports.useState(seed);
   reactExports.useEffect(() => {
@@ -282,69 +368,72 @@ function About({
 function Projects({
   projects
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "work", className: "border-t border-hairline bg-surface/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-10 py-28", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SectionHead, { kicker: "02 · Selected Work", title: "Three flagship products — full-stack, shipped, and live.", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/dashboard", className: "hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary", children: [
-      "Manage ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-8 max-w-4xl", children: projects.map((p, i) => {
-      const img = p.image ? imageAssets[p.image] : void 0;
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.article, { initial: {
-        opacity: 0,
-        y: 20
-      }, whileInView: {
-        opacity: 1,
-        y: 0
-      }, viewport: {
-        once: true,
-        margin: "-100px"
-      }, transition: {
-        duration: 0.5,
-        delay: i * 0.05
-      }, className: "group relative rounded-3xl border border-hairline bg-background overflow-hidden hover:border-primary/60 transition-colors", children: [
-        img && p.link && /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: p.link, target: "_blank", rel: "noreferrer", className: "block aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: img, alt: `${p.title} preview`, className: "size-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-700" }) }),
-        img && !p.link && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: img, alt: `${p.title} preview`, className: "size-full object-cover object-top" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7 space-y-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-mono text-xs uppercase tracking-widest text-muted-foreground", children: [
-                p.year,
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "work", className: "border-t border-[#1e293b] bg-[#0a0e14] text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-10 py-20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold tracking-[0.2em] text-[#38bdf8] uppercase", children: "Projects" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl", children: "Featured Full Stack Projects" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-3xl text-base leading-relaxed text-[#9ca3af]", children: "Each project includes live URL, repository, stack, and a detailed breakdown using the STAR method." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-12 grid gap-6 md:grid-cols-2 lg:gap-8", children: projects.map((p, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(ProjectCard, { project: p, index: i }, p.id)) })
+  ] }) });
+}
+function ProjectCard({
+  project: p,
+  index
+}) {
+  const img = p.image ? imageAssets[p.image] : void 0;
+  const outlineBtn = "inline-flex items-center justify-center rounded-lg border border-[#4b5563] bg-transparent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:border-[#9ca3af] hover:bg-white/5 disabled:pointer-events-none disabled:opacity-40";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.article, { initial: {
+    opacity: 0,
+    y: 16
+  }, whileInView: {
+    opacity: 1,
+    y: 0
+  }, viewport: {
+    once: true,
+    margin: "-80px"
+  }, transition: {
+    duration: 0.45,
+    delay: index * 0.06
+  }, className: "flex flex-col overflow-hidden rounded-xl border border-[#1f2937] bg-[#111827] shadow-lg shadow-black/20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-[16/10] overflow-hidden bg-[#1f2937]", children: img ? /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: img, alt: p.title, className: "size-full object-cover object-top" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-full items-center justify-center px-6 text-center text-sm text-[#6b7280]", children: p.title }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col gap-4 p-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-bold leading-snug text-white", children: p.title }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed text-[#9ca3af]", children: p.description })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: p.stack.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full border border-[#374151] px-3 py-1 text-xs font-medium text-[#d1d5db]", children: s }, s)) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-auto flex flex-wrap gap-2 pt-2", children: [
+        p.link ? /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: p.link, target: "_blank", rel: "noreferrer", className: "inline-flex items-center justify-center rounded-lg bg-[#3b82f6] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2563eb]", children: "Live Project" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: outlineBtn, "aria-disabled": true, children: "Live Project" }),
+        p.github ? /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: p.github, target: "_blank", rel: "noreferrer", className: outlineBtn, children: "GitHub Repo" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: outlineBtn, "aria-disabled": true, children: "GitHub Repo" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", className: outlineBtn, children: "View Details" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-h-[85vh] overflow-y-auto border-[#374151] bg-[#111827] text-white sm:max-w-lg", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { className: "text-xl text-white", children: p.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogDescription, { className: "text-[#9ca3af]", children: [
+                p.role,
                 " · ",
-                p.role
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl mt-1", children: p.title }),
-              p.description && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-2 text-sm leading-relaxed", children: p.description })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2 shrink-0", children: [
-              p.link && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: p.link, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors", children: [
-                "Live demo ",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
-              ] }),
-              p.github && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: p.github, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-3" }),
-                " GitHub"
+                p.year
               ] })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: p.stack.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] font-mono uppercase tracking-wider px-2 py-1 rounded-full bg-surface-2 border border-hairline", children: s }, s)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { className: "space-y-4 text-sm", children: [
-            p.problem && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-widest text-primary mb-1", children: "The problem" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "text-muted-foreground leading-relaxed", children: p.problem })
             ] }),
-            p.challenge && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-widest text-primary mb-1", children: "The challenge" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "text-muted-foreground leading-relaxed", children: p.challenge })
-            ] }),
-            p.result && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-widest text-primary mb-1", children: "The result" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "text-muted-foreground leading-relaxed", children: p.result })
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { className: "space-y-4 text-sm", children: [
+              p.problem && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "mb-1 text-xs font-semibold uppercase tracking-wider text-[#38bdf8]", children: "The problem" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "leading-relaxed text-[#d1d5db]", children: p.problem })
+              ] }),
+              p.challenge && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "mb-1 text-xs font-semibold uppercase tracking-wider text-[#38bdf8]", children: "The challenge" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "leading-relaxed text-[#d1d5db]", children: p.challenge })
+              ] }),
+              p.result && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "mb-1 text-xs font-semibold uppercase tracking-wider text-[#38bdf8]", children: "The result" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "leading-relaxed text-[#d1d5db]", children: p.result })
+              ] })
             ] })
           ] })
         ] })
-      ] }, p.id);
-    }) })
-  ] }) });
+      ] })
+    ] })
+  ] });
 }
 function Experience({
   experience

@@ -1,15 +1,16 @@
-import degreeImg from "@/assets/byui-degree.png";
-import aasSoftwareDevelopmentImg from "@/assets/AAS Software Development.png";
 import mummyImg from "@/assets/project-mummyj2.png";
 import riseflowImg from "@/assets/project-riseflow.png";
-import webAndComputerProgrammingImg from "@/assets/Web and computer programming certificate.png";
-import webDevelopmentImg from "@/assets/web development certificate.png";
+
+/** Served from public/certificates/ so links work without SPA route 404s. */
+export const certificateAssets: Record<string, string> = {
+  "byui-degree": "/certificates/byui-degree.png",
+  "aas-software-development": "/certificates/aas-software-development.png",
+  "web-and-computer-programming-certificate": "/certificates/web-and-computer-programming.png",
+  "web-development-certificate": "/certificates/web-development.png",
+};
 
 export const imageAssets: Record<string, string> = {
-  "byui-degree": degreeImg,
-  "aas-software-development": aasSoftwareDevelopmentImg,
+  ...certificateAssets,
   "project-mummyj2": mummyImg,
   "project-riseflow": riseflowImg,
-  "web-and-computer-programming-certificate": webAndComputerProgrammingImg,
-  "web-development-certificate": webDevelopmentImg,
 };

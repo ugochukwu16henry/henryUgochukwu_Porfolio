@@ -54,6 +54,34 @@ export type Portfolio = {
 
 const KEY = "henry-portfolio:v2";
 
+function mergeProjects(seedProjects: Project[], storedProjects: Project[] | undefined): Project[] {
+  if (!storedProjects?.length) return seedProjects;
+
+  const storedById = new Map(storedProjects.map((project) => [project.id, project]));
+
+  const merged = seedProjects.map((seedProject) => {
+    const stored = storedById.get(seedProject.id);
+    if (!stored) return seedProject;
+
+    return {
+      ...seedProject,
+      ...stored,
+      image: stored.image?.trim() ? stored.image : seedProject.image,
+      link: stored.link?.trim() ? stored.link : seedProject.link,
+      github: stored.github?.trim() ? stored.github : seedProject.github,
+      problem: stored.problem?.trim() ? stored.problem : seedProject.problem,
+      challenge: stored.challenge?.trim() ? stored.challenge : seedProject.challenge,
+      result: stored.result?.trim() ? stored.result : seedProject.result,
+    };
+  });
+
+  const extras = storedProjects.filter(
+    (stored) => !seedProjects.some((seedProject) => seedProject.id === stored.id),
+  );
+
+  return [...merged, ...extras];
+}
+
 function mergeCertificates(
   seedCertificates: Certificate[],
   storedCertificates: Certificate[] | undefined,
@@ -82,6 +110,17 @@ function mergeCertificates(
   return [...merged, ...extras];
 }
 
+/** Reconcile GitHub/local edits with bundled seed (keeps image keys, STAR fields, etc.). */
+export function mergeWithSeed(partial: Partial<Portfolio>): Portfolio {
+  const base = seed as Portfolio;
+  return {
+    ...base,
+    ...partial,
+    projects: mergeProjects(base.projects, partial.projects),
+    certificates: mergeCertificates(base.certificates, partial.certificates),
+  };
+}
+
 export function loadPortfolio(): Portfolio {
   if (typeof window === "undefined") return seed as Portfolio;
   try {
@@ -90,11 +129,7 @@ export function loadPortfolio(): Portfolio {
     const parsed = JSON.parse(raw) as Partial<Portfolio>;
     const base = seed as Portfolio;
 
-    return {
-      ...base,
-      ...parsed,
-      certificates: mergeCertificates(base.certificates, parsed.certificates),
-    };
+    return mergeWithSeed(parsed);
   } catch {
     return seed as Portfolio;
   }
