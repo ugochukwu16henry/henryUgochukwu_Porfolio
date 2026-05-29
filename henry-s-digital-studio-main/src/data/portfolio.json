@@ -1,0 +1,149 @@
+{
+  "profile": {
+    "name": "Henry Ugochukwu",
+    "fullName": "Henry Maobughichi Ugochukwu",
+    "title": "Software Engineer · Full-Stack Developer",
+    "location": "Uyo, Akwa Ibom State, Nigeria",
+    "email": "ugochukwuhenry16@gmail.com",
+    "phone": "+234 901 571 8484",
+    "linkedin": "https://www.linkedin.com/in/ugochukwuhenry",
+    "github": "https://github.com/ugochukwu16henry",
+    "tagline": "I build resilient digital architecture where human insight meets engineering rigor.",
+    "summary": "Founder of Henrymo Technologies and full-stack engineer pivoting from a degree in Marriage & Family Studies into Software Development at BYU-Idaho. I ship responsive React/Next.js products, write reliable test suites, and tune relational databases to feel fast. I care about clarity, trust, and software that respects the people using it."
+  },
+  "skills": {
+    "engineering": ["React", "Next.js", "Node.js", "JavaScript", "TypeScript", "Java", "C++", "C#", ".NET", "Spring Boot"],
+    "data": ["PostgreSQL", "SQL Server", "Azure", "REST APIs", "JSON / XML", "Postman"],
+    "craft": ["UI/UX Engineering", "Automated Testing", "Code Review", "Performance Tuning", "Git / GitHub"]
+  },
+  "projects": [
+    {
+      "id": "riseflow-hub",
+      "title": "RiseFlow Hub",
+      "year": "2026",
+      "role": "Co-Founder · Full-Stack Engineer",
+      "stack": ["React", "Next.js", "Node.js", "PostgreSQL", "AI"],
+      "description": "A structured startup growth platform that helps entrepreneurs turn ideas into scalable companies through technology, guidance, and investor connection. Includes AI-powered idea evaluation, milestone-based pricing, founder dashboards, and an investor marketplace.",
+      "image": "project-riseflow",
+      "link": "https://app.riseflowhub.app"
+    },
+    {
+      "id": "mummyj2-treats",
+      "title": "mummyj2Treats — Yogurt & Treats Storefront",
+      "year": "2025",
+      "role": "Full-Stack Developer",
+      "stack": ["React", "Next.js", "Node.js", "Stripe", "Tailwind"],
+      "description": "Branded ecommerce experience for a Nigerian parfait, small-chops and zobo brand. Built a featured-treats catalog, cart, order-only flow, customer stories wall, and an admin-friendly menu — “Layers of Love in Every Spoon.”",
+      "image": "project-mummyj2",
+      "link": "https://www.mummyj2treats.com"
+    },
+    {
+      "id": "henrymo-platform",
+      "title": "Henrymo Technologies Platform",
+      "year": "2025",
+      "role": "Founder & Lead Developer",
+      "stack": ["Next.js", "React", "Node.js", "PostgreSQL"],
+      "description": "End-to-end agency platform turning startup concepts into shipped, scalable web products. Reusable component system, secure REST integrations, sub-second page loads.",
+      "image": "",
+      "link": "https://github.com/ugochukwu16henry"
+    },
+    {
+      "id": "qa-suite-h10",
+      "title": "H10 AI · QA Test Architecture",
+      "year": "2026",
+      "role": "QA Software Developer (Intern)",
+      "stack": ["JavaScript", "Jest", "Playwright", "GitHub Actions"],
+      "description": "Designed unit and system test suites that caught regressions before deploy. Pair-reviewed core feature PRs with senior engineers and stabilized release pipelines.",
+      "image": "",
+      "link": ""
+    },
+    {
+      "id": "sff-learning",
+      "title": "Strengthening Families · LMS Optimization",
+      "year": "2025",
+      "role": "Web Developer & Data Analyst",
+      "stack": ["LearnDash", "SQL", "Analytics"],
+      "description": "Tuned database queries, hardened client-facing web infrastructure, and lifted quiz completion 20% through interactive module refactors.",
+      "image": "",
+      "link": ""
+    }
+  ],
+  "experience": [
+    {
+      "company": "H10 AI",
+      "role": "Quality Assurance Software Developer (Intern)",
+      "period": "Jan 2026 — Present",
+      "location": "United States",
+      "bullets": [
+        "Architected unit + system tests with modern JS tooling to harden release stability.",
+        "Reviewed PRs alongside senior engineers, enforcing code quality gates.",
+        "Tracked work transparently via daily standups and metrics in Clockify."
+      ]
+    },
+    {
+      "company": "Henrymo Technologies",
+      "role": "Founder · Full-Stack Developer",
+      "period": "Oct 2025 — Present",
+      "location": "Remote",
+      "bullets": [
+        "Shipped responsive React / Next.js interfaces with reusable component systems.",
+        "Integrated secure REST APIs with real-time data flows and cross-browser parity.",
+        "Owned the end-to-end SDLC: strategy, architecture, build, and delivery."
+      ]
+    },
+    {
+      "company": "Strengthening Families Foundation",
+      "role": "Web Developer & Data Analyst (Contract)",
+      "period": "Jan 2025 — Apr 2025",
+      "location": "Remote",
+      "bullets": [
+        "Optimized relational queries and managed secure client-facing infrastructure.",
+        "Lifted organic traffic 65% through SEO and analytics-led iteration.",
+        "Generated 300+ qualified leads monthly at $2.50 average CPC."
+      ]
+    },
+    {
+      "company": "Money Mouth Marketing",
+      "role": "Digital Marketing Specialist",
+      "period": "Feb 2024 — May 2024",
+      "location": "Remote",
+      "bullets": [
+        "Boosted lead conversions 25% via A/B-tested email funnels.",
+        "Maintained 95% CSAT across technical client support.",
+        "Built ad campaigns across Google Ads, Meta, and LinkedIn."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Brigham Young University-Idaho",
+      "degree": "B.S. Software Development",
+      "period": "2023 — 2026",
+      "note": "Cumulative GPA 3.27 · Full-stack web, .NET, data structures, web services."
+    },
+    {
+      "school": "Brigham Young University-Idaho",
+      "degree": "B.S. Marriage and Family Studies",
+      "period": "2022 — 2025",
+      "note": "Conferred April 2026."
+    },
+    {
+      "school": "BYU-Pathway Worldwide",
+      "degree": "PathwayConnect Certificate",
+      "period": "2020",
+      "note": "Foundations in programming and professional skills."
+    }
+  ],
+  "certificates": [
+    { "id": "byui-bsmfs", "title": "B.S. Marriage and Family Studies", "issuer": "Brigham Young University-Idaho", "date": "Apr 2026", "image": "byui-degree", "file": "" },
+    { "id": "byui-aas-sd", "title": "Associate of Applied Science · Software Development", "issuer": "BYU-Idaho", "date": "Apr 2026", "image": "", "file": "/certificates/aas-software-development.pdf" },
+    { "id": "byui-cert-webdev", "title": "Certificate · Web Development", "issuer": "BYU-Idaho", "date": "Feb 2026", "image": "", "file": "/certificates/web-development.pdf" },
+    { "id": "byui-cert-wcp", "title": "Certificate · Web & Computer Programming", "issuer": "BYU-Idaho", "date": "Oct 2025", "image": "", "file": "/certificates/web-and-computer-programming.pdf" },
+    { "id": "byui-cert-advmf", "title": "Certificate · Advanced Marriage and Family", "issuer": "BYU-Idaho", "date": "2025", "image": "", "file": "/certificates/advanced-marriage-and-family.pdf" },
+    { "id": "byui-cert-pfe", "title": "Certificate · Parent and Family Education", "issuer": "BYU-Idaho", "date": "2025", "image": "", "file": "/certificates/parent-and-family-education.pdf" },
+    { "id": "genai-evo", "title": "Generative AI: The Evolution of Thoughtful Online Search", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },
+    { "id": "what-is-genai", "title": "What Is Generative AI?", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },
+    { "id": "ms-copilot", "title": "Streamlining Your Work with Microsoft Copilot", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },
+    { "id": "intro-ai", "title": "Introduction to Artificial Intelligence", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" }
+  ]
+}
