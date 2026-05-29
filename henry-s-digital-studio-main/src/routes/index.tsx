@@ -28,6 +28,7 @@ import {
   type Profile,
   type Skills,
 } from "@/lib/portfolio-store";
+import { getLivePortfolio } from "@/lib/api/portfolio.functions";
 import { ThemeToggle } from "@/lib/theme";
 import { imageAssets } from "@/lib/cert-assets";
 import seed from "@/data/portfolio.json";
@@ -54,7 +55,28 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [data, setData] = useState<Portfolio>(seed as Portfolio);
-  useEffect(() => setData(loadPortfolio()), []);
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        const live = await getLivePortfolio();
+        if (!cancelled) {
+          setData(live.portfolio);
+        }
+      } catch {
+        if (!cancelled) {
+          setData(loadPortfolio());
+        }
+      }
+    };
+
+    load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const { profile, skills, projects, experience, education, certificates } = data;
 

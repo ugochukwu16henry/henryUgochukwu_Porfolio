@@ -14,6 +14,7 @@ import {
   type Education,
   type Certificate,
 } from "@/lib/portfolio-store";
+import { getLivePortfolio, saveLivePortfolio } from "@/lib/api/portfolio.functions";
 import seed from "@/data/portfolio.json";
 
 export const Route = createFileRoute("/dashboard")({
@@ -42,8 +43,29 @@ function Dashboard() {
   const [dirty, setDirty] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     setAuthed(localStorage.getItem(PASS_KEY) === "1");
-    setData(loadPortfolio());
+
+    const load = async () => {
+      try {
+        const live = await getLivePortfolio();
+        if (!cancelled) {
+          setData(live.portfolio);
+          savePortfolio(live.portfolio);
+        }
+      } catch {
+        if (!cancelled) {
+          setData(loadPortfolio());
+        }
+      }
+    };
+
+    load();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const patch = <K extends keyof Portfolio>(key: K, value: Portfolio[K]) => {
@@ -51,10 +73,18 @@ function Dashboard() {
     setDirty(true);
   };
 
-  const save = () => {
-    savePortfolio(data);
-    setDirty(false);
-    toast.success("Saved to local JSON store.");
+  const save = async () => {
+    try {
+      const result = await saveLivePortfolio({ data });
+      savePortfolio(data);
+      setDirty(false);
+      toast.success(`Saved to GitHub${result.commitSha ? ` (${result.commitSha.slice(0, 7)})` : ""}.`);
+    } catch (error) {
+      console.error(error);
+      savePortfolio(data);
+      setDirty(false);
+      toast.error("GitHub save failed. Saved locally only.");
+    }
   };
 
   const reset = () => {
