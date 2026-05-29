@@ -30,7 +30,7 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 const PASS_KEY = "henry-dash:auth";
-const PASSCODE = "henry2026";
+const PASSCODE = "1995Mobuchi@";
 
 const normalizePasscode = (value: string) => value.trim();
 
@@ -457,7 +457,7 @@ function Gate({ onPass }: { onPass: () => void }) {
         {err && <p className="text-sm text-destructive">Incorrect passcode.</p>}
         <button className="w-full bg-primary text-primary-foreground rounded-full py-2.5 font-medium">Enter</button>
         <p className="text-xs text-muted-foreground text-center">
-          Default: <span className="font-mono">henry2026</span> — edit in <span className="font-mono">src/routes/dashboard.tsx</span>
+          Passcode is configured in <span className="font-mono">src/routes/dashboard.tsx</span>
         </p>
       </form>
     </div>
