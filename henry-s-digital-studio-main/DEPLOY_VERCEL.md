@@ -1,29 +1,87 @@
 # Vercel Deployment + GitHub Live JSON
 
-## 1. Connect project to Vercel
-1. Import this repository in Vercel.
-2. Set Root Directory to `henry-s-digital-studio-main`.
-3. Vercel reads `vercel.json` automatically.
+This app is **TanStack Start + Vite + Nitro** (not Next.js). Use the settings below in the Vercel dashboard.
 
-## 2. Set environment variables (Project Settings -> Environment Variables)
+## 1. Import & Root Directory
+
+1. Import [henryUgochukwu_Porfolio](https://github.com/ugochukwu16henry/henryUgochukwu_Porfolio) in Vercel.
+2. **Root Directory:** `henry-s-digital-studio-main`  
+   (Do **not** use `frontend` — that folder does not exist in this repo.)
+3. Click **Continue** — Vercel will read `henry-s-digital-studio-main/vercel.json`.
+
+## 2. Framework Settings (override defaults)
+
+In **Project → Settings → Build & Deployment → Framework Settings**, set:
+
+| Setting | Value |
+| --- | --- |
+| **Framework Preset** | **Other** (not Next.js) |
+| **Root Directory** | `henry-s-digital-studio-main` |
+| **Build Command** | `bun run build` |
+| **Install Command** | `bun install` |
+| **Development Command** | `bun run dev` |
+| **Output Directory** | *(leave empty)* — Nitro writes `.vercel/output` automatically |
+
+**Include files outside the root directory:** Off (not needed).
+
+**Ignored Build Step:** Automatic (default) is fine.
+
+**Node.js Version:** `22.x` (or `20.x`). `24.x` usually works; use 22.x if a build fails.
+
+`NITRO_PRESET=vercel` is set in `vercel.json` — do not remove it.
+
+### Wrong settings (will fail)
+
+- Framework Preset: **Next.js** with `next build` / `pnpm install`
+- Root Directory: **`frontend`**
+
+## 3. Environment variables
+
+**Project Settings → Environment Variables** (Production, Preview, Development):
+
 Use values from `.env.example`:
-- `GITHUB_TOKEN`
-- `GITHUB_OWNER`
-- `GITHUB_REPO`
-- `GITHUB_BRANCH`
-- `GITHUB_PORTFOLIO_PATH`
 
-`NITRO_PRESET=vercel` is already set in `vercel.json`.
+| Variable | Example / notes |
+| --- | --- |
+| `GITHUB_TOKEN` | Fine-grained PAT with **Contents: Read and write** |
+| `GITHUB_OWNER` | `ugochukwu16henry` |
+| `GITHUB_REPO` | `henryUgochukwu_Porfolio` |
+| `GITHUB_BRANCH` | `main` |
+| `GITHUB_PORTFOLIO_PATH` | `henry-s-digital-studio-main/src/data/portfolio.json` |
 
-## 3. GitHub token permissions
-Create a fine-grained PAT with repository access for the target repo and grant:
-- Contents: Read and write
+Optional:
 
-## 4. How live storage works now
+| Variable | Purpose |
+| --- | --- |
+| `VITE_APP_URL` | Public site URL (e.g. `https://your-domain.vercel.app`) |
+
+Never commit real tokens to git.
+
+## 4. GitHub token permissions
+
+Create a fine-grained PAT with repository access for the target repo:
+
+- **Contents:** Read and write
+
+## 5. How live storage works
+
 - Home page loads portfolio JSON from GitHub via server function.
-- Dashboard loads GitHub data first.
-- Dashboard Save commits updated JSON back to the configured GitHub file path.
-- If GitHub read/write fails, app falls back to local seed/local storage.
+- Dashboard loads GitHub data first (merged with seed).
+- Dashboard **Save** commits updated JSON to `GITHUB_PORTFOLIO_PATH`.
+- If GitHub read/write fails, the app falls back to seed / local storage.
 
-## 5. Deploy
-Push to `main` (or connected branch). Vercel builds and deploys automatically.
+## 6. Deploy
+
+Push to `main`. Vercel builds and deploys automatically.
+
+**Redeploy** after changing env vars or framework settings.
+
+## 7. Verify build locally (optional)
+
+```bash
+cd henry-s-digital-studio-main
+bun install
+bun run build
+```
+
+A successful build produces `.vercel/output/` (used by Vercel).
