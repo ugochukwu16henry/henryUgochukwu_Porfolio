@@ -42,22 +42,6 @@
   },
   "projects": [
     {
-      "id": "proj-1780071135662",
-      "title": "New Project",
-      "year": "2026",
-      "role": "Lead Developer",
-      "stack": [
-        "React"
-      ],
-      "description": "One-line summary for the card header.",
-      "problem": "What problem does this solve?",
-      "challenge": "What was hard — technically or architecturally?",
-      "result": "What shipped and what impact did it have?",
-      "image": "",
-      "link": "",
-      "github": ""
-    },
-    {
       "id": "gpg-gathering-place",
       "title": "GPG Gathering Place Global",
       "year": "2026",
