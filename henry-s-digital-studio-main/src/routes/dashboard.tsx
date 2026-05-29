@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Plus, Trash2, Save, RotateCcw, Download, Lock, ArrowLeft } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { useTheme } from "@/lib/theme";
+import { ThemeToggle, useTheme } from "@/lib/theme";
 import {
   loadPortfolio,
   savePortfolio,
@@ -97,12 +97,15 @@ function Dashboard() {
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Portfolio · Dashboard {dirty && <span className="text-primary">· unsaved</span>}
           </p>
-          <button
-            onClick={() => { localStorage.removeItem(PASS_KEY); setAuthed(false); }}
-            className="text-xs text-muted-foreground hover:text-primary"
-          >
-            Sign out
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle variant="inline" />
+            <button
+              onClick={() => { localStorage.removeItem(PASS_KEY); setAuthed(false); }}
+              className="text-xs text-muted-foreground hover:text-primary"
+            >
+              Sign out
+            </button>
+          </div>
         </div>
       </header>
 

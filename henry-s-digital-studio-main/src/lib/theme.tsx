@@ -69,16 +69,20 @@ export function useTheme() {
   return context;
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ variant = "floating" }: { variant?: "floating" | "inline" }) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
+  const className =
+    variant === "floating"
+      ? "fixed bottom-5 right-5 z-[70] inline-flex items-center gap-2 rounded-full border border-hairline bg-background/90 px-3 py-2 text-xs font-mono uppercase tracking-widest text-foreground shadow-elegant backdrop-blur-md transition hover:border-primary hover:text-primary"
+      : "inline-flex items-center gap-2 rounded-full border border-hairline bg-background/80 px-3 py-1.5 text-xs font-mono uppercase tracking-widest text-foreground transition hover:border-primary hover:text-primary";
 
   return (
     <button
       type="button"
       aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
       onClick={toggleTheme}
-      className="fixed bottom-5 right-5 z-[70] inline-flex items-center gap-2 rounded-full border border-hairline bg-background/90 px-3 py-2 text-xs font-mono uppercase tracking-widest text-foreground shadow-elegant backdrop-blur-md transition hover:border-primary hover:text-primary"
+      className={className}
     >
       {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
       {isDark ? "Day" : "Night"}

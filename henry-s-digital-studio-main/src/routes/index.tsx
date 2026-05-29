@@ -28,6 +28,7 @@ import {
   type Profile,
   type Skills,
 } from "@/lib/portfolio-store";
+import { ThemeToggle } from "@/lib/theme";
 import { imageAssets } from "@/lib/cert-assets";
 import seed from "@/data/portfolio.json";
 
@@ -96,12 +97,15 @@ function Nav() {
             </a>
           ))}
         </nav>
-        <Link
-          to="/dashboard"
-          className="font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
-        >
-          Dashboard
-        </Link>
+        <div className="flex items-center gap-2">
+          <ThemeToggle variant="inline" />
+          <Link
+            to="/dashboard"
+            className="font-mono text-xs uppercase tracking-widest px-3 py-1.5 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
+          >
+            Dashboard
+          </Link>
+        </div>
       </div>
     </header>
   );
