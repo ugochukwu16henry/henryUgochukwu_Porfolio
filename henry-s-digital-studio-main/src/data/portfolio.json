@@ -12,9 +12,33 @@
     "summary": "Founder of Henrymo Technologies and full-stack engineer pivoting from a degree in Marriage & Family Studies into Software Development at BYU-Idaho. I ship responsive React/Next.js products, write reliable test suites, and tune relational databases to feel fast. I care about clarity, trust, and software that respects the people using it."
   },
   "skills": {
-    "engineering": ["React", "Next.js", "Node.js", "JavaScript", "TypeScript", "Java", "C++", "C#", ".NET", "Spring Boot"],
-    "data": ["PostgreSQL", "SQL Server", "Azure", "REST APIs", "JSON / XML", "Postman"],
-    "craft": ["UI/UX Engineering", "Automated Testing", "Code Review", "Performance Tuning", "Git / GitHub"]
+    "engineering": [
+      "React",
+      "Next.js",
+      "Node.js",
+      "JavaScript",
+      "TypeScript",
+      "Java",
+      "C++",
+      "C#",
+      ".NET",
+      "Spring Boot"
+    ],
+    "data": [
+      "PostgreSQL",
+      "SQL Server",
+      "Azure",
+      "REST APIs",
+      "JSON / XML",
+      "Postman"
+    ],
+    "craft": [
+      "UI/UX Engineering",
+      "Automated Testing",
+      "Code Review",
+      "Performance Tuning",
+      "Git / GitHub"
+    ]
   },
   "projects": [
     {
@@ -22,7 +46,12 @@
       "title": "GPG Gathering Place Global",
       "year": "2026",
       "role": "Full-Stack Developer",
-      "stack": ["TanStack Start", "Cloudflare Workers", "AI Moderation", "React"],
+      "stack": [
+        "TanStack Start",
+        "Cloudflare Workers",
+        "AI Moderation",
+        "React"
+      ],
       "description": "A digital sanctuary for the YSA community, BYU-Pathway students, and friends of the Church — country-first gathering centers with optional global access.",
       "problem": "Young adults and Pathway students lack one trusted place to reconnect with mission peers, find local study groups, discover verified talent, and explore discipleship and outreach pathways without noisy or unsafe social platforms.",
       "challenge": "Ship country-first discovery, Gospel-standard AI moderation, consent-based missionary outreach, and a global pass (NGN 1000 yearly) while mapping 200+ gathering centers and three pillars: mission network, Pathway hub, and talent marketplace.",
@@ -36,7 +65,14 @@
       "title": "IbaHub — Uyo's All-in-One Life Engine",
       "year": "2026",
       "role": "Full-Stack Developer",
-      "stack": ["PWA", "React", "Vercel", "Paystack", "Monnify", "KYC"],
+      "stack": [
+        "PWA",
+        "React",
+        "Vercel",
+        "Paystack",
+        "Monnify",
+        "KYC"
+      ],
       "description": "Digitizing Uyo's informal economy in one progressive web app — student labor, plaza-to-home logistics, and market-side retail intelligence with dedicated virtual accounts.",
       "problem": "Students, plaza vendors, and market shops in Uyo run on WhatsApp, cash, and paper records — with no unified way to monetize skills, fulfill deliveries, or track sales with bankable payments.",
       "challenge": "Unify gig escrow, rider logistics, and retail tracking in a mobile-first, offline-capable PWA while integrating Paystack/Monnify virtual accounts and trust-based KYC for students and vendors.",
@@ -50,7 +86,13 @@
       "title": "Henry's eBook Store",
       "year": "2026",
       "role": "Full-Stack Developer",
-      "stack": ["React", "Vercel", "JSON", "Selar", "PDF"],
+      "stack": [
+        "React",
+        "Vercel",
+        "JSON",
+        "Selar",
+        "PDF"
+      ],
       "description": "A homepage that works like your digital eBook store — showcase titles, open dedicated eBook pages, connect Selar payments, and keep PDFs synced from one JSON source.",
       "problem": "Selling eBooks usually means duplicating content across a storefront, product pages, downloads, and payment links — so updates fall out of sync and the author experience feels fragmented.",
       "challenge": "Power the homepage, per-title pages, admin updates, and PDF generation from one shared JSON database while supporting per-book templates (premium, classic, minimal) and Selar checkout.",
@@ -64,7 +106,13 @@
       "title": "RiseFlow — School Management Platform",
       "year": "2026",
       "role": "Full-Stack Developer",
-      "stack": ["PHP", "MySQL", "JavaScript", "Paystack", "Multi-tenant SaaS"],
+      "stack": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "Paystack",
+        "Multi-tenant SaaS"
+      ],
       "description": "One platform for admissions, academics, and school finance — built for modern schools in Africa with secure records and role-based access.",
       "problem": "School administrators, teachers, and parents juggle separate tools for admissions, classes, fees, results, and reporting — creating delays, errors, and weak accountability.",
       "challenge": "Ship multi-tenant isolation, role-based workflows, and Paystack prepaid billing (₦170 per student per month after a free month) while keeping onboarding simple for non-technical school staff.",
@@ -78,7 +126,13 @@
       "title": "RiseFlow Hub",
       "year": "2026",
       "role": "Co-Founder · Full-Stack Engineer",
-      "stack": ["React", "Next.js", "Node.js", "PostgreSQL", "AI"],
+      "stack": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "AI"
+      ],
       "description": "A structured startup growth platform with AI-powered idea evaluation, founder dashboards, milestone-based pricing, and an investor marketplace for early-stage teams.",
       "problem": "Early-stage founders juggle spreadsheets, pitch decks, and scattered tools with no single system to validate ideas, track progress, or reach investors.",
       "challenge": "Ship milestone-based pricing and AI idea evaluation without overwhelming first-time founders — while keeping auth, dashboards, and marketplace data consistent across roles.",
@@ -92,7 +146,13 @@
       "title": "mummyj2Treats – Home Bakery E-commerce",
       "year": "2025",
       "role": "Full-Stack Developer",
-      "stack": ["React", "Next.js", "Node.js", "Stripe", "Tailwind"],
+      "stack": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "Stripe",
+        "Tailwind"
+      ],
       "description": "A robust e-commerce platform with featured treats, cart functionality, order management, customer stories, and responsive design for a local bakery business.",
       "problem": "A growing local food brand needed a professional online storefront instead of manual WhatsApp orders and inconsistent menu updates.",
       "challenge": "Balance a warm brand story with a fast mobile checkout, Stripe payments, and an admin-friendly menu owners can update without a developer.",
@@ -106,7 +166,12 @@
       "title": "Henrymo Technologies Platform",
       "year": "2025",
       "role": "Founder & Lead Developer",
-      "stack": ["Next.js", "React", "Node.js", "PostgreSQL"],
+      "stack": [
+        "Next.js",
+        "React",
+        "Node.js",
+        "PostgreSQL"
+      ],
       "description": "An end-to-end agency delivery platform with reusable UI systems, secure REST integrations, CRUD-heavy client dashboards, and performance-tuned page loads for startup engagements.",
       "problem": "Client startups needed repeatable full-stack delivery without rebuilding auth, APIs, and UI foundations for every engagement.",
       "challenge": "Design a reusable component system and secure REST layer that stays fast across projects while supporting CRUD-heavy client dashboards.",
@@ -183,15 +248,85 @@
     }
   ],
   "certificates": [
-    { "id": "byui-bsmfs", "title": "B.S. Marriage and Family Studies", "issuer": "Brigham Young University-Idaho", "date": "Apr 2026", "image": "byui-degree", "file": "" },
-    { "id": "byui-aas-sd", "title": "Associate of Applied Science · Software Development", "issuer": "BYU-Idaho", "date": "Apr 2026", "image": "aas-software-development", "file": "/certificates/aas-software-development.pdf" },
-    { "id": "byui-cert-webdev", "title": "Certificate · Web Development", "issuer": "BYU-Idaho", "date": "Feb 2026", "image": "web-development-certificate", "file": "/certificates/web-development.pdf" },
-    { "id": "byui-cert-wcp", "title": "Certificate · Web & Computer Programming", "issuer": "BYU-Idaho", "date": "Oct 2025", "image": "web-and-computer-programming-certificate", "file": "/certificates/web-and-computer-programming.pdf" },
-    { "id": "byui-cert-advmf", "title": "Certificate · Advanced Marriage and Family", "issuer": "BYU-Idaho", "date": "2025", "image": "", "file": "/certificates/advanced-marriage-and-family.pdf" },
-    { "id": "byui-cert-pfe", "title": "Certificate · Parent and Family Education", "issuer": "BYU-Idaho", "date": "2025", "image": "", "file": "/certificates/parent-and-family-education.pdf" },
-    { "id": "genai-evo", "title": "Generative AI: The Evolution of Thoughtful Online Search", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },
-    { "id": "what-is-genai", "title": "What Is Generative AI?", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },
-    { "id": "ms-copilot", "title": "Streamlining Your Work with Microsoft Copilot", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" },
-    { "id": "intro-ai", "title": "Introduction to Artificial Intelligence", "issuer": "LinkedIn Learning", "date": "2025", "image": "", "file": "" }
+    {
+      "id": "byui-bsmfs",
+      "title": "B.S. Marriage and Family Studies",
+      "issuer": "Brigham Young University-Idaho",
+      "date": "Apr 2026",
+      "image": "byui-degree",
+      "file": ""
+    },
+    {
+      "id": "byui-aas-sd",
+      "title": "Associate of Applied Science · Software Development",
+      "issuer": "BYU-Idaho",
+      "date": "Apr 2026",
+      "image": "aas-software-development",
+      "file": "/certificates/aas-software-development.pdf"
+    },
+    {
+      "id": "byui-cert-webdev",
+      "title": "Certificate · Web Development",
+      "issuer": "BYU-Idaho",
+      "date": "Feb 2026",
+      "image": "web-development-certificate",
+      "file": "/certificates/web-development.pdf"
+    },
+    {
+      "id": "byui-cert-wcp",
+      "title": "Certificate · Web & Computer Programming",
+      "issuer": "BYU-Idaho",
+      "date": "Oct 2025",
+      "image": "web-and-computer-programming-certificate",
+      "file": "/certificates/web-and-computer-programming.pdf"
+    },
+    {
+      "id": "byui-cert-advmf",
+      "title": "Certificate · Advanced Marriage and Family",
+      "issuer": "BYU-Idaho",
+      "date": "2025",
+      "image": "",
+      "file": "/certificates/advanced-marriage-and-family.pdf"
+    },
+    {
+      "id": "byui-cert-pfe",
+      "title": "Certificate · Parent and Family Education",
+      "issuer": "BYU-Idaho",
+      "date": "2025",
+      "image": "",
+      "file": "/certificates/parent-and-family-education.pdf"
+    },
+    {
+      "id": "genai-evo",
+      "title": "Generative AI: The Evolution of Thoughtful Online Search",
+      "issuer": "LinkedIn Learning",
+      "date": "2025",
+      "image": "",
+      "file": ""
+    },
+    {
+      "id": "what-is-genai",
+      "title": "What Is Generative AI?",
+      "issuer": "LinkedIn Learning",
+      "date": "2025",
+      "image": "",
+      "file": ""
+    },
+    {
+      "id": "ms-copilot",
+      "title": "Streamlining Your Work with Microsoft Copilot",
+      "issuer": "LinkedIn Learning",
+      "date": "2025",
+      "image": "",
+      "file": ""
+    },
+    {
+      "id": "intro-ai",
+      "title": "Introduction to Artificial Intelligence",
+      "issuer": "LinkedIn Learning",
+      "date": "2025",
+      "image": "",
+      "file": ""
+    }
   ]
 }
