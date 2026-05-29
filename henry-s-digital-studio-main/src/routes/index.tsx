@@ -30,6 +30,14 @@ import {
 import { getLivePortfolio } from "@/lib/api/portfolio.functions";
 import { ThemeToggle } from "@/lib/theme";
 import { imageAssets } from "@/lib/cert-assets";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import seed from "@/data/portfolio.json";
 
 export const Route = createFileRoute("/")({
@@ -292,110 +300,135 @@ function About({ profile, skills }: { profile: Profile; skills: Skills }) {
 /* ───────── Projects ───────── */
 function Projects({ projects }: { projects: Project[] }) {
   return (
-    <section id="work" className="border-t border-hairline bg-surface/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-28">
-        <SectionHead kicker="02 · Selected Work" title="Three flagship products — full-stack, shipped, and live.">
-          <Link to="/dashboard" className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary">
-            Manage <ArrowUpRight className="size-3" />
-          </Link>
-        </SectionHead>
-        <div className="space-y-8 max-w-4xl">
-          {projects.map((p, i) => {
-            const img = p.image ? imageAssets[p.image] : undefined;
-            return (
-              <motion.article
-                key={p.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="group relative rounded-3xl border border-hairline bg-background overflow-hidden hover:border-primary/60 transition-colors"
-              >
-                {img && p.link && (
-                  <a
-                    href={p.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline"
-                  >
-                    <img
-                      src={img}
-                      alt={`${p.title} preview`}
-                      className="size-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
-                    />
-                  </a>
-                )}
-                {img && !p.link && (
-                  <div className="aspect-[16/9] overflow-hidden bg-surface-2 border-b border-hairline">
-                    <img src={img} alt={`${p.title} preview`} className="size-full object-cover object-top" />
-                  </div>
-                )}
-                <div className="p-7 space-y-5">
-                  <div className="flex flex-wrap items-start justify-between gap-4">
-                    <div>
-                      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{p.year} · {p.role}</p>
-                      <h3 className="font-display text-2xl mt-1">{p.title}</h3>
-                      {p.description && (
-                        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{p.description}</p>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-2 shrink-0">
-                      {p.link && (
-                        <a
-                          href={p.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
-                        >
-                          Live demo <ArrowUpRight className="size-3" />
-                        </a>
-                      )}
-                      {p.github && (
-                        <a
-                          href={p.github}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider px-3 py-2 rounded-full border border-hairline hover:border-primary hover:text-primary transition-colors"
-                        >
-                          <Github className="size-3" /> GitHub
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.stack.map((s) => (
-                      <span key={s} className="text-[11px] font-mono uppercase tracking-wider px-2 py-1 rounded-full bg-surface-2 border border-hairline">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  <dl className="space-y-4 text-sm">
-                    {p.problem && (
-                      <div>
-                        <dt className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">The problem</dt>
-                        <dd className="text-muted-foreground leading-relaxed">{p.problem}</dd>
-                      </div>
-                    )}
-                    {p.challenge && (
-                      <div>
-                        <dt className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">The challenge</dt>
-                        <dd className="text-muted-foreground leading-relaxed">{p.challenge}</dd>
-                      </div>
-                    )}
-                    {p.result && (
-                      <div>
-                        <dt className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">The result</dt>
-                        <dd className="text-muted-foreground leading-relaxed">{p.result}</dd>
-                      </div>
-                    )}
-                  </dl>
-                </div>
-              </motion.article>
-            );
-          })}
+    <section id="work" className="border-t border-[#1e293b] bg-[#0a0e14] text-white">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
+        <p className="text-sm font-semibold tracking-[0.2em] text-[#38bdf8] uppercase">Projects</p>
+        <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          Featured Full Stack Projects
+        </h2>
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-[#9ca3af]">
+          Each project includes live URL, repository, stack, and a detailed breakdown using the STAR method.
+        </p>
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:gap-8">
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ProjectCard({ project: p, index }: { project: Project; index: number }) {
+  const img = p.image ? imageAssets[p.image] : undefined;
+  const outlineBtn =
+    "inline-flex items-center justify-center rounded-lg border border-[#4b5563] bg-transparent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:border-[#9ca3af] hover:bg-white/5 disabled:pointer-events-none disabled:opacity-40";
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+      className="flex flex-col overflow-hidden rounded-xl border border-[#1f2937] bg-[#111827] shadow-lg shadow-black/20"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#1f2937]">
+        {img ? (
+          <img
+            src={img}
+            alt={p.title}
+            className="size-full object-cover object-top"
+          />
+        ) : (
+          <div className="flex size-full items-center justify-center px-6 text-center text-sm text-[#6b7280]">
+            {p.title}
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-6">
+        <div className="space-y-3">
+          <h3 className="text-lg font-bold leading-snug text-white">{p.title}</h3>
+          <p className="text-sm leading-relaxed text-[#9ca3af]">{p.description}</p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {p.stack.map((s) => (
+            <span
+              key={s}
+              className="rounded-full border border-[#374151] px-3 py-1 text-xs font-medium text-[#d1d5db]"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-2">
+          {p.link ? (
+            <a
+              href={p.link}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-lg bg-[#3b82f6] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2563eb]"
+            >
+              Live Project
+            </a>
+          ) : (
+            <span className={outlineBtn} aria-disabled>
+              Live Project
+            </span>
+          )}
+          {p.github ? (
+            <a href={p.github} target="_blank" rel="noreferrer" className={outlineBtn}>
+              GitHub Repo
+            </a>
+          ) : (
+            <span className={outlineBtn} aria-disabled>
+              GitHub Repo
+            </span>
+          )}
+          <Dialog>
+            <DialogTrigger asChild>
+              <button type="button" className={outlineBtn}>
+                View Details
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-h-[85vh] overflow-y-auto border-[#374151] bg-[#111827] text-white sm:max-w-lg">
+              <DialogHeader>
+                <DialogTitle className="text-xl text-white">{p.title}</DialogTitle>
+                <DialogDescription className="text-[#9ca3af]">{p.role} · {p.year}</DialogDescription>
+              </DialogHeader>
+              <dl className="space-y-4 text-sm">
+                {p.problem && (
+                  <div>
+                    <dt className="mb-1 text-xs font-semibold uppercase tracking-wider text-[#38bdf8]">
+                      The problem
+                    </dt>
+                    <dd className="leading-relaxed text-[#d1d5db]">{p.problem}</dd>
+                  </div>
+                )}
+                {p.challenge && (
+                  <div>
+                    <dt className="mb-1 text-xs font-semibold uppercase tracking-wider text-[#38bdf8]">
+                      The challenge
+                    </dt>
+                    <dd className="leading-relaxed text-[#d1d5db]">{p.challenge}</dd>
+                  </div>
+                )}
+                {p.result && (
+                  <div>
+                    <dt className="mb-1 text-xs font-semibold uppercase tracking-wider text-[#38bdf8]">
+                      The result
+                    </dt>
+                    <dd className="leading-relaxed text-[#d1d5db]">{p.result}</dd>
+                  </div>
+                )}
+              </dl>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
