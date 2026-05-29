@@ -1,11 +1,11 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, l as loadPortfolio } from "./portfolio.functions-BwXrxY4E.mjs";
-import { T as ThemeToggle } from "./router-BE1Ih542.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio, p as portraitImage, b as resolvePortfolioImage } from "./portfolio.functions-DEQP_1DH.mjs";
+import { T as ThemeToggle } from "./router-D1hX6Gdx.mjs";
 import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-import { s as seed } from "./portfolio-C3mz8jZY.mjs";
+import { s as seed } from "./portfolio-BMxTfVw5.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
 import { b as Sparkles, c as ArrowUpRight, d as MapPin, G as Github, e as Linkedin, C as CodeXml, f as Database, W as Wrench, g as GraduationCap, h as Award, F as FileText, i as Mail, j as Phone, X } from "../_libs/lucide-react.mjs";
@@ -21,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-rSWosdHT.mjs";
+import "./server-WXc0ypUF.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -54,21 +54,12 @@ import "../_libs/use-callback-ref.mjs";
 import "../_libs/aria-hidden.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
-const portraitImg = "/assets/henry-profile-BBIzd_xn.jpeg";
-const degreeImg = "/assets/byui-degree-y-D1N98C.png";
-const aasSoftwareDevelopmentImg = "/assets/AAS%20Software%20Development-CMFq5zBE.png";
-const mummyImg = "/assets/project-mummyj2-BPmKyHwK.png";
-const riseflowImg = "/assets/project-riseflow-BSZrJAsr.png";
-const webAndComputerProgrammingImg = "/assets/Web%20and%20computer%20programming%20certificate-Cd6V90HU.png";
-const webDevelopmentImg = "/assets/web%20development%20certificate-CEdsgrNo.png";
-const imageAssets = {
-  "byui-degree": degreeImg,
-  "aas-software-development": aasSoftwareDevelopmentImg,
-  "project-mummyj2": mummyImg,
-  "project-riseflow": riseflowImg,
-  "web-and-computer-programming-certificate": webAndComputerProgrammingImg,
-  "web-development-certificate": webDevelopmentImg
-};
+function openStaticAsset(path, event) {
+  event?.preventDefault();
+  event?.stopPropagation();
+  const url = path.startsWith("http") ? path : `${window.location.origin}${path.startsWith("/") ? path : `/${path}`}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
@@ -137,7 +128,7 @@ function Home() {
       try {
         const live = await getLivePortfolio();
         if (!cancelled) {
-          setData(live.portfolio);
+          setData(mergeWithSeed(live.portfolio));
         }
       } catch {
         if (!cancelled) {
@@ -288,7 +279,7 @@ function Hero({
         delay: 0.15
       }, className: "lg:col-span-5 relative", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-elegant border border-hairline", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: portraitImg, alt: `${profile.name} portrait`, className: "size-full object-cover" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: portraitImage, alt: `${profile.name} portrait`, className: "size-full object-cover" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-5 left-5 right-5 flex items-end justify-between", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -379,7 +370,7 @@ function ProjectCard({
   project: p,
   index
 }) {
-  const img = p.image ? imageAssets[p.image] : void 0;
+  const img = resolvePortfolioImage(p.image);
   const outlineBtn = "inline-flex items-center justify-center rounded-lg border border-[#4b5563] bg-transparent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:border-[#9ca3af] hover:bg-white/5 disabled:pointer-events-none disabled:opacity-40";
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.article, { initial: {
     opacity: 0,
@@ -472,38 +463,56 @@ function Education({
     ] }, ed.degree)) })
   ] }) });
 }
+function certImageSrc(certificate) {
+  return resolvePortfolioImage(certificate.image);
+}
 function Certificates({
   certificates
 }) {
-  const featured = certificates.find((c) => c.image === "byui-degree" && imageAssets[c.image]) ?? certificates.find((c) => c.image && imageAssets[c.image]);
+  const degree = certificates.find((c) => c.id === "byui-bsmfs");
+  const degreeSrc = degree ? certImageSrc(degree) : void 0;
+  const withImages = certificates.filter((c) => certImageSrc(c));
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "certificates", className: "mx-auto max-w-7xl px-6 lg:px-10 py-28", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SectionHead, { kicker: "05 · Certificates", title: "Conferred degrees and continuing study." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-3 gap-6", children: [
-      featured && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-1 rounded-3xl border border-hairline bg-surface/60 p-3 overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: imageAssets[featured.image], alt: featured.title, className: "rounded-2xl w-full object-cover" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-3 px-2 pb-2", children: [
-          featured.issuer,
-          " · ",
-          featured.date
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `${featured ? "lg:col-span-2" : "lg:col-span-3"} grid sm:grid-cols-2 gap-3`, children: certificates.map((c) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "group rounded-2xl border border-hairline bg-background p-5 hover:border-primary/60 transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "size-9 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "size-4 text-primary" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground", children: c.date }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-medium leading-snug", children: c.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-0.5", children: c.issuer }),
-          c.file && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: c.file, target: "_blank", rel: "noreferrer", className: "text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "size-3" }),
-            " View PDF ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
-          ] }),
-          !c.file && c.image && imageAssets[c.image] && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: imageAssets[c.image], target: "_blank", rel: "noreferrer", className: "text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline", children: [
-            "View certificate ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-1 space-y-4", children: [
+        degree && degreeSrc && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-3xl border border-hairline bg-surface/60 p-3 overflow-hidden", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: degreeSrc, alt: degree.title, className: "rounded-2xl w-full object-cover" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-3 px-2", children: degree.title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground px-2 pb-2", children: [
+            degree.issuer,
+            " · ",
+            degree.date
           ] })
-        ] })
-      ] }) }, c.id)) })
+        ] }),
+        withImages.length > 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-2", children: withImages.filter((c) => c.id !== "byui-bsmfs").map((c) => {
+          const src = certImageSrc(c);
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: src, onClick: (e) => openStaticAsset(src, e), className: "block cursor-pointer rounded-xl border border-hairline overflow-hidden hover:border-primary/60 transition-colors", title: c.title, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src, alt: c.title, className: "aspect-[3/4] w-full object-cover object-top" }) }, c.id);
+        }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:col-span-2 grid sm:grid-cols-2 gap-3", children: certificates.map((c) => {
+        const src = certImageSrc(c);
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "group rounded-2xl border border-hairline bg-background overflow-hidden hover:border-primary/60 transition-colors", children: [
+          src && /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: src, onClick: (e) => openStaticAsset(src, e), className: "block cursor-pointer border-b border-hairline bg-surface-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src, alt: c.title, className: "w-full max-h-40 object-cover object-top" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+            !src && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "size-9 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "size-4 text-primary" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground", children: c.date }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-medium leading-snug", children: c.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-0.5", children: c.issuer }),
+              c.file && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: c.file, onClick: (e) => openStaticAsset(c.file, e), className: "text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "size-3" }),
+                " View PDF ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
+              ] }),
+              src && !c.file && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: src, onClick: (e) => openStaticAsset(src, e), className: "text-primary text-xs mt-2 inline-flex items-center gap-1 hover:underline", children: [
+                "View certificate ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-3" })
+              ] })
+            ] })
+          ] }) })
+        ] }, c.id);
+      }) })
     ] })
   ] });
 }

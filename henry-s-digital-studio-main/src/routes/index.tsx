@@ -16,7 +16,6 @@ import {
   Award,
   FileText,
 } from "lucide-react";
-import portraitImg from "@/assets/henry-profile.jpeg";
 import {
   loadPortfolio,
   mergeWithSeed,
@@ -30,7 +29,7 @@ import {
 } from "@/lib/portfolio-store";
 import { getLivePortfolio } from "@/lib/api/portfolio.functions";
 import { ThemeToggle } from "@/lib/theme";
-import { imageAssets } from "@/lib/cert-assets";
+import { portraitImage, resolvePortfolioImage } from "@/lib/cert-assets";
 import { openStaticAsset } from "@/lib/open-static-asset";
 import {
   Dialog,
@@ -212,7 +211,7 @@ function Hero({ profile }: { profile: Profile }) {
           className="lg:col-span-5 relative"
         >
           <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-elegant border border-hairline">
-            <img src={portraitImg} alt={`${profile.name} portrait`} className="size-full object-cover" />
+            <img src={portraitImage} alt={`${profile.name} portrait`} className="size-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
               <div>
@@ -322,7 +321,7 @@ function Projects({ projects }: { projects: Project[] }) {
 }
 
 function ProjectCard({ project: p, index }: { project: Project; index: number }) {
-  const img = p.image ? imageAssets[p.image] : undefined;
+  const img = resolvePortfolioImage(p.image);
   const outlineBtn =
     "inline-flex items-center justify-center rounded-lg border border-[#4b5563] bg-transparent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:border-[#9ca3af] hover:bg-white/5 disabled:pointer-events-none disabled:opacity-40";
 
@@ -487,9 +486,7 @@ function Education({ education }: { education: EducationItem[] }) {
 
 /* ───────── Certificates ───────── */
 function certImageSrc(certificate: Certificate): string | undefined {
-  const key = certificate.image?.trim();
-  if (!key) return undefined;
-  return imageAssets[key];
+  return resolvePortfolioImage(certificate.image);
 }
 
 function Certificates({ certificates }: { certificates: Certificate[] }) {

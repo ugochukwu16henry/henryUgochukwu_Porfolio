@@ -1,4 +1,5 @@
 import seed from "@/data/portfolio.json";
+import { hasPortfolioImageKey } from "@/lib/cert-assets";
 
 export type Project = {
   id: string;
@@ -66,7 +67,10 @@ function mergeProjects(seedProjects: Project[], storedProjects: Project[] | unde
     return {
       ...seedProject,
       ...stored,
-      image: stored.image?.trim() ? stored.image : seedProject.image,
+      image:
+        stored.image?.trim() && hasPortfolioImageKey(stored.image)
+          ? stored.image.trim()
+          : seedProject.image,
       link: stored.link?.trim() ? stored.link : seedProject.link,
       github: stored.github?.trim() ? stored.github : seedProject.github,
       problem: stored.problem?.trim() ? stored.problem : seedProject.problem,
@@ -98,7 +102,10 @@ function mergeCertificates(
       ...seedCertificate,
       ...stored,
       // Keep new seed image/file when old local data has empty values.
-      image: stored.image && stored.image.trim() ? stored.image : seedCertificate.image,
+      image:
+        stored.image?.trim() && hasPortfolioImageKey(stored.image)
+          ? stored.image.trim()
+          : seedCertificate.image,
       file: stored.file && stored.file.trim() ? stored.file : seedCertificate.file,
     };
   });

@@ -1,11 +1,7 @@
-import mummyImg from "@/assets/project-mummyj2.png";
-import riseflowImg from "@/assets/project-riseflow.png";
-import riseflowSchoolImg from "@/assets/riseflowschool.png";
-import ebookStoreImg from "@/assets/e-book.png";
-import ibaHubImg from "@/assets/mega.png";
-import gpgImg from "@/assets/gpg.png";
-
-/** Served from public/certificates/ so links work without SPA route 404s. */
+/**
+ * Portfolio images are served from /public so Vercel serves them as static files
+ * (stable URLs, no SPA 404s, no dependency on Vite hashed /assets/ paths).
+ */
 export const certificateAssets: Record<string, string> = {
   "byui-degree": "/certificates/byui-degree.png",
   "aas-software-development": "/certificates/aas-software-development.png",
@@ -13,12 +9,28 @@ export const certificateAssets: Record<string, string> = {
   "web-development-certificate": "/certificates/web-development.png",
 };
 
+export const projectAssets: Record<string, string> = {
+  gpg: "/images/projects/gpg.png",
+  mega: "/images/projects/mega.png",
+  "e-book": "/images/projects/e-book.png",
+  riseflowschool: "/images/projects/riseflowschool.png",
+  "project-riseflow": "/images/projects/project-riseflow.png",
+  "project-mummyj2": "/images/projects/project-mummyj2.png",
+};
+
 export const imageAssets: Record<string, string> = {
   ...certificateAssets,
-  "project-mummyj2": mummyImg,
-  "project-riseflow": riseflowImg,
-  "riseflowschool": riseflowSchoolImg,
-  "e-book": ebookStoreImg,
-  mega: ibaHubImg,
-  gpg: gpgImg,
+  ...projectAssets,
 };
+
+export const portraitImage = "/images/henry-profile.jpeg";
+
+export function hasPortfolioImageKey(key: string | undefined): boolean {
+  if (!key?.trim()) return false;
+  return key.trim() in imageAssets;
+}
+
+export function resolvePortfolioImage(key: string | undefined): string | undefined {
+  if (!key?.trim()) return undefined;
+  return imageAssets[key.trim()];
+}

@@ -1,9 +1,9 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { T as Toaster, t as toast } from "../_libs/sonner.mjs";
-import { u as useTheme, T as ThemeToggle } from "./router-BE1Ih542.mjs";
-import { g as getLivePortfolio, s as savePortfolio, l as loadPortfolio, a as saveLivePortfolio, e as exportJson, r as resetStore } from "./portfolio.functions-BwXrxY4E.mjs";
-import { s as seed } from "./portfolio-C3mz8jZY.mjs";
+import { u as useTheme, T as ThemeToggle } from "./router-D1hX6Gdx.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, s as savePortfolio, l as loadPortfolio, a as saveLivePortfolio, e as exportJson, r as resetStore } from "./portfolio.functions-DEQP_1DH.mjs";
+import { s as seed } from "./portfolio-BMxTfVw5.mjs";
 import "../_libs/seroval.mjs";
 import { A as ArrowLeft, a as Save, D as Download, R as RotateCcw, L as Lock, P as Plus, T as Trash2 } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -20,7 +20,7 @@ import "stream";
 import "../_libs/isbot.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
-import "./server-rSWosdHT.mjs";
+import "./server-WXc0ypUF.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -44,8 +44,9 @@ function Dashboard() {
       try {
         const live = await getLivePortfolio();
         if (!cancelled) {
-          setData(live.portfolio);
-          savePortfolio(live.portfolio);
+          const merged = mergeWithSeed(live.portfolio);
+          setData(merged);
+          savePortfolio(merged);
         }
       } catch {
         if (!cancelled) {
@@ -251,7 +252,7 @@ function ProjectsEditor({
       /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-6", label: "GitHub repo URL", value: p.github ?? "", onChange: (v) => update(p.id, {
         github: v
       }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-12", label: "Image key (project-mummyj2, project-riseflow…)", value: p.image ?? "", onChange: (v) => update(p.id, {
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "md:col-span-12", label: "Image key (gpg, mega, e-book, riseflowschool…)", value: p.image ?? "", onChange: (v) => update(p.id, {
         image: v
       }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(TextArea, { className: "md:col-span-12", label: "Summary (one line)", value: p.description, rows: 2, onChange: (v) => update(p.id, {
