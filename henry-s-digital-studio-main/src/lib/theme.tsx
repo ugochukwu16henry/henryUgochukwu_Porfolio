@@ -34,23 +34,33 @@ function getThemeFromDocument(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getThemeFromDocument);
+  // Start as null so the first client render matches the server; the real
+  // theme (already applied by ThemeInitScript) is read after hydration.
+  const [stored, setThemeState] = useState<Theme | null>(null);
+  const theme = stored ?? "light";
 
   useEffect(() => {
-    applyTheme(theme);
+    setThemeState(getThemeFromDocument());
+  }, []);
+
+  useEffect(() => {
+    if (!stored) return;
+    applyTheme(stored);
     try {
-      localStorage.setItem(THEME_STORAGE_KEY, theme);
+      localStorage.setItem(THEME_STORAGE_KEY, stored);
     } catch {
       // Ignore storage errors in privacy-restricted environments.
     }
-  }, [theme]);
+  }, [stored]);
 
   const setTheme = useCallback((next: Theme) => {
     setThemeState(next);
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setThemeState((current) => (current === "dark" ? "light" : "dark"));
+    setThemeState((current) =>
+      (current ?? getThemeFromDocument()) === "dark" ? "light" : "dark",
+    );
   }, []);
 
   const value = useMemo(

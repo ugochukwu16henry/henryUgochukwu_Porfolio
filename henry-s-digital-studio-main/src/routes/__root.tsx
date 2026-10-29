@@ -69,12 +69,21 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const fontsCss =
+  "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
     const seo = buildPortfolioHead();
     return {
       meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, ...seo.meta],
-      links: [{ rel: "stylesheet", href: appCss }, ...seo.links],
+      links: [
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+        { rel: "stylesheet", href: fontsCss },
+        { rel: "stylesheet", href: appCss },
+        ...seo.links,
+      ],
       scripts: seo.scripts,
     };
   },
@@ -86,7 +95,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // ThemeInitScript sets the theme class on <html> before hydration.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
         <ThemeInitScript />
