@@ -133,7 +133,7 @@ function resolvePortfolioImage(key) {
   if (!key?.trim()) return void 0;
   return imageAssets[key.trim()];
 }
-const FALLBACK_SITE_URL = "https://henry-ugochukwu-portfolio.vercel.app";
+const FALLBACK_SITE_URL = "https://henry-ugochukwu-porfolio.vercel.app";
 function getSiteUrl() {
   return FALLBACK_SITE_URL;
 }
@@ -365,7 +365,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-BXpD-980.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-Bpl_I1_p.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -383,7 +383,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-BXNsBmG9.mjs");
+const $$splitComponentImporter = () => import("./index-BmvDwl_7.mjs");
 const Route = createFileRoute("/")({
   head: () => buildPortfolioHead({
     path: "/",

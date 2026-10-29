@@ -3,7 +3,7 @@ import { portraitImage, resumePdf } from "@/lib/cert-assets";
 import type { Profile } from "@/lib/portfolio-store";
 
 /** Set VITE_APP_URL in Vercel to your production domain (no trailing slash). */
-const FALLBACK_SITE_URL = "https://henry-ugochukwu-portfolio.vercel.app";
+const FALLBACK_SITE_URL = "https://henry-ugochukwu-porfolio.vercel.app";
 
 export function getSiteUrl(): string {
   const fromEnv = import.meta.env.VITE_APP_URL;

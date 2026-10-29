@@ -35,3 +35,6 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# The prebuilt server function bundles its own node_modules; it must be committed.
+!.vercel/output/functions/**/node_modules/
