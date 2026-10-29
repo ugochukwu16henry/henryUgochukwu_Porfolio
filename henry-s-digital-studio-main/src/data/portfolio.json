@@ -340,7 +340,7 @@
       "problem": "Leading AI tools are priced in dollars and need foreign cards, which shuts out most Nigerian creators, students, and developers.",
       "challenge": "Design a pricing engine and double-entry wallet ledger so every AI call is metered, priced in Naira, and paid from Paystack top-ups — with clear unit economics per feature before the first user arrives.",
       "result": "Phase 0 foundation shipped: the monorepo, PostgreSQL schema and migrations, and the money path (pricing engine, wallet and ledger, Paystack top-ups and webhooks) with CI that type-checks, builds, and tests every change.",
-      "image": "",
+      "image": "zentrix-ai-hub",
       "link": "",
       "github": ""
     },
@@ -402,7 +402,7 @@
       "problem": "Classified marketplaces live or die on how quickly people can post an item and find what they want — on low-end phones and patchy networks.",
       "challenge": "Apply clean architecture to real app flows: persist listings locally with Room, keep list, detail, and create screens in sync, and make search, filter, and sort feel instant.",
       "result": "A complete, maintainable Android app with listing creation, keyword search, category filters, and price/newest sorting — source on GitHub.",
-      "image": "",
+      "image": "marketplace-connect",
       "link": "",
       "github": "https://github.com/ugochukwu16henry/Marketplace-Connect-Android-"
     },
@@ -422,7 +422,7 @@
       "problem": "Teams that share one connection have no control over who joins, no visibility into usage, and no protection for the traffic passing through.",
       "challenge": "Combine invite-code onboarding, per-device keys, and end-to-end encryption with an admin dashboard simple enough for non-technical team leads.",
       "result": "Working prototype with onboarding, device-key management, an encrypted sharing model, and a team dashboard.",
-      "image": "",
+      "image": "linksphere",
       "link": "",
       "github": ""
     },
@@ -442,7 +442,7 @@
       "problem": "Client startups needed repeatable full-stack delivery without rebuilding auth, APIs, and UI foundations for every engagement.",
       "challenge": "Design a reusable component system and secure REST layer that stays fast across projects while supporting CRUD-heavy client dashboards.",
       "result": "Internal platform and delivery playbook used to ship multiple client products with shared patterns for auth, APIs, and performance tuning.",
-      "image": "",
+      "image": "henrymo",
       "link": "",
       "github": "https://github.com/ugochukwu16henry"
     }
