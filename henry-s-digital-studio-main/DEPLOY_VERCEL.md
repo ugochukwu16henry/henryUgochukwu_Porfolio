@@ -74,7 +74,15 @@ Create a fine-grained PAT with repository access for the target repo:
 
 ## 6. Deploy
 
-Push to `main`. Vercel builds and deploys automatically.
+Push to `main`. Vercel deploys the committed `.vercel/output/` as-is, so it
+must be rebuilt for every change. The **Build Vercel output** GitHub Action
+(`.github/workflows/build-vercel-output.yml`) does this automatically: it
+builds on Linux after each push to `main`, commits the new output, and that
+commit is what Vercel deploys. `vercel.json`'s `ignoreCommand` skips Vercel
+deployments for commits that don't change `.vercel/output/`.
+
+Never add `.vercel/output` to `.gitignore`, and keep the server function's
+`node_modules` committed (the root `node_modules` rule is negated for it).
 
 **Redeploy** after changing env vars or framework settings.
 
