@@ -33,6 +33,7 @@ export const imageAssets: Record<string, string> = {
 
 export const portraitImage = "/images/henry-profile.jpeg";
 export const zentrixIcon = "/images/zentrix-icon.png";
+export const shareCardImage = "/images/og-card.jpg";
 
 /** Primary resume URL (also kept at legacy path for old links). */
 export const resumePdf = "/resume/henry-ugochukwu-resume-2026.pdf";

@@ -167,9 +167,11 @@ function Nav({ profile }: { profile: Profile }) {
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/75 border-b border-hairline">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2.5 group min-w-0">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg shadow-glow group-hover:scale-105 transition-transform">
-            H
-          </span>
+          <img
+            src="/favicon.svg"
+            alt=""
+            className="size-8 shrink-0 rounded-[0.6rem] shadow-glow group-hover:scale-105 transition-transform"
+          />
           <span className="hidden sm:block truncate font-medium">{profile.name}</span>
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-sm">

@@ -1,5 +1,5 @@
 import seed from "@/data/portfolio.json";
-import { portraitImage, resumePdf } from "@/lib/cert-assets";
+import { portraitImage, resumePdf, shareCardImage } from "@/lib/cert-assets";
 import type { Profile } from "@/lib/portfolio-store";
 
 /** Set VITE_APP_URL in Vercel to your production domain (no trailing slash). */
@@ -112,7 +112,8 @@ export function buildPortfolioHead(options?: { path?: string; profile?: Profile 
   const description = trimDescription(
     `${profile.tagline} ${profile.summary}`.replace(/\s+/g, " ").trim(),
   );
-  const image = absoluteUrl(portraitImage);
+  // Branded 1200×630 share card (photo + name + role) for link previews.
+  const image = absoluteUrl(shareCardImage);
   const resume = absoluteUrl(resumePdf);
 
   const meta: Array<Record<string, string>> = [
@@ -138,6 +139,8 @@ export function buildPortfolioHead(options?: { path?: string; profile?: Profile 
     { property: "og:image:secure_url", content: image },
     { property: "og:image:alt", content: `${profile.name} — ${profile.title}` },
     { property: "og:image:type", content: "image/jpeg" },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
     { property: "profile:first_name", content: "Henry" },
     { property: "profile:last_name", content: "Ugochukwu" },
     { name: "twitter:card", content: "summary_large_image" },
