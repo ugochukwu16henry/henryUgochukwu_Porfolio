@@ -1,11 +1,11 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-Ee3uqcXc.mjs";
-import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-LqdofgHX.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-NRkE2m9-.mjs";
+import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-CA1-RKhe.mjs";
 import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-import { s as seed } from "./portfolio-CGQBLrmy.mjs";
+import { s as seed } from "./portfolio-Dih3MIE0.mjs";
 import "../_libs/seroval.mjs";
 import { u as useScroll, a as useSpring, m as motion } from "../_libs/framer-motion.mjs";
 import { b as Rocket, c as ArrowUpRight, d as ArrowRight, F as FileText, e as MapPin, G as GraduationCap, C as CodeXml, f as Database, W as Wrench, H as HeartHandshake, g as ShieldCheck, h as CircleCheck, i as Award, j as Layers, k as Cloud, B as Bot, l as PenTool, m as Compass, n as LifeBuoy, o as Briefcase, p as Sparkles, q as Mail, r as Phone, s as Linkedin, t as Github, u as CirclePlay, L as Lock, X } from "../_libs/lucide-react.mjs";
@@ -21,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-Dcd--aRs.mjs";
+import "./server-Cg8Fs7Ke.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -170,6 +170,16 @@ const resumeDownloadName = "Henry-Ugochukwu-Resume-May-2026.pdf";
 const featuredDegreeId = "byui-bssd";
 function hireHref(profile) {
   return `mailto:${profile.email}?subject=${encodeURIComponent("Let's work together")}`;
+}
+function whatsappHref(profile) {
+  const digits = (profile.whatsapp || profile.phone).replace(/\D/g, "");
+  const text = "Hi Henry, I saw your portfolio and I'd like to talk with you.";
+  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
+}
+function WhatsAppIcon({
+  className
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { viewBox: "0 0 24 24", fill: "currentColor", "aria-hidden": true, className, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.43 9.43 0 0 1-4.8-1.31l-.35-.2-3.57.94.95-3.48-.22-.36a9.4 9.4 0 0 1-1.45-5.03c0-5.2 4.24-9.43 9.45-9.43a9.4 9.4 0 0 1 6.68 2.77 9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.24 9.43-9.44 9.43zm8.04-17.47A11.3 11.3 0 0 0 12.04.7C5.77.7.67 5.79.67 12.06c0 2 .52 3.96 1.52 5.68L.57 23.3l5.7-1.5a11.33 11.33 0 0 0 5.77 1.47h.01c6.27 0 11.37-5.1 11.37-11.36 0-3.04-1.18-5.89-3.34-8.04z" }) });
 }
 function companyUrl(profile) {
   return profile.companyUrl || "https://www.zentrixsoftware.org";
@@ -342,6 +352,10 @@ function Hero({
           /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: hireHref(profile), className: "group inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-full font-medium shadow-glow hover:scale-[1.02] transition-transform", children: [
             "Let's work together",
             /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "size-4 group-hover:translate-x-0.5 transition-transform" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: whatsappHref(profile), target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 font-medium text-white hover:scale-[1.02] transition-transform", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(WhatsAppIcon, { className: "size-5" }),
+            "Chat on WhatsApp"
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#work", className: "inline-flex items-center gap-2 border border-hairline px-6 py-3.5 rounded-full hover:border-primary hover:text-primary transition-colors", children: "See my work" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(ResumeLink, { className: "inline-flex items-center gap-2 px-3 py-3.5 text-muted-foreground hover:text-primary transition-colors", children: [
@@ -1068,7 +1082,8 @@ function Contact({
           ] })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid sm:grid-cols-2 lg:grid-cols-5 gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: WhatsAppIcon, label: "WhatsApp", value: profile.whatsapp || profile.phone, href: whatsappHref(profile) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Mail, label: "Email", value: profile.email, href: `mailto:${profile.email}` }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Phone, label: "Phone", value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, "")}` }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(ContactCard, { icon: Linkedin, label: "LinkedIn", value: "ugochukwuhenry", href: profile.linkedin }),
@@ -1117,15 +1132,22 @@ function FloatingHire({
     });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.a, { href: hireHref(profile), initial: false, animate: {
-    opacity: show ? 1 : 0,
-    y: show ? 0 : 16,
-    pointerEvents: show ? "auto" : "none"
-  }, transition: {
-    duration: 0.3
-  }, className: "fixed bottom-20 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow", "aria-hidden": !show, tabIndex: show ? 0 : -1, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "size-4" }),
-    " Work with me"
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed bottom-20 right-5 z-50 flex flex-col items-end gap-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.a, { href: hireHref(profile), initial: false, animate: {
+      opacity: show ? 1 : 0,
+      y: show ? 0 : 16,
+      pointerEvents: show ? "auto" : "none"
+    }, transition: {
+      duration: 0.3
+    }, className: "inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow", "aria-hidden": !show, tabIndex: show ? 0 : -1, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "size-4" }),
+      " Work with me"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: whatsappHref(profile), target: "_blank", rel: "noreferrer", "aria-label": "Chat with Henry on WhatsApp", className: "group relative flex items-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-full bg-background/95 px-3 py-1.5 text-xs font-medium shadow-elegant ring-1 ring-hairline opacity-0 transition-opacity group-hover:opacity-100 sm:block", children: "Chat on WhatsApp" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-30" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,0.65)] transition-transform group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(WhatsAppIcon, { className: "size-7" }) })
+    ] })
   ] });
 }
 export {

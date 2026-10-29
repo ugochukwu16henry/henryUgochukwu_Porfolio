@@ -1,4 +1,4 @@
-import { s as seed } from "./portfolio-CGQBLrmy.mjs";
+import { s as seed } from "./portfolio-Dih3MIE0.mjs";
 import process from "node:process";
 function getServerConfig() {
   return {

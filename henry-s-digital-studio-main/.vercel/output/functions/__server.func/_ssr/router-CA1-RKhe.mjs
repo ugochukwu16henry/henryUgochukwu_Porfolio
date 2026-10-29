@@ -2,7 +2,7 @@ import { Q as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { c as createRouter, a as createRootRouteWithContext, u as useRouter, L as Link, O as Outlet, H as HeadContent, S as Scripts, b as createFileRoute, l as lazyRouteComponent } from "../_libs/tanstack__react-router.mjs";
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
-import { s as seed } from "./portfolio-CGQBLrmy.mjs";
+import { s as seed } from "./portfolio-Dih3MIE0.mjs";
 import { S as Sun, M as Moon } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -281,7 +281,7 @@ function buildPortfolioHead(options) {
   ];
   return { meta, links, scripts };
 }
-const appCss = "/assets/styles-CCIihK2w.css";
+const appCss = "/assets/styles-EZrcHMTL.css";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -373,7 +373,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-CUfaVjMi.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-D3QJiBKf.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -391,7 +391,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-Cr0vvQ69.mjs");
+const $$splitComponentImporter = () => import("./index-CXPgBjM6.mjs");
 const Route = createFileRoute("/")({
   head: () => buildPortfolioHead({
     path: "/",
