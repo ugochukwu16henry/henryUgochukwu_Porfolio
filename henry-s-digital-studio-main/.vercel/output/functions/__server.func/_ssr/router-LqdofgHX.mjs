@@ -96,6 +96,7 @@ function ThemeInitScript() {
 })();`;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("script", { dangerouslySetInnerHTML: { __html: code } });
 }
+const shareCardUrl = "/assets/og-card-Bg_1TH3F.jpg";
 const certificateAssets = {
   "bs-software-development": "/certificates/bs-software-development.png",
   "byui-degree": "/certificates/byui-degree.png",
@@ -124,7 +125,7 @@ const imageAssets = {
 };
 const portraitImage = "/images/henry-profile.jpeg";
 const zentrixIcon = "/images/zentrix-icon.png";
-const shareCardImage = "/images/og-card.jpg";
+const shareCardImage = shareCardUrl;
 const resumePdf = "/resume/henry-ugochukwu-resume-2026.pdf";
 function hasPortfolioImageKey(key) {
   if (!key?.trim()) return false;
@@ -372,7 +373,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-gUJ3DvjC.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-CUfaVjMi.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -390,7 +391,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-BQvWExhR.mjs");
+const $$splitComponentImporter = () => import("./index-Cr0vvQ69.mjs");
 const Route = createFileRoute("/")({
   head: () => buildPortfolioHead({
     path: "/",
