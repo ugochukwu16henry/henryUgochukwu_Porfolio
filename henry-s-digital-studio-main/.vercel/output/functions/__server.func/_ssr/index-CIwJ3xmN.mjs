@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-Bc0mnmrZ.mjs";
-import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-CCtw-E9D.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-Jph4Ne2P.mjs";
+import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-Crpljm6i.mjs";
 import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
@@ -21,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-DY0-2zLQ.mjs";
+import "./server-UpKAZSM5.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -235,7 +235,7 @@ function Nav({
   }];
   return /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "sticky top-0 z-50 backdrop-blur-xl bg-background/75 border-b border-hairline", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between gap-4", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/", className: "flex items-center gap-2.5 group min-w-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "grid size-8 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg shadow-glow group-hover:scale-105 transition-transform", children: "H" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/favicon.svg", alt: "", className: "size-8 shrink-0 rounded-[0.6rem] shadow-glow group-hover:scale-105 transition-transform" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:block truncate font-medium", children: profile.name })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "hidden lg:flex items-center gap-7 text-sm", children: links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: l.href, className: "text-muted-foreground hover:text-foreground transition-colors", children: l.label }, l.href)) }),

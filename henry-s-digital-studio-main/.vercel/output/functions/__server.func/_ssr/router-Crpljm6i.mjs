@@ -124,6 +124,7 @@ const imageAssets = {
 };
 const portraitImage = "/images/henry-profile.jpeg";
 const zentrixIcon = "/images/zentrix-icon.png";
+const shareCardImage = "/images/og-card.jpg";
 const resumePdf = "/resume/henry-ugochukwu-resume-2026.pdf";
 function hasPortfolioImageKey(key) {
   if (!key?.trim()) return false;
@@ -232,7 +233,7 @@ function buildPortfolioHead(options) {
   const description = trimDescription(
     `${profile.tagline} ${profile.summary}`.replace(/\s+/g, " ").trim()
   );
-  const image = absoluteUrl(portraitImage);
+  const image = absoluteUrl(shareCardImage);
   const resume = absoluteUrl(resumePdf);
   const meta = [
     { title },
@@ -256,6 +257,8 @@ function buildPortfolioHead(options) {
     { property: "og:image:secure_url", content: image },
     { property: "og:image:alt", content: `${profile.name} — ${profile.title}` },
     { property: "og:image:type", content: "image/jpeg" },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
     { property: "profile:first_name", content: "Henry" },
     { property: "profile:last_name", content: "Ugochukwu" },
     { name: "twitter:card", content: "summary_large_image" },
@@ -277,7 +280,7 @@ function buildPortfolioHead(options) {
   ];
   return { meta, links, scripts };
 }
-const appCss = "/assets/styles-Bi-0nZED.css";
+const appCss = "/assets/styles-CCIihK2w.css";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -333,6 +336,10 @@ const Route$2 = createRootRouteWithContext()({
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
         { rel: "stylesheet", href: fontsCss },
         { rel: "stylesheet", href: appCss },
+        { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+        { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+        { rel: "manifest", href: "/site.webmanifest" },
         ...seo.links
       ],
       scripts: seo.scripts
@@ -365,7 +372,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-DoS6lvla.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-B-ChbLJj.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -383,7 +390,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-CYnlEgTx.mjs");
+const $$splitComponentImporter = () => import("./index-CIwJ3xmN.mjs");
 const Route = createFileRoute("/")({
   head: () => buildPortfolioHead({
     path: "/",
