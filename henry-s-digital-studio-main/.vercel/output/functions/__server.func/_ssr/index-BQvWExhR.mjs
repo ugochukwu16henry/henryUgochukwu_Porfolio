@@ -1,14 +1,14 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-Jph4Ne2P.mjs";
-import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-Crpljm6i.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-DIHHVP8o.mjs";
+import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-Dhs61Hjh.mjs";
 import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-import { s as seed } from "./portfolio-DDnDtgvB.mjs";
+import { s as seed } from "./portfolio-CGQBLrmy.mjs";
 import "../_libs/seroval.mjs";
 import { u as useScroll, a as useSpring, m as motion } from "../_libs/framer-motion.mjs";
-import { G as GraduationCap, b as ArrowUpRight, c as ArrowRight, F as FileText, d as MapPin, C as CodeXml, e as Database, W as Wrench, f as Rocket, H as HeartHandshake, g as ShieldCheck, h as CircleCheck, i as Award, j as Layers, k as Cloud, B as Bot, l as PenTool, m as Compass, n as LifeBuoy, o as Briefcase, p as Sparkles, q as Mail, r as Phone, s as Linkedin, t as Github, u as CirclePlay, L as Lock, X } from "../_libs/lucide-react.mjs";
+import { b as Rocket, c as ArrowUpRight, d as ArrowRight, F as FileText, e as MapPin, G as GraduationCap, C as CodeXml, f as Database, W as Wrench, H as HeartHandshake, g as ShieldCheck, h as CircleCheck, i as Award, j as Layers, k as Cloud, B as Bot, l as PenTool, m as Compass, n as LifeBuoy, o as Briefcase, p as Sparkles, q as Mail, r as Phone, s as Linkedin, t as Github, u as CirclePlay, L as Lock, X } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -21,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-UpKAZSM5.mjs";
+import "./server-DfI1zvLB.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -253,6 +253,9 @@ function Hero({
 }) {
   const live = projects.filter((p) => p.status === "Live").length;
   const stats = [{
+    value: "6+",
+    label: "Years building software"
+  }, {
     value: `${projects.length}`,
     label: "Products built"
   }, {
@@ -261,9 +264,6 @@ function Hero({
   }, {
     value: "2",
     label: "B.S. degrees"
-  }, {
-    value: "6+",
-    label: "Years coding"
   }];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative overflow-hidden", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-grid pointer-events-none" }),
@@ -281,8 +281,8 @@ function Hero({
           duration: 0.6
         }, className: "flex flex-wrap items-center gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(GraduationCap, { className: "size-3.5" }),
-            "Class of 2026 · B.S. Software Development"
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Rocket, { className: "size-3.5" }),
+            "6+ years shipping production software"
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex size-2", children: [
@@ -398,7 +398,7 @@ function Hero({
         }, className: "absolute -left-3 sm:-left-8 top-8 rounded-2xl border border-hairline bg-surface/95 px-4 py-3 shadow-elegant backdrop-blur", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "grid size-9 place-items-center rounded-xl bg-primary/15 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GraduationCap, { className: "size-5" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "leading-tight", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Graduated · Aug 2026" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "B.S. Software Development" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "BYU-Idaho" })
           ] })
         ] }) }),
@@ -476,9 +476,9 @@ function About({
   }];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "about", className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-24 sm:py-28 scroll-mt-16", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SectionHead, { kicker: "01 · About", title: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      "Engineer, founder, and fresh graduate —",
+      "Six years of building, a company of my own —",
       " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-primary", children: "built for real-world software." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-primary", children: "and software that ships." })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-12 gap-10", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "lg:col-span-7 space-y-8", children: [
@@ -518,17 +518,17 @@ function Graduation({
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-glow pointer-events-none" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-24 sm:py-28 grid lg:grid-cols-12 gap-12 items-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "lg:col-span-5 space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-widest text-primary", children: "02 · Milestone" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-widest text-primary", children: "02 · Credentials" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "font-display text-5xl sm:text-6xl leading-[0.98]", children: [
-          "Officially a ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-gradient", children: "Software Developer." })
+          "Real-world experience, ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-gradient", children: "formally certified." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-lg text-muted-foreground leading-relaxed", children: [
-          "On 15 August 2026, Brigham Young University–Idaho conferred my",
+          "Years of shipping production software, backed by a",
           " ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "Bachelor of Science in Software Development" }),
           " ",
-          "— my second bachelor's degree. It sits on years of shipping real products, so the theory comes with receipts."
+          "from Brigham Young University–Idaho — one of two bachelor's degrees I hold. The products came first; the degree confirms the engineering behind them."
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2.5 text-sm", children: ["Full-stack web, .NET, data structures, and web services", "Associate of Applied Science in Software Development", "Certificates in Web Development and Web & Computer Programming"].map((t) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-2.5 text-muted-foreground", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "size-4 text-primary mt-0.5 shrink-0" }),
