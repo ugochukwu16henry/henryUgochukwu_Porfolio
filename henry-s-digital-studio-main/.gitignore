@@ -35,6 +35,3 @@ dist-ssr
 .env
 .env.*
 !.env.example
-
-# Vercel build output (Vercel builds this on every deploy; never commit it)
-.vercel
