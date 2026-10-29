@@ -28,6 +28,7 @@ import {
   LifeBuoy,
   CheckCircle2,
   Briefcase,
+  PlayCircle,
 } from "lucide-react";
 import {
   loadPortfolio,
@@ -822,6 +823,20 @@ function ProjectActions({ project: p, size = "md" }: { project: Project; size?: 
           <Lock className="size-3.5" /> Private repo
         </span>
       )}
+      {p.videos?.length ? (
+        <DemoVideos
+          project={p}
+          trigger={
+            <button
+              type="button"
+              className={`${outline} border-primary/50 text-primary hover:bg-primary/10`}
+            >
+              <PlayCircle className="size-4" />
+              {p.videos.length === 1 ? "Watch demo" : `Watch ${p.videos.length} demos`}
+            </button>
+          }
+        />
+      ) : null}
       <CaseStudy
         project={p}
         trigger={
@@ -830,6 +845,142 @@ function ProjectActions({ project: p, size = "md" }: { project: Project; size?: 
           </button>
         }
       />
+    </div>
+  );
+}
+
+function DemoVideos({
+  project: p,
+  trigger,
+  initialIndex = 0,
+}: {
+  project: Project;
+  trigger: React.ReactNode;
+  initialIndex?: number;
+}) {
+  const videos = p.videos ?? [];
+  const [active, setActive] = useState(initialIndex);
+  const current = videos[active];
+  if (!current) return null;
+  const landscape = current.orientation === "landscape";
+
+  return (
+    <Dialog onOpenChange={(open) => open && setActive(initialIndex)}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent className="max-h-[92vh] overflow-y-auto sm:max-w-5xl">
+        <DialogHeader>
+          <DialogTitle className="font-display text-2xl font-normal sm:text-3xl">
+            {p.title.split(/ [—–-] /)[0]} · Demo videos
+          </DialogTitle>
+          <DialogDescription>
+            {active + 1} of {videos.length} · {current.title}
+          </DialogDescription>
+        </DialogHeader>
+        <div className={`grid gap-5 ${videos.length > 1 ? "md:grid-cols-[1fr_17rem]" : ""}`}>
+          <div className="flex min-w-0 items-center justify-center rounded-2xl bg-black">
+            <video
+              key={current.src}
+              src={current.src}
+              poster={current.poster}
+              controls
+              autoPlay
+              playsInline
+              preload="metadata"
+              className={
+                landscape
+                  ? "aspect-video w-full rounded-2xl"
+                  : "max-h-[70vh] w-auto max-w-full rounded-2xl"
+              }
+            />
+          </div>
+          {videos.length > 1 && (
+            <ol className="flex gap-2 overflow-x-auto pb-1 md:max-h-[70vh] md:flex-col md:overflow-y-auto md:overflow-x-visible md:pb-0 md:pr-1">
+              {videos.map((v, i) => (
+                <li key={v.src} className="shrink-0 md:shrink">
+                  <button
+                    type="button"
+                    onClick={() => setActive(i)}
+                    aria-current={i === active}
+                    className={`flex w-40 items-center gap-3 rounded-xl border p-2 text-left transition-colors md:w-full ${
+                      i === active
+                        ? "border-primary bg-primary/10"
+                        : "border-hairline hover:border-primary/50"
+                    }`}
+                  >
+                    <span className="relative h-14 w-10 shrink-0 overflow-hidden rounded-md bg-surface-2">
+                      {v.poster && (
+                        <img
+                          src={v.poster}
+                          alt=""
+                          loading="lazy"
+                          className="size-full object-cover"
+                        />
+                      )}
+                      <PlayCircle className="absolute inset-0 m-auto size-5 text-white drop-shadow" />
+                    </span>
+                    <span className="line-clamp-2 text-xs leading-snug">{v.title}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function DemoStrip({ project: p }: { project: Project }) {
+  const videos = p.videos ?? [];
+  if (!videos.length) return null;
+  const shown = videos.slice(0, 5);
+  return (
+    <div>
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-primary">
+        {videos.length === 1 ? "Demo video" : `${videos.length} demo videos`}
+      </p>
+      <div className="flex gap-2">
+        {shown.map((v, i) => (
+          <DemoVideos
+            key={v.src}
+            project={p}
+            initialIndex={i}
+            trigger={
+              <button
+                type="button"
+                aria-label={`Play ${v.title}`}
+                className="group/v relative h-24 w-16 shrink-0 overflow-hidden rounded-xl border border-hairline bg-surface-2 hover:border-primary"
+              >
+                {v.poster && (
+                  <img
+                    src={v.poster}
+                    alt=""
+                    loading="lazy"
+                    className="size-full object-cover transition-transform duration-500 group-hover/v:scale-110"
+                  />
+                )}
+                <span className="absolute inset-0 grid place-items-center bg-black/25 group-hover/v:bg-black/10">
+                  <PlayCircle className="size-6 text-white drop-shadow" />
+                </span>
+              </button>
+            }
+          />
+        ))}
+        {videos.length > shown.length && (
+          <DemoVideos
+            project={p}
+            initialIndex={shown.length}
+            trigger={
+              <button
+                type="button"
+                className="grid h-24 w-16 shrink-0 place-items-center rounded-xl border border-hairline text-sm text-muted-foreground hover:border-primary hover:text-primary"
+              >
+                +{videos.length - shown.length}
+              </button>
+            }
+          />
+        )}
+      </div>
     </div>
   );
 }
@@ -967,6 +1118,7 @@ function Projects({ projects }: { projects: Project[] }) {
                   </span>
                 ))}
               </div>
+              <DemoStrip project={p} />
               <ProjectActions project={p} size="lg" />
             </div>
           </motion.article>

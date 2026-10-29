@@ -19,6 +19,15 @@ export type Project = {
   status?: string;
   /** Featured projects get the large showcase treatment on the home page. */
   featured?: boolean;
+  /** Demo videos served from /public/videos. */
+  videos?: ProjectVideo[];
+};
+
+export type ProjectVideo = {
+  title: string;
+  src: string;
+  poster?: string;
+  orientation?: "portrait" | "landscape";
 };
 
 export type Experience = {
@@ -96,7 +105,9 @@ function mergeCertificates(
 ): Certificate[] {
   if (!storedCertificates?.length) return seedCertificates;
 
-  const storedById = new Map(storedCertificates.map((certificate) => [certificate.id, certificate]));
+  const storedById = new Map(
+    storedCertificates.map((certificate) => [certificate.id, certificate]),
+  );
 
   const merged = seedCertificates.map((seedCertificate) => {
     const stored = storedById.get(seedCertificate.id);

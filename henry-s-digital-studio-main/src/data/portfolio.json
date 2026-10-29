@@ -75,7 +75,99 @@
       "result": "Live at market.zentrixsoftware.org with verified-seller storefronts, location-ranked discovery, seller consoles for catalogue and orders, rider job boards with earnings, and interstate waybill and parcel tracking.",
       "image": "zentrix-market",
       "link": "https://market.zentrixsoftware.org",
-      "github": ""
+      "github": "",
+      "videos": [
+        {
+          "title": "Why Zentrix Market",
+          "src": "/videos/zentrix-market/why-zentrix-market.mp4",
+          "poster": "/videos/zentrix-market/why-zentrix-market.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "How to buy on Zentrix",
+          "src": "/videos/zentrix-market/buy-on-zentrix.mp4",
+          "poster": "/videos/zentrix-market/buy-on-zentrix.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Shop people you can trust",
+          "src": "/videos/zentrix-market/shop-people-you-can-trust.mp4",
+          "poster": "/videos/zentrix-market/shop-people-you-can-trust.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Register your business",
+          "src": "/videos/zentrix-market/register-your-business.mp4",
+          "poster": "/videos/zentrix-market/register-your-business.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Seller registration walkthrough · Part 1",
+          "src": "/videos/zentrix-market/seller-registration-part-1.mp4",
+          "poster": "/videos/zentrix-market/seller-registration-part-1.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Seller registration walkthrough · Part 2",
+          "src": "/videos/zentrix-market/seller-registration-part-2.mp4",
+          "poster": "/videos/zentrix-market/seller-registration-part-2.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Sell on WhatsApp",
+          "src": "/videos/zentrix-market/sell-on-whatsapp.mp4",
+          "poster": "/videos/zentrix-market/sell-on-whatsapp.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Keep every naira you sell",
+          "src": "/videos/zentrix-market/keep-every-naira-you-sell.mp4",
+          "poster": "/videos/zentrix-market/keep-every-naira-you-sell.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Let someone manage your shop",
+          "src": "/videos/zentrix-market/let-someone-manage-your-shop.mp4",
+          "poster": "/videos/zentrix-market/let-someone-manage-your-shop.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Grow with your referral code",
+          "src": "/videos/zentrix-market/grow-with-your-referral-code.mp4",
+          "poster": "/videos/zentrix-market/grow-with-your-referral-code.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Send goods by waybill",
+          "src": "/videos/zentrix-market/send-goods-by-waybill.mp4",
+          "poster": "/videos/zentrix-market/send-goods-by-waybill.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Become a rider",
+          "src": "/videos/zentrix-market/become-a-rider.mp4",
+          "poster": "/videos/zentrix-market/become-a-rider.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Rider guide 1 · Register",
+          "src": "/videos/zentrix-market/rider-guide-1-register.mp4",
+          "poster": "/videos/zentrix-market/rider-guide-1-register.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Rider guide 2 · Deliver",
+          "src": "/videos/zentrix-market/rider-guide-2-deliver.mp4",
+          "poster": "/videos/zentrix-market/rider-guide-2-deliver.jpg",
+          "orientation": "portrait"
+        },
+        {
+          "title": "Install the app",
+          "src": "/videos/zentrix-market/install-the-app.mp4",
+          "poster": "/videos/zentrix-market/install-the-app.jpg",
+          "orientation": "portrait"
+        }
+      ]
     },
     {
       "id": "zentrix-software",
@@ -120,7 +212,15 @@
       "result": "Phase 1 bookkeeping-intelligence MVP in active development: a NestJS API with a WhatsApp webhook, Next.js portals, an Android-first Expo app, and owner dashboards for cash flow, profit, and spending insights.",
       "image": "peni",
       "link": "",
-      "github": ""
+      "github": "",
+      "videos": [
+        {
+          "title": "Bookkeeping by WhatsApp — demo",
+          "src": "/videos/peni/whatsapp-bookkeeping-demo.mp4",
+          "poster": "/videos/peni/whatsapp-bookkeeping-demo.jpg",
+          "orientation": "portrait"
+        }
+      ]
     },
     {
       "id": "riseflow-schools",
@@ -128,20 +228,36 @@
       "year": "2026",
       "role": "Full-Stack Developer",
       "status": "Live",
+      "featured": true,
       "stack": [
         "PHP",
         "MySQL",
         "JavaScript",
         "Paystack",
-        "Multi-tenant SaaS"
+        "Multi-tenant SaaS",
+        "PWA"
       ],
-      "description": "One platform for admissions, academics, and school finance — built for modern schools in Africa with secure records and role-based access.",
-      "problem": "School administrators, teachers, and parents juggle separate tools for admissions, classes, fees, results, and reporting — creating delays, errors, and weak accountability.",
-      "challenge": "Ship multi-tenant isolation, role-based workflows, and Paystack prepaid billing (₦170 per student per month after a free month) while keeping onboarding simple for non-technical school staff.",
-      "result": "Live at riseflowschools.com with admissions, academic operations, finance, affiliate referrals, and platform admin — helping school leaders run attendance, fees, and results in one flow.",
+      "description": "Run a whole school from one simple app — admissions, results, fees, timetables, and parent updates, billed per term in local currency and light enough for any phone.",
+      "problem": "School administrators, teachers, and parents across Africa juggle separate tools for admissions, classes, fees, results, and reporting — creating delays, errors, and weak accountability, often on low-end phones and patchy data.",
+      "challenge": "Ship multi-tenant isolation and role-based workflows for principals, teachers, and parents; open registration to all 55 African countries with local regions and towns; bill per term like school fees (₦500 per student per term); and give every school its own free website — while keeping onboarding simple for non-technical staff.",
+      "result": "Live at riseflowschools.com with a 1-week free trial, admissions, results publishing, fee receipts to parents, timetables, a free school website, Android install, and partner referrals — plus a 4-minute getting-started video guide.",
       "image": "riseflowschool",
       "link": "https://riseflowschools.com/",
-      "github": "https://github.com/ugochukwu16henry/Saas-Schools"
+      "github": "https://github.com/ugochukwu16henry/Saas-Schools",
+      "videos": [
+        {
+          "title": "Getting started with RiseFlow (4 min)",
+          "src": "/videos/riseflow-schools/getting-started-guide.mp4",
+          "poster": "/videos/riseflow-schools/getting-started-guide.jpg",
+          "orientation": "landscape"
+        },
+        {
+          "title": "RiseFlow in 2 minutes",
+          "src": "/videos/riseflow-schools/riseflow-promo.mp4",
+          "poster": "/videos/riseflow-schools/riseflow-promo.jpg",
+          "orientation": "portrait"
+        }
+      ]
     },
     {
       "id": "riseflow-hub",
