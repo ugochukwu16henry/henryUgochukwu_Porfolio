@@ -365,7 +365,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-Bpl_I1_p.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-DoS6lvla.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -383,7 +383,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-BmvDwl_7.mjs");
+const $$splitComponentImporter = () => import("./index-CYnlEgTx.mjs");
 const Route = createFileRoute("/")({
   head: () => buildPortfolioHead({
     path: "/",
