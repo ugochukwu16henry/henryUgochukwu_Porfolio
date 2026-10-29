@@ -1,3 +1,5 @@
+import shareCardUrl from "@/assets/og-card.jpg";
+
 /**
  * Portfolio images are served from /public so Vercel serves them as static files
  * (stable URLs, no SPA 404s, no dependency on Vite hashed /assets/ paths).
@@ -33,7 +35,12 @@ export const imageAssets: Record<string, string> = {
 
 export const portraitImage = "/images/henry-profile.jpeg";
 export const zentrixIcon = "/images/zentrix-icon.png";
-export const shareCardImage = "/images/og-card.jpg";
+/**
+ * Social share card. The one exception to the /public rule: Vite gives it a
+ * content-hashed URL, so Facebook, LinkedIn, and X fetch a fresh image
+ * whenever src/assets/og-card.jpg changes instead of reusing a cached one.
+ */
+export const shareCardImage = shareCardUrl;
 
 /** Primary resume URL (also kept at legacy path for old links). */
 export const resumePdf = "/resume/henry-ugochukwu-resume-2026.pdf";
