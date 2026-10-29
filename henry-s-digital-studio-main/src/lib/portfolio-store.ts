@@ -15,6 +15,10 @@ export type Project = {
   image?: string;
   link?: string;
   github?: string;
+  /** "Live", "In development", "Open source", "Prototype", "Internal". */
+  status?: string;
+  /** Featured projects get the large showcase treatment on the home page. */
+  featured?: boolean;
 };
 
 export type Experience = {
@@ -123,6 +127,8 @@ export function mergeWithSeed(partial: Partial<Portfolio>): Portfolio {
   return {
     ...base,
     ...partial,
+    // Field-level merge so new seed profile fields survive older stored copies.
+    profile: { ...base.profile, ...partial.profile },
     projects: mergeProjects(base.projects, partial.projects),
     certificates: mergeCertificates(base.certificates, partial.certificates),
   };

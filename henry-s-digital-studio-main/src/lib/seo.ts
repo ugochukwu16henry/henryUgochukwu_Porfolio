@@ -53,6 +53,20 @@ export function buildPersonJsonLd(profile: Profile, pageUrl: string) {
           addressCountry: "NG",
         },
         sameAs: [profile.linkedin, profile.github].filter(Boolean),
+        worksFor: {
+          "@type": "Organization",
+          name: profile.company,
+          url: profile.companyUrl,
+        },
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: "Brigham Young University-Idaho",
+        },
+        hasCredential: {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "degree",
+          name: "Bachelor of Science in Software Development",
+        },
         knowsAbout: [
           "Full-stack web development",
           "React",
@@ -108,7 +122,7 @@ export function buildPortfolioHead(options?: { path?: string; profile?: Profile 
     {
       name: "keywords",
       content:
-        "Henry Ugochukwu, software engineer, full-stack developer, React, Next.js, Node.js, TypeScript, PostgreSQL, remote developer, portfolio, BYU-Idaho, Nigeria",
+        "Henry Ugochukwu, software engineer, full-stack developer, Zentrix Software Solutions, co-founder, B.S. Software Development, React, Next.js, NestJS, Node.js, TypeScript, PostgreSQL, remote developer, portfolio, BYU-Idaho, Nigeria",
     },
     { name: "robots", content: "index, follow, max-image-preview:large" },
     { name: "googlebot", content: "index, follow, max-image-preview:large" },

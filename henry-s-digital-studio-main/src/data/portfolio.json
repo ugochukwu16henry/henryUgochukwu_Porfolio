@@ -2,40 +2,52 @@
   "profile": {
     "name": "Henry Ugochukwu",
     "fullName": "Henry Maobughichi Ugochukwu",
-    "title": "Software Engineer · Full-Stack Developer",
+    "title": "Software Engineer · Co-Founder, Zentrix Software Solutions",
     "location": "Uyo, Akwa Ibom State, Nigeria",
     "email": "ugochukwuhenry16@gmail.com",
     "phone": "+234 901 571 8484",
     "linkedin": "https://www.linkedin.com/in/ugochukwuhenry",
     "github": "https://github.com/ugochukwu16henry",
     "resume": "/resume/henry-ugochukwu-resume-2026.pdf",
-    "tagline": "I build resilient digital architecture where human insight meets engineering rigor.",
-    "summary": "I'm a full-stack engineer completing Software Development at BYU-Idaho, with a Marriage & Family Studies background that helps me build software people actually trust. Through client projects and Henrymo Technologies, I've shipped React/Next.js apps, written reliable test suites, and tuned PostgreSQL systems for real users. I'm actively looking for remote engineering roles and collaborations where I can contribute from day one—clear communication, fast learning, and code that respects the people behind the screen."
+    "company": "Zentrix Software Solutions",
+    "companyRole": "Co-Founder",
+    "companyUrl": "https://www.zentrixsoftware.org",
+    "tagline": "I design, build, and ship software that businesses quietly rely on every day — from the first sketch to production.",
+    "summary": "I'm a full-stack software engineer and co-founder of Zentrix Software Solutions, a registered Nigerian engineering studio that builds web, mobile, cloud, and AI products for founders and businesses. In August 2026 I graduated from Brigham Young University–Idaho with a B.S. in Software Development — my second degree, after a B.S. in Marriage & Family Studies that taught me to build software around how real people think and behave. I've shipped marketplaces, school SaaS, fintech, and e-commerce platforms that serve real customers, and I own the work end to end: discovery, architecture, build, testing, launch, and support. I'm open to remote engineering roles, contract builds, and partnerships — bring me a hard problem and I'll bring clear communication, fast delivery, and code that respects the people behind the screen."
   },
   "skills": {
     "engineering": [
       "React",
       "Next.js",
-      "Node.js",
-      "JavaScript",
       "TypeScript",
+      "Node.js",
+      "NestJS",
+      "TanStack Start",
       "Java",
-      "C++",
+      "Android",
       "C#",
       ".NET",
-      "Spring Boot"
+      "Spring Boot",
+      "PHP"
     ],
     "data": [
       "PostgreSQL",
+      "Prisma",
+      "MySQL",
       "SQL Server",
-      "Azure",
       "REST APIs",
-      "JSON / XML",
-      "Postman"
+      "Paystack",
+      "Docker",
+      "AWS",
+      "Vercel",
+      "Cloudflare Workers"
     ],
     "craft": [
+      "Product Strategy",
       "UI/UX Engineering",
       "Automated Testing",
+      "CI/CD",
+      "AI Integration",
       "Code Review",
       "Performance Tuning",
       "Git / GitHub"
@@ -43,70 +55,79 @@
   },
   "projects": [
     {
-      "id": "gpg-gathering-place",
-      "title": "GPG Gathering Place Global",
+      "id": "zentrix-market",
+      "title": "Zentrix Market — Marketplace & Logistics",
       "year": "2026",
-      "role": "Full-Stack Developer",
+      "role": "Co-Founder · Lead Engineer",
+      "status": "Live",
+      "featured": true,
+      "stack": [
+        "Next.js PWA",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma",
+        "Paystack",
+        "AWS"
+      ],
+      "description": "Nigeria's local marketplace and logistics platform — customers, verified sellers, and delivery riders in one app, organized around every State and LGA.",
+      "problem": "Local trade in Nigeria runs on WhatsApp chats, cash, and trust. Buyers can't easily find verified shops near them, sellers have no real storefront, and deliveries — especially interstate — are hard to track.",
+      "challenge": "Build one platform with three roles (shop, sell, ride), seeded with every Nigerian State, LGA, and town; verify sellers; support direct-to-seller payment; and add interstate waybill tracking — all as a fast, installable PWA backed by CI that blocks merges on failing tests.",
+      "result": "Live at market.zentrixsoftware.org with verified-seller storefronts, location-ranked discovery, seller consoles for catalogue and orders, rider job boards with earnings, and interstate waybill and parcel tracking.",
+      "image": "zentrix-market",
+      "link": "https://market.zentrixsoftware.org",
+      "github": ""
+    },
+    {
+      "id": "zentrix-software",
+      "title": "Zentrix Software Solutions — Company Platform",
+      "year": "2026",
+      "role": "Co-Founder · Full-Stack Engineer",
+      "status": "Live",
+      "featured": true,
       "stack": [
         "TanStack Start",
-        "Cloudflare Workers",
-        "AI Moderation",
-        "React"
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "SEO / JSON-LD"
       ],
-      "description": "A digital sanctuary for the YSA community, BYU-Pathway students, and friends of the Church — country-first gathering centers with optional global access.",
-      "problem": "Young adults and Pathway students lack one trusted place to reconnect with mission peers, find local study groups, discover verified talent, and explore discipleship and outreach pathways without noisy or unsafe social platforms.",
-      "challenge": "Ship country-first discovery, Gospel-standard AI moderation, consent-based missionary outreach, and a global pass (NGN 1000 yearly) while mapping 200+ gathering centers and three pillars: mission network, Pathway hub, and talent marketplace.",
-      "result": "Live at tanstack-start-app.henrymobuchi16.workers.dev with waitlist onboarding, center directory, mission peer reconnect flows, Pathway milestones, verified talent listings, and privacy-first safety controls.",
-      "image": "gpg",
-      "link": "https://tanstack-start-app.henrymobuchi16.workers.dev/",
+      "description": "The official home of Zentrix Software Solutions — services, case studies, transparent pricing, and a careers portal for a registered Nigerian engineering studio.",
+      "problem": "A new studio has to earn trust before a single call: founders want to see who you are, what you build, what it costs, and proof that you ship.",
+      "challenge": "Present custom software, cloud and DevOps, AI and automation, product design, consulting, and support with clear pricing and real work — while a careers portal reads live roles from the Zentrix Market API.",
+      "result": "Live at zentrixsoftware.org with service pages, pricing, the Zentrix Market case study, a careers pipeline, and rich social previews for every page.",
+      "image": "zentrix-website",
+      "link": "https://www.zentrixsoftware.org",
       "github": ""
     },
     {
-      "id": "ibahub",
-      "title": "IbaHub — Uyo's All-in-One Life Engine",
+      "id": "peni-fintech",
+      "title": "Peni — WhatsApp-First Bookkeeping for SMEs",
       "year": "2026",
-      "role": "Full-Stack Developer",
+      "role": "Full-Stack Engineer",
+      "status": "In development",
+      "featured": true,
       "stack": [
-        "PWA",
-        "React",
-        "Vercel",
-        "Paystack",
-        "Monnify",
-        "KYC"
+        "NestJS",
+        "Next.js",
+        "Expo",
+        "Supabase",
+        "AI",
+        "WhatsApp API"
       ],
-      "description": "Digitizing Uyo's informal economy in one progressive web app — student labor, plaza-to-home logistics, and market-side retail intelligence with dedicated virtual accounts.",
-      "problem": "Students, plaza vendors, and market shops in Uyo run on WhatsApp, cash, and paper records — with no unified way to monetize skills, fulfill deliveries, or track sales with bankable payments.",
-      "challenge": "Unify gig escrow, rider logistics, and retail tracking in a mobile-first, offline-capable PWA while integrating Paystack/Monnify virtual accounts and trust-based KYC for students and vendors.",
-      "result": "Live at iba-hub.vercel.app with gig marketplace, plaza-to-home logistics, retail intelligence, and a fintech layer that turns informal operators into verified, data-rich participants.",
-      "image": "mega",
-      "link": "https://iba-hub.vercel.app/",
+      "description": "Bookkeeping and financial intelligence for African small businesses — owners record sales, expenses, and receipts by sending a WhatsApp message or voice note.",
+      "problem": "Most African SMEs keep no reliable books, so they can't see profit, plan cash, or qualify for credit. Accounting software asks them to change how they work.",
+      "challenge": "Meet owners where they already are: turn WhatsApp messages, voice notes, and receipt photos into clean ledger entries with AI, then serve business, analyst, support, and institution portals from one modular monolith with per-country configuration.",
+      "result": "Phase 1 bookkeeping-intelligence MVP in active development: a NestJS API with a WhatsApp webhook, Next.js portals, an Android-first Expo app, and owner dashboards for cash flow, profit, and spending insights.",
+      "image": "peni",
+      "link": "",
       "github": ""
-    },
-    {
-      "id": "henry-ebook-store",
-      "title": "Henry's eBook Store",
-      "year": "2026",
-      "role": "Full-Stack Developer",
-      "stack": [
-        "React",
-        "Vercel",
-        "JSON",
-        "Selar",
-        "PDF"
-      ],
-      "description": "A homepage that works like your digital eBook store — showcase titles, open dedicated eBook pages, connect Selar payments, and keep PDFs synced from one JSON source.",
-      "problem": "Selling eBooks usually means duplicating content across a storefront, product pages, downloads, and payment links — so updates fall out of sync and the author experience feels fragmented.",
-      "challenge": "Power the homepage, per-title pages, admin updates, and PDF generation from one shared JSON database while supporting per-book templates (premium, classic, minimal) and Selar checkout.",
-      "result": "Live at e-bookfirst.vercel.app with a full catalog, featured title The Premarital Readiness Blueprint, PDF downloads, and Buy on Selar flows — all driven from the same content source.",
-      "image": "e-book",
-      "link": "https://e-bookfirst.vercel.app/",
-      "github": "https://github.com/ugochukwu16henry/e-book_first"
     },
     {
       "id": "riseflow-schools",
       "title": "RiseFlow — School Management Platform",
       "year": "2026",
       "role": "Full-Stack Developer",
+      "status": "Live",
       "stack": [
         "PHP",
         "MySQL",
@@ -127,6 +148,7 @@
       "title": "RiseFlow Hub",
       "year": "2026",
       "role": "Co-Founder · Full-Stack Engineer",
+      "status": "Live",
       "stack": [
         "React",
         "Next.js",
@@ -143,10 +165,96 @@
       "github": "https://github.com/ugochukwu16henry/riseflowhub_v1.0"
     },
     {
+      "id": "ibahub",
+      "title": "IbaHub — Uyo's All-in-One Life Engine",
+      "year": "2026",
+      "role": "Full-Stack Developer",
+      "status": "Live",
+      "stack": [
+        "PWA",
+        "React",
+        "Vercel",
+        "Paystack",
+        "Monnify",
+        "KYC"
+      ],
+      "description": "Digitizing Uyo's informal economy in one progressive web app — student labor, plaza-to-home logistics, and market-side retail intelligence with dedicated virtual accounts.",
+      "problem": "Students, plaza vendors, and market shops in Uyo run on WhatsApp, cash, and paper records — with no unified way to monetize skills, fulfill deliveries, or track sales with bankable payments.",
+      "challenge": "Unify gig escrow, rider logistics, and retail tracking in a mobile-first, offline-capable PWA while integrating Paystack/Monnify virtual accounts and trust-based KYC for students and vendors.",
+      "result": "Live at iba-hub.vercel.app with gig marketplace, plaza-to-home logistics, retail intelligence, and a fintech layer that turns informal operators into verified, data-rich participants.",
+      "image": "mega",
+      "link": "https://iba-hub.vercel.app/",
+      "github": ""
+    },
+    {
+      "id": "gpg-gathering-place",
+      "title": "GPG Gathering Place Global",
+      "year": "2026",
+      "role": "Full-Stack Developer",
+      "status": "Live",
+      "stack": [
+        "TanStack Start",
+        "Cloudflare Workers",
+        "AI Moderation",
+        "React"
+      ],
+      "description": "A digital sanctuary for the YSA community, BYU-Pathway students, and friends of the Church — country-first gathering centers with optional global access.",
+      "problem": "Young adults and Pathway students lack one trusted place to reconnect with mission peers, find local study groups, discover verified talent, and explore discipleship and outreach pathways without noisy or unsafe social platforms.",
+      "challenge": "Ship country-first discovery, Gospel-standard AI moderation, consent-based missionary outreach, and a global pass (NGN 1000 yearly) while mapping 200+ gathering centers and three pillars: mission network, Pathway hub, and talent marketplace.",
+      "result": "Live at tanstack-start-app.henrymobuchi16.workers.dev with waitlist onboarding, center directory, mission peer reconnect flows, Pathway milestones, verified talent listings, and privacy-first safety controls.",
+      "image": "gpg",
+      "link": "https://tanstack-start-app.henrymobuchi16.workers.dev/",
+      "github": ""
+    },
+    {
+      "id": "zentrix-ai-hub",
+      "title": "Zentrix AI Hub",
+      "year": "2026",
+      "role": "Co-Founder · Lead Engineer",
+      "status": "In development",
+      "stack": [
+        "NestJS",
+        "PostgreSQL",
+        "pnpm Monorepo",
+        "Paystack",
+        "Grok (xAI)",
+        "Groq"
+      ],
+      "description": "An all-in-one AI platform for African creators, developers, and students — AI video, images, and fast text models, paid for in Naira from one prepaid wallet.",
+      "problem": "Leading AI tools are priced in dollars and need foreign cards, which shuts out most Nigerian creators, students, and developers.",
+      "challenge": "Design a pricing engine and double-entry wallet ledger so every AI call is metered, priced in Naira, and paid from Paystack top-ups — with clear unit economics per feature before the first user arrives.",
+      "result": "Phase 0 foundation shipped: the monorepo, PostgreSQL schema and migrations, and the money path (pricing engine, wallet and ledger, Paystack top-ups and webhooks) with CI that type-checks, builds, and tests every change.",
+      "image": "",
+      "link": "",
+      "github": ""
+    },
+    {
+      "id": "henry-ebook-store",
+      "title": "Henry's eBook Store",
+      "year": "2026",
+      "role": "Full-Stack Developer",
+      "status": "Live",
+      "stack": [
+        "React",
+        "Vercel",
+        "JSON",
+        "Selar",
+        "PDF"
+      ],
+      "description": "A homepage that works like your digital eBook store — showcase titles, open dedicated eBook pages, connect Selar payments, and keep PDFs synced from one JSON source.",
+      "problem": "Selling eBooks usually means duplicating content across a storefront, product pages, downloads, and payment links — so updates fall out of sync and the author experience feels fragmented.",
+      "challenge": "Power the homepage, per-title pages, admin updates, and PDF generation from one shared JSON database while supporting per-book templates (premium, classic, minimal) and Selar checkout.",
+      "result": "Live at e-bookfirst.vercel.app with a full catalog, featured title The Premarital Readiness Blueprint, PDF downloads, and Buy on Selar flows — all driven from the same content source.",
+      "image": "e-book",
+      "link": "https://e-bookfirst.vercel.app/",
+      "github": "https://github.com/ugochukwu16henry/e-book_first"
+    },
+    {
       "id": "mummyj2-treats",
       "title": "mummyj2Treats – Home Bakery E-commerce",
       "year": "2025",
       "role": "Full-Stack Developer",
+      "status": "Live",
       "stack": [
         "React",
         "Next.js",
@@ -163,10 +271,51 @@
       "github": "https://github.com/ugochukwu16henry/mummyj2_1"
     },
     {
+      "id": "marketplace-connect-android",
+      "title": "Marketplace Connect — Native Android App",
+      "year": "2026",
+      "role": "Android Developer",
+      "status": "Open source",
+      "stack": [
+        "Java",
+        "Android",
+        "Room",
+        "Material 3"
+      ],
+      "description": "A native Android classifieds app — create listings, browse, search by keyword, filter by category, and sort by newest or price.",
+      "problem": "Classified marketplaces live or die on how quickly people can post an item and find what they want — on low-end phones and patchy networks.",
+      "challenge": "Apply clean architecture to real app flows: persist listings locally with Room, keep list, detail, and create screens in sync, and make search, filter, and sort feel instant.",
+      "result": "A complete, maintainable Android app with listing creation, keyword search, category filters, and price/newest sorting — source on GitHub.",
+      "image": "",
+      "link": "",
+      "github": "https://github.com/ugochukwu16henry/Marketplace-Connect-Android-"
+    },
+    {
+      "id": "linksphere",
+      "title": "LinkSphere — Secure Internet Sharing for Teams",
+      "year": "2025",
+      "role": "Full-Stack Developer",
+      "status": "Prototype",
+      "stack": [
+        "TanStack Start",
+        "Drizzle ORM",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "description": "Lets organizations share internet access securely across a team, with invite codes, per-device keys, end-to-end encryption, and a usage dashboard.",
+      "problem": "Teams that share one connection have no control over who joins, no visibility into usage, and no protection for the traffic passing through.",
+      "challenge": "Combine invite-code onboarding, per-device keys, and end-to-end encryption with an admin dashboard simple enough for non-technical team leads.",
+      "result": "Working prototype with onboarding, device-key management, an encrypted sharing model, and a team dashboard.",
+      "image": "",
+      "link": "",
+      "github": ""
+    },
+    {
       "id": "henrymo-platform",
       "title": "Henrymo Technologies Platform",
       "year": "2025",
       "role": "Founder & Lead Developer",
+      "status": "Internal",
       "stack": [
         "Next.js",
         "React",
@@ -183,6 +332,18 @@
     }
   ],
   "experience": [
+    {
+      "company": "Zentrix Software Solutions",
+      "role": "Co-Founder · Software Engineer",
+      "period": "Jul 2026 — Present",
+      "location": "Nigeria · Remote",
+      "bullets": [
+        "Co-founded a registered Nigerian software studio (CAMA 2020, RC/BN 9648404) serving founders and businesses across Africa, the EU, and the US.",
+        "Lead engineering on Zentrix Market — a live marketplace and logistics platform for customers, verified sellers, and riders.",
+        "Architect the company's products end to end: NestJS APIs, Next.js PWAs, PostgreSQL, CI/CD, and payments with Paystack.",
+        "Run client delivery across custom software, cloud and DevOps, AI automation, and product design."
+      ]
+    },
     {
       "company": "H10 AI",
       "role": "Quality Assurance Software Developer (Intern)",
@@ -233,7 +394,7 @@
       "school": "Brigham Young University-Idaho",
       "degree": "B.S. Software Development",
       "period": "2023 — 2026",
-      "note": "Cumulative GPA 3.27 · Full-stack web, .NET, data structures, web services."
+      "note": "Conferred 15 August 2026 · Cumulative GPA 3.27 · Full-stack web, .NET, data structures, web services."
     },
     {
       "school": "Brigham Young University-Idaho",
@@ -249,6 +410,14 @@
     }
   ],
   "certificates": [
+    {
+      "id": "byui-bssd",
+      "title": "B.S. Software Development",
+      "issuer": "Brigham Young University-Idaho",
+      "date": "Aug 2026",
+      "image": "bs-software-development",
+      "file": "/certificates/bs-software-development.pdf"
+    },
     {
       "id": "byui-bsmfs",
       "title": "B.S. Marriage and Family Studies",
