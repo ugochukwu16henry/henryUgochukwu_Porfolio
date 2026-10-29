@@ -212,10 +212,10 @@ function Nav({ profile }: { profile: Profile }) {
 function Hero({ profile, projects }: { profile: Profile; projects: Project[] }) {
   const live = projects.filter((p) => p.status === "Live").length;
   const stats = [
+    { value: "6+", label: "Years building software" },
     { value: `${projects.length}`, label: "Products built" },
     { value: `${live}`, label: "Live in production" },
     { value: "2", label: "B.S. degrees" },
-    { value: "6+", label: "Years coding" },
   ];
 
   return (
@@ -232,8 +232,8 @@ function Hero({ profile, projects }: { profile: Profile; projects: Project[] }) 
             className="flex flex-wrap items-center gap-2"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
-              <GraduationCap className="size-3.5" />
-              Class of 2026 · B.S. Software Development
+              <Rocket className="size-3.5" />
+              6+ years shipping production software
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
               <span className="relative flex size-2">
@@ -360,7 +360,7 @@ function Hero({ profile, projects }: { profile: Profile; projects: Project[] }) 
                 <GraduationCap className="size-5" />
               </span>
               <div className="leading-tight">
-                <p className="text-sm font-medium">Graduated · Aug 2026</p>
+                <p className="text-sm font-medium">B.S. Software Development</p>
                 <p className="text-xs text-muted-foreground">BYU-Idaho</p>
               </div>
             </div>
@@ -476,8 +476,8 @@ function About({ profile, skills }: { profile: Profile; skills: Skills }) {
         kicker="01 · About"
         title={
           <>
-            Engineer, founder, and fresh graduate —{" "}
-            <span className="italic text-primary">built for real-world software.</span>
+            Six years of building, a company of my own —{" "}
+            <span className="italic text-primary">and software that ships.</span>
           </>
         }
       />
@@ -534,17 +534,19 @@ function Graduation({ certificates }: { certificates: Certificate[] }) {
       <div className="absolute inset-0 bg-glow pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-24 sm:py-28 grid lg:grid-cols-12 gap-12 items-center">
         <motion.div {...fadeUp} className="lg:col-span-5 space-y-6">
-          <p className="font-mono text-xs uppercase tracking-widest text-primary">02 · Milestone</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-primary">
+            02 · Credentials
+          </p>
           <h2 className="font-display text-5xl sm:text-6xl leading-[0.98]">
-            Officially a <span className="italic text-gradient">Software Developer.</span>
+            Real-world experience, <span className="italic text-gradient">formally certified.</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            On 15 August 2026, Brigham Young University–Idaho conferred my{" "}
+            Years of shipping production software, backed by a{" "}
             <span className="text-foreground font-medium">
               Bachelor of Science in Software Development
             </span>{" "}
-            — my second bachelor's degree. It sits on years of shipping real products, so the theory
-            comes with receipts.
+            from Brigham Young University–Idaho — one of two bachelor's degrees I hold. The products
+            came first; the degree confirms the engineering behind them.
           </p>
           <ul className="space-y-2.5 text-sm">
             {[
