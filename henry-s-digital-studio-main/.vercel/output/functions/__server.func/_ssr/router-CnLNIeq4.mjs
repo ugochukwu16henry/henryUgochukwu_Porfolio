@@ -373,7 +373,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeToggle, {})
   ] }) });
 }
-const $$splitComponentImporter$1 = () => import("./dashboard-D3QJiBKf.mjs");
+const $$splitComponentImporter$1 = () => import("./dashboard-BXQpiWXN.mjs");
 const Route$1 = createFileRoute("/dashboard")({
   head: () => ({
     meta: [{
@@ -391,7 +391,7 @@ const Route$1 = createFileRoute("/dashboard")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-CXPgBjM6.mjs");
+const $$splitComponentImporter = () => import("./index-CrL7DB8P.mjs");
 const Route = createFileRoute("/")({
   head: () => buildPortfolioHead({
     path: "/",

@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-NRkE2m9-.mjs";
-import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-CA1-RKhe.mjs";
+import { g as getLivePortfolio, m as mergeWithSeed, l as loadPortfolio } from "./portfolio.functions-PHmE0wX5.mjs";
+import { T as ThemeToggle, z as zentrixIcon, p as portraitImage, r as resolvePortfolioImage, a as resumePdf } from "./router-CnLNIeq4.mjs";
 import { R as Root, T as Trigger, P as Portal, C as Content, a as Close, b as Title, D as Description, O as Overlay } from "../_libs/radix-ui__react-dialog.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
@@ -21,7 +21,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-Cg8Fs7Ke.mjs";
+import "./server-DL2LFf0V.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -166,7 +166,7 @@ function Home() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(FloatingHire, { profile })
   ] });
 }
-const resumeDownloadName = "Henry-Ugochukwu-Resume-May-2026.pdf";
+const resumeDownloadName = "Henry-Ugochukwu-Resume-2026.pdf";
 const featuredDegreeId = "byui-bssd";
 function hireHref(profile) {
   return `mailto:${profile.email}?subject=${encodeURIComponent("Let's work together")}`;
