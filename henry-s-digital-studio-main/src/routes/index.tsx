@@ -108,7 +108,7 @@ function Home() {
   );
 }
 
-const resumeDownloadName = "Henry-Ugochukwu-Resume-May-2026.pdf";
+const resumeDownloadName = "Henry-Ugochukwu-Resume-2026.pdf";
 const featuredDegreeId = "byui-bssd";
 
 function hireHref(profile: Profile) {
